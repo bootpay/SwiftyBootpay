@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftyBootpay'
-  s.version          = '0.1.0'
-  s.summary          = 'A short description of SwiftyBootpay.'
+  s.version          = '0.7.0'
+  s.summary          = 'PG Plugin For Swift'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -21,11 +21,11 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/ehowlsla/SwiftyBootpay'
+  s.homepage         = 'https://github.com/bootpay/SwiftyBootpay'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'ehowlsla' => 'jungler@cvdv.me' }
-  s.source           = { :git => 'https://github.com/ehowlsla/SwiftyBootpay.git', :tag => s.version.to_s }
+  s.author           = { 'bootpay' => 'bootpay.co.kr@gmail.com' }
+  s.source           = { :git => 'https://github.com/bootpay/SwiftyBootpay.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'

@@ -13,6 +13,7 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		81D546E71FA729AB003F7EF7 /* .swift-version in Resources */ = {isa = PBXBuildFile; fileRef = 81D546E61FA729AB003F7EF7 /* .swift-version */; };
 		B6CC6846FD1E7A6B6F76388A /* Pods_SwiftyBootpay_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C50F5545B805E912776E6F /* Pods_SwiftyBootpay_Tests.framework */; };
 		C1FD617BB8DB7AF2A005C651 /* Pods_SwiftyBootpay_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B9AD7678AAF7DC621FC5F7 /* Pods_SwiftyBootpay_Example.framework */; };
 /* End PBXBuildFile section */
@@ -42,11 +43,12 @@
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		66C50F5545B805E912776E6F /* Pods_SwiftyBootpay_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyBootpay_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		76AB05847EA0EE7D51613405 /* Pods-SwiftyBootpay_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyBootpay_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyBootpay_Example/Pods-SwiftyBootpay_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		81D546E61FA729AB003F7EF7 /* .swift-version */ = {isa = PBXFileReference; lastKnownFileType = text; path = ".swift-version"; sourceTree = "<group>"; };
 		B532A88FAB5C53985F6967AF /* Pods-SwiftyBootpay_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyBootpay_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyBootpay_Tests/Pods-SwiftyBootpay_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		B7183E45378FE1B44208E11D /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		B7183E45378FE1B44208E11D /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		B8B9AD7678AAF7DC621FC5F7 /* Pods_SwiftyBootpay_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyBootpay_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E7EAF0798F68857EC71CBB92 /* SwiftyBootpay.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = SwiftyBootpay.podspec; path = ../SwiftyBootpay.podspec; sourceTree = "<group>"; };
-		F6F3420B13752B9A6DB45A2B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		E7EAF0798F68857EC71CBB92 /* SwiftyBootpay.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SwiftyBootpay.podspec; path = ../SwiftyBootpay.podspec; sourceTree = "<group>"; };
+		F6F3420B13752B9A6DB45A2B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 				E7EAF0798F68857EC71CBB92 /* SwiftyBootpay.podspec */,
 				F6F3420B13752B9A6DB45A2B /* README.md */,
 				B7183E45378FE1B44208E11D /* LICENSE */,
+				81D546E61FA729AB003F7EF7 /* .swift-version */,
 			);
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81D546E71FA729AB003F7EF7 /* .swift-version in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
