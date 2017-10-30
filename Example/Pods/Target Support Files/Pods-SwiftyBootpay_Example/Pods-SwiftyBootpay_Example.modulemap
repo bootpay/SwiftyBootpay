@@ -1,0 +1,6 @@
+framework module Pods_SwiftyBootpay_Example {
+  umbrella header "Pods-SwiftyBootpay_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

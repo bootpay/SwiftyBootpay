@@ -1,0 +1,6 @@
+framework module SwiftyBootpay {
+  umbrella header "SwiftyBootpay-umbrella.h"
+
+  export *
+  module * { export * }
+}
