@@ -29,7 +29,7 @@ class ViewController: UIViewController {
     }
     
     @objc func btnClick() {
-        sendAnaylticsCall() // 페이지 유입(추적) 시점에 호출, 로그인 통신이 완료된 후에 호출해야 함
+        sendAnaylticsPageCall() // 페이지 유입(추적) 시점에 호출, 로그인 통신이 완료된 후에 호출해야 함
         presentBootpayController()
     }
 
@@ -55,7 +55,7 @@ extension ViewController {
         BootpayAnalytics.sharedInstance.postLogin()
     }
     
-    func sendAnaylticsCall() {
+    func sendAnaylticsPageCall() {
         BootpayAnalytics.sharedInstance.postCall(url: "item_list", // 페이지를 구분하는 주소
                                                  page_type: "아이템", // 페이지 유형
                                                  img_url: "", // 대표 상품 이미지 url
