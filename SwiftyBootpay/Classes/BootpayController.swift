@@ -78,7 +78,7 @@ public class BootpayController: UIViewController {
     public var method = ""
     public var params: [String: String] = [:]
     public var order_id = ""
-    public var isPaying = false
+    var isPaying = false
     public var sendable: BootpayRequestProtocol?
     
     internal var wv: BootpayWebView!
