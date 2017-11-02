@@ -40,7 +40,6 @@
 		96289F7A12CE7A05EE7485E8207D5ACB /* Pods-SwiftyBootpay_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A9FEDFF8CA41E68C6D65E4717AC80F1D /* Pods-SwiftyBootpay_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9673CF780F48C8E4EC2A331717B1F67C /* FBSnapshotTestCase.h in Headers */ = {isa = PBXBuildFile; fileRef = E37899BD4B349060AA147E2A3721D3A2 /* FBSnapshotTestCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9D492821299DA70EF74FB78CCB111C34 /* Pods-SwiftyBootpay_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 06885B458D389C37D660B3B7EBB1486B /* Pods-SwiftyBootpay_Example-dummy.m */; };
-		9ECDC4EFE430586F4195A73099D1C048 /* ReplaceMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A59EB13DBB444E247D7D212F7D34BE4 /* ReplaceMe.swift */; };
 		A4F69F3477A935285620AC3031C5C848 /* FBSnapshotTestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 052258A488A96C35531FAC73C4F42924 /* FBSnapshotTestController.m */; };
 		B27DFD6025D94758785918F1D6F6C060 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A27810809BAD71E4022600B21251449F /* QuartzCore.framework */; };
 		B758FB09FE2C06C1B8E36A71A9D76D41 /* FBSnapshotTestCase-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 73D037B3C804B9E1BB70538E342E5104 /* FBSnapshotTestCase-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -94,7 +93,6 @@
 		52E74F8EA3398304E3B7D4884498DC4F /* SwiftyBootpay-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyBootpay-dummy.m"; sourceTree = "<group>"; };
 		550F68F92B590A440232DF1C1E8A600F /* Pods-SwiftyBootpay_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SwiftyBootpay_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		58A2557E7CE20AACCD1B28B1CD1F920D /* FBSnapshotTestCasePlatform.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSnapshotTestCasePlatform.m; path = FBSnapshotTestCase/FBSnapshotTestCasePlatform.m; sourceTree = "<group>"; };
-		5A59EB13DBB444E247D7D212F7D34BE4 /* ReplaceMe.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReplaceMe.swift; sourceTree = "<group>"; };
 		5C32A54BA3C2585EB4161100B91ECF13 /* SwiftyBootpay.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyBootpay.xcconfig; sourceTree = "<group>"; };
 		5D5CC1DA9213AC711B11E75C3DB5966C /* Pods-SwiftyBootpay_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SwiftyBootpay_Example-resources.sh"; sourceTree = "<group>"; };
 		68C0EB202DBCC9B3679E593FE54A6D0B /* Pods-SwiftyBootpay_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SwiftyBootpay_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -245,7 +243,6 @@
 				81D546E81FA72B70003F7EF7 /* BootpayAnalytics.swift */,
 				81D546E91FA72B71003F7EF7 /* BootpayController.swift */,
 				81D546EA1FA72B71003F7EF7 /* BootpayWebView.swift */,
-				5A59EB13DBB444E247D7D212F7D34BE4 /* ReplaceMe.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -550,7 +547,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				81D546F21FA72B71003F7EF7 /* BootpayController.swift in Sources */,
-				9ECDC4EFE430586F4195A73099D1C048 /* ReplaceMe.swift in Sources */,
 				654539258B6D6F6C3C5564D79E3B3C42 /* SwiftyBootpay-dummy.m in Sources */,
 				81D546EE1FA72B71003F7EF7 /* BootpayAnalytics.swift in Sources */,
 				81D546F61FA72B71003F7EF7 /* BootpayWebView.swift in Sources */,

@@ -26,8 +26,9 @@ class BootpayDefault {
 //MARK: Bootpay Models
 public class BootpayUser: Params {
     public init() {}
+    var user_id = ""
     
-    public var user_id = ""
+    public var id = ""
     public var username = ""
     public var email = ""
     public var gender = 0
@@ -137,12 +138,12 @@ extension BootpayAnalytics {
 
 //MARK: Bootpay Rest Api for Analytics
 extension BootpayAnalytics {
-    open func postLogin(user_id: String, email: String, gender: Int,
+    open func postLogin(id: String, email: String, gender: Int,
                         birth: String, phone: String, area: String) {
-        var components = URLComponents(string: "https://dev-analytics.bootpay.co.kr/login")
+        var components = URLComponents(string: "https://analytics.bootpay.co.kr/login")
         components?.queryItems = [
             URLQueryItem(name: "application_id", value: getApplicationId()),
-            URLQueryItem(name: "id", value: user_id),
+            URLQueryItem(name: "id", value: id),
             URLQueryItem(name: "email", value: email),
             URLQueryItem(name: "gender", value: "\(gender)"),
             URLQueryItem(name: "birth", value: birth),
@@ -150,22 +151,22 @@ extension BootpayAnalytics {
             URLQueryItem(name: "area", value: area)
         ]
         
-        if BootpayAnalytics.sharedInstance.user.user_id == "" { BootpayAnalytics.sharedInstance.user.user_id = user_id }
+        if BootpayAnalytics.sharedInstance.user.id == "" { BootpayAnalytics.sharedInstance.user.id = id }
         if BootpayAnalytics.sharedInstance.user.email == "" { BootpayAnalytics.sharedInstance.user.email = email }
         if BootpayAnalytics.sharedInstance.user.gender == 0 { BootpayAnalytics.sharedInstance.user.gender = gender }
         if BootpayAnalytics.sharedInstance.user.birth == "" { BootpayAnalytics.sharedInstance.user.birth = birth }
         if BootpayAnalytics.sharedInstance.user.phone == "" { BootpayAnalytics.sharedInstance.user.phone = phone }
         if BootpayAnalytics.sharedInstance.user.area == "" { BootpayAnalytics.sharedInstance.user.area = area }
         
-        post(components: components)
+        post(components: components, isLogin: true)
     }
     
     open func postLogin() {
-        if(BootpayAnalytics.sharedInstance.user.user_id == "") {
-            NSLog("Bootpay Analytics Warning: postLogin() not Work!! Please check user_id is not empty")
+        if(BootpayAnalytics.sharedInstance.user.id == "") {
+            NSLog("Bootpay Analytics Warning: postLogin() not Work!! Please check id is not empty")
             return
         }
-        postLogin(user_id: BootpayAnalytics.sharedInstance.user.user_id,
+        postLogin(id: BootpayAnalytics.sharedInstance.user.id,
                   email: BootpayAnalytics.sharedInstance.user.email,
                   gender: BootpayAnalytics.sharedInstance.user.gender,
                   birth: BootpayAnalytics.sharedInstance.user.birth,
@@ -174,7 +175,7 @@ extension BootpayAnalytics {
     }
     
     open func postCall(url: String, page_type: String, img_url: String, item_unique: String, item_name: String) {
-        var components = URLComponents(string: "https://dev-analytics.bootpay.co.kr/call")
+        var components = URLComponents(string: "https://analytics.bootpay.co.kr/call")
         components?.queryItems = [
             URLQueryItem(name: "application_id", value: getApplicationId()),
             URLQueryItem(name: "uuid", value: getUuId()),
@@ -187,10 +188,10 @@ extension BootpayAnalytics {
             URLQueryItem(name: "unique", value: item_unique),
             URLQueryItem(name: "item_name", value: item_name)
         ]
-        post(components: components)
+        post(components: components, isLogin: false)
     }
     
-    open func post(components: URLComponents?) {
+    open func post(components: URLComponents?, isLogin: Bool) {
         guard let url = components?.url else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -198,16 +199,17 @@ extension BootpayAnalytics {
         let session = URLSession.shared
         let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
             guard error == nil else { return }
-            
-//            guard let data = data else { return }
-//            do {
-                //create json object from data
-//                if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
-//                    print(json)
-//                }
-//            } catch let error {
-//                print(error.localizedDescription)
-//            }
+            if isLogin == false { return }
+            guard let data = data else { return }
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
+                    if let data = json["data"] as? [String : Any], let user_id = data["user_id"] as? String { 
+                        BootpayAnalytics.sharedInstance.user.user_id = user_id
+                    }
+                }
+            } catch let error {
+                print(error.localizedDescription)
+            }
         })
         task.resume()
     }

@@ -19,7 +19,7 @@ public protocol BootpayRequestProtocol {
 class BootpayWebView: UIView {
     var wv: WKWebView!
  
-    final let BASE_URL = "https://dev-inapp.bootpay.co.kr/1.0.0/development.html"
+    final let BASE_URL = "https://inapp.bootpay.co.kr/1.0.0/production.html"
     final let bridgeName = "Bootpay_iOS"
  
     var firstLoad = false
@@ -55,6 +55,17 @@ extension BootpayWebView {
         }
     }
     
+    
+    
+    func registerAppId() {
+        doJavascript("$('script[data-boot-app-id]').attr('data-boot-app-id', '\(BootpayAnalytics.sharedInstance.application_id)');")
+    }
+    
+    internal func setDevice() {
+        doJavascript("window.BootPay.setDevice('IOS');")
+        doJavascript("console.log(window.BootPay.deviceType);")
+    }
+    
     internal func setAnalytics() {
         if BootpayAnalytics.sharedInstance.sk_time == 0 {
             NSLog("Bootpay Analytics Warning: setAnalytics() not Work!! Please session active in AppDelegate")
@@ -69,11 +80,6 @@ extension BootpayWebView {
             + "});")
     }
     
-    internal func setDevice() {
-        doJavascript("window.BootPay.setDevice('IOS');")
-        doJavascript("console.log(window.BootPay.deviceType);")
-    }
-    
     internal func loadBootapyRequest() { 
         doJavascript(self.bootpayScript)
     }
@@ -83,6 +89,7 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         if firstLoad == false {
             firstLoad = true
+            registerAppId()
             setDevice()
             setAnalytics()
             loadBootapyRequest() 

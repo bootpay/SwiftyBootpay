@@ -18,7 +18,6 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         setUI()
         sendAnaylticsUserLogin() // 유저 로그인 시점에 호출
-        sendAnaylticsCall() // 페이지 유입(추적) 시점에 호출
     }
     
     func setUI() {
@@ -30,6 +29,7 @@ class ViewController: UIViewController {
     }
     
     @objc func btnClick() {
+        sendAnaylticsCall() // 페이지 유입(추적) 시점에 호출, 로그인 통신이 완료된 후에 호출해야 함
         presentBootpayController()
     }
 
@@ -44,7 +44,7 @@ class ViewController: UIViewController {
 extension ViewController {
     func sendAnaylticsUserLogin() {
         BootpayAnalytics.sharedInstance.user.params {
-            $0.user_id = "1" // user 고유 키
+            $0.id = "testUser" // user 고유 id 혹은 로그인 아이디
             $0.username = "홍길동" // user 이름
             $0.email = "testUser@gmail.com" // user email
             $0.gender = 1 // 1: 남자, 0: 여자
