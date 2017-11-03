@@ -50,14 +50,14 @@ extension ViewController {
             $0.gender = 1 // 1: 남자, 0: 여자
             $0.birth = "861014" // user 생년월일 앞자리
             $0.phone = "01012345678" // user 휴대폰 번호
-            $0.area = "서울" //
+            $0.area = "서울" // 서울|인천|대구|대전|광주|부산|울산|경기|강원|충청북도|충북|충청남도|충남|전라북도|전북|전라남도|전남|경상북도|경북|경상남도|경남|제주|세종 중 택 1
         }
         BootpayAnalytics.sharedInstance.postLogin()
     }
     
     func sendAnaylticsPageCall() {
         BootpayAnalytics.sharedInstance.postCall(url: "item_list", // 페이지를 구분하는 주소
-                                                 page_type: "아이템", // 페이지 유형
+                                                 page_type: "아이템", // 페이지 유형|카테고리|태그
                                                  img_url: "", // 대표 상품 이미지 url
                                                  item_unique: "1", // 대표 상품의 고유 키
                                                  item_name: "철산동핫도그") // 대표 상품명
@@ -89,8 +89,8 @@ extension ViewController {
             $0.name = "블링블링 마스카라" // 결제할 상품명
             $0.order_id = "1234" // 결제 고유번호
             $0.params = customParams // 커스텀 변수
-            $0.method = "card" // 결제수단
             $0.pg = "danal" // 결제할 PG사
+            $0.method = "card" // 결제수단
             $0.sendable = self // 이벤트를 처리할 protocol receiver
         }
         vc.addItem(item: item) //배열 가능
