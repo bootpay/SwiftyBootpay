@@ -19,7 +19,7 @@ public protocol BootpayRequestProtocol {
 class BootpayWebView: UIView {
     var wv: WKWebView!
  
-    final let BASE_URL = "https://inapp.bootpay.co.kr/1.0.0/production.html"
+    final let BASE_URL = "https://inapp.bootpay.co.kr/1.1.1/production.html"
     final let bridgeName = "Bootpay_iOS"
  
     var firstLoad = false

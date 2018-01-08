@@ -74,9 +74,11 @@ public class BootpayController: UIViewController {
     public var application_id = BootpayAnalytics.sharedInstance.getApplicationId()
     public var name = ""
     public var pg = ""
+    public var show_agree_window = 0
     public var items = [BootpayItem]()
     public var method = ""
-    public var params: [String: String] = [:]
+    public var user_info: [String: String] = [:]
+    public var params: [String: String] = [:] 
     public var order_id = ""
     var isPaying = false
     public var sendable: BootpayRequestProtocol?
@@ -151,25 +153,38 @@ extension BootpayController {
     }
     
     fileprivate func generateScript() -> String {
-        return ["BootPay.request({",
-                "price: '\(price)',",
-            "application_id: '\(application_id)',",
-            "name: '\(name)',",
-            "pg:'\(pg)',",
-            "item: [\(generateItems())],",
-            "method: '\(method)',",
-            "params: \(dicToJsonString(params).replace(target: "\"", withString: "'")),",
-            "order_id: '\(order_id)'",
-            "}).error(function (data) {",
-            "webkit.messageHandlers.\(wv.bridgeName).postMessage(data);",
-            "}).confirm(function (data) {",
-            "webkit.messageHandlers.\(wv.bridgeName).postMessage(data);",
-            "}).cancel(function (data) {",
-            "webkit.messageHandlers.\(wv.bridgeName).postMessage(data);",
-            "}).done(function (data) {",
-            "webkit.messageHandlers.\(wv.bridgeName).postMessage(data);",
-            "});"
-            ].reduce("", +)
+        var array = ["BootPay.request({",
+                     "price: '\(price)',",
+                     "application_id: '\(application_id)',",
+                     "name: '\(name)',",
+                     "pg:'\(pg)',",
+                     "show_agree_window: '\(show_agree_window)',",
+                     "item: [\(generateItems())],",
+                     "params: \(dicToJsonString(params).replace(target: "\"", withString: "'")),",
+                     "order_id: '\(order_id)'",
+        ]
+        
+        if !method.isEmpty {
+            array.append(",method: '\(method)'")
+        }
+        if !user_info.isEmpty {
+            array.append(",user_info: \(dicToJsonString(user_info).replace(target: "\"", withString: "'"))")
+        }
+        
+        let result = array +
+                ["}).error(function (data) {",
+                 "webkit.messageHandlers.\(wv.bridgeName).postMessage(data);",
+                 "}).confirm(function (data) {",
+                 "webkit.messageHandlers.\(wv.bridgeName).postMessage(data);",
+                 "}).cancel(function (data) {",
+                 "webkit.messageHandlers.\(wv.bridgeName).postMessage(data);",
+                 "}).done(function (data) {",
+                 "webkit.messageHandlers.\(wv.bridgeName).postMessage(data);",
+                 "});"]
+        
+        NSLog(result.reduce("", +))
+        
+        return result.reduce("", +)
     }
     
     fileprivate func clear() {
