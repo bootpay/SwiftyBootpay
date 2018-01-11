@@ -81,6 +81,14 @@ extension ViewController {
             "callbackParam4": "value78",
             ]
         
+        // 구매자 정보
+        let userInfo: [String: String] = [
+            "username": "사용자 이름",
+            "email": "사용자 이메일",
+            "addr": "사용자 주소",
+            "phone": "010-1234-4567"
+        ]
+        
         vc = BootpayController()
         
         // 주문정보 - 실제 결제창에 반영되는 정보
@@ -89,10 +97,13 @@ extension ViewController {
             $0.name = "블링블링 마스카라" // 결제할 상품명
             $0.order_id = "1234" // 결제 고유번호
             $0.params = customParams // 커스텀 변수
+            $0.user_info = userInfo // 구매자 정보
             $0.pg = "danal" // 결제할 PG사
             $0.method = "card" // 결제수단
             $0.sendable = self // 이벤트를 처리할 protocol receiver
         }
+        
+        
         vc.addItem(item: item) //배열 가능
         
         self.present(vc, animated: true, completion: nil) // bootpay controller 호출

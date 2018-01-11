@@ -182,8 +182,6 @@ extension BootpayController {
                  "webkit.messageHandlers.\(wv.bridgeName).postMessage(data);",
                  "});"]
         
-        NSLog(result.reduce("", +))
-        
         return result.reduce("", +)
     }
     
@@ -196,7 +194,9 @@ extension BootpayController {
         self.pg = ""
         self.items = [BootpayItem]()
         self.method = ""
-        self.order_id = "" 
+        self.order_id = ""
+        self.user_info = [:]
+        self.params = [:]
     }
 }
 
