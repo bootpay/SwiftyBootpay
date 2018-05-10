@@ -74,6 +74,7 @@ public class BootpayController: UIViewController {
     public var application_id = BootpayAnalytics.sharedInstance.getApplicationId()
     public var name = ""
     public var pg = ""
+    public var phone = ""
     public var show_agree_window = 0
     public var items = [BootpayItem]()
     public var method = ""
@@ -158,6 +159,7 @@ extension BootpayController {
                      "application_id: '\(application_id)',",
                      "name: '\(name)',",
                      "pg:'\(pg)',",
+                     "phone:'\(phone)',",
                      "show_agree_window: '\(show_agree_window)',",
                      "item: [\(generateItems())],",
                      "params: \(dicToJsonString(params).replace(target: "\"", withString: "'")),",
@@ -192,6 +194,7 @@ extension BootpayController {
         self.application_id = ""
         self.name = ""
         self.pg = ""
+        self.phone = ""
         self.items = [BootpayItem]()
         self.method = ""
         self.order_id = ""
