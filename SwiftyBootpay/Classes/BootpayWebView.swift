@@ -19,7 +19,7 @@ public protocol BootpayRequestProtocol {
 class BootpayWebView: UIView {
     var wv: WKWebView!
  
-    final let BASE_URL = "https://inapp.bootpay.co.kr/2.0.3/production.html"
+    final let BASE_URL = "https://inapp.bootpay.co.kr/2.0.4/production.html"
     final let bridgeName = "Bootpay_iOS"
  
     var firstLoad = false
@@ -58,7 +58,8 @@ extension BootpayWebView {
     
     
     func registerAppId() {
-        doJavascript("$('script[data-boot-app-id]').attr('data-boot-app-id', '\(BootpayAnalytics.sharedInstance.application_id)');")
+        doJavascript("window.BootPay.setApplicationId('\(BootpayAnalytics.sharedInstance.application_id)');")
+//        doJavascript("$('script[data-boot-app-id]').attr('data-boot-app-id', '\(BootpayAnalytics.sharedInstance.application_id)');")
     }
     
     internal func setDevice() {
