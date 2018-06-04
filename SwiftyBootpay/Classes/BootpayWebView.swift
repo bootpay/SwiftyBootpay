@@ -19,27 +19,55 @@ public protocol BootpayRequestProtocol {
 class BootpayWebView: UIView {
     var wv: WKWebView!
  
-    final let BASE_URL = "https://inapp.bootpay.co.kr/2.0.4/production.html"
+    final let BASE_URL = "https://inapp.bootpay.co.kr/2.0.5/production.html"
+//    final let BASE_URL = "https://inapp.bootpay.co.kr/2.0.5/development.html"
+    
     final let bridgeName = "Bootpay_iOS"
  
     var firstLoad = false
     
     var sendable: BootpayRequestProtocol?
     var bootpayScript = ""
-    var parentController: UIViewController!
+    var parentController: BootpayController!
     
     func bootpayRequest(_ script: String) {
         
+//        let configuration = WKWebViewConfiguration()
+//        webView = WKWebView(frame: CGRect.zero, configuration: configuration)
+        
+        
         let configuration = WKWebViewConfiguration()
+        
+//        if #available(iOS 9.0, *) {
+//            configuration.websiteDataStore = WKWebsiteDataStore.default()
+//        }
+        
         configuration.userContentController.add(self, name: bridgeName)
         wv = WKWebView(frame: self.bounds, configuration: configuration)
         wv.uiDelegate = self
         wv.navigationDelegate = self
         self.addSubview(wv)
         
+        
+        
         self.bootpayScript = script
         self.loadUrl(BASE_URL)
     }
+    
+//    func setCookiePolicy() {
+//        let cookieProps: [HTTPCookiePropertyKey : Any] = [
+//            HTTPCookiePropertyKey.domain: URL,
+//            HTTPCookiePropertyKey.path: "/",
+//            HTTPCookiePropertyKey.name: key,
+//            HTTPCookiePropertyKey.value: value,
+//            HTTPCookiePropertyKey.secure: "TRUE",
+//            HTTPCookiePropertyKey.expires: NSDate(timeIntervalSinceNow: ExpTime)
+//        ]
+//        
+//        if let cookie = NSHTTPCookie(properties: cookieProps) {
+//            NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookie(cookie)
+//        }
+//    }
 }
 
 extension BootpayWebView {
@@ -59,7 +87,6 @@ extension BootpayWebView {
     
     func registerAppId() {
         doJavascript("window.BootPay.setApplicationId('\(BootpayAnalytics.sharedInstance.application_id)');")
-//        doJavascript("$('script[data-boot-app-id]').attr('data-boot-app-id', '\(BootpayAnalytics.sharedInstance.application_id)');")
     }
     
     internal func setDevice() {
@@ -111,6 +138,8 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
         
         
         if let url = navigationAction.request.url {
+            print(url)
+            
             if(isItunesURL(url.absoluteString)) {
                 if #available(iOS 10, *) {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -120,7 +149,7 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
                 decisionHandler(.cancel)
             } else if url.scheme != "http" && url.scheme != "https" {
                 if #available(iOS 10, *) {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil) 
                 } else {
                     UIApplication.shared.openURL(url)
                 }
@@ -128,13 +157,30 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
             } else {
                 decisionHandler(.allow)
             }
-        } else { decisionHandler(.allow) }
+        } else {
+            decisionHandler(.allow)
+        }
+    }
+    
+    func getURLSchema() -> String?{
+        guard let schemas = Bundle.main.object(forInfoDictionaryKey: "CFBundleURLTypes") as? [[String:Any]],
+            let schema = schemas.first,
+            let urlschemas = schema["CFBundleURLSchemes"] as? [String],
+            let urlschema = urlschemas.first
+            else {
+                return nil
+        }
+        return urlschema
     }
     
     
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
         let alertController = UIAlertController(title: message, message: nil, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "확인", style: .cancel) { _ in completionHandler() }
+        let cancelAction = UIAlertAction(title: "확인", style: .cancel) { _ in            
+            completionHandler()
+            self.parentController.dismiss()
+        }
+//        let cancelAction = UIAlertAction(title: "확인", style: .cancel) { _ in completionHandler() }
         alertController.addAction(cancelAction)
         DispatchQueue.main.async { self.parentController.present(alertController, animated: true, completion: nil) }
     }

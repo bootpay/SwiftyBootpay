@@ -22,6 +22,20 @@ extension String
     }
 }
 
+extension String {
+    subscript (bounds: CountableClosedRange<Int>) -> String {
+        let start = index(startIndex, offsetBy: bounds.lowerBound)
+        let end = index(startIndex, offsetBy: bounds.upperBound)
+        return String(self[start...end])
+    }
+    
+    subscript (bounds: CountableRange<Int>) -> String {
+        let start = index(startIndex, offsetBy: bounds.lowerBound)
+        let end = index(startIndex, offsetBy: bounds.upperBound)
+        return String(self[start..<end])
+    }
+}
+
 extension URL {
     public var queryItems: [String: String] {
         var params = [String: String]()
@@ -51,6 +65,9 @@ public class BootpayItem: Params {
     public var qty: Int = 0
     public var unique = ""
     public var price = Double(0)
+    public var cat1 = ""
+    public var cat2 = ""
+    public var cat3 = ""
     
     func toString() -> String {
         if item_name.isEmpty { return "" }
@@ -61,9 +78,12 @@ public class BootpayItem: Params {
         return [
             "{",
             "item_name: '\(item_name)',",
-            "qty: '\(qty)',",
+            "qty: \(qty),",
             "unique: '\(unique)',",
-            "price: '\(Int(price))'",
+            "price: \(Int(price)),",
+            "cat1: '\(cat1)',",
+            "cat2: '\(cat2)',",
+            "cat3: '\(cat3)'",
             "}"
             ].reduce("", +)
     }
@@ -150,7 +170,8 @@ extension BootpayController {
     
     fileprivate func generateItems() -> String {
         if self.items.count == 0 { return "" }
-        return self.items.map { $0.toString() }.reduce(",", +)
+        let str = self.items.map { $0.toString() }.reduce("", {$0 + "," + $1})
+        return str[1..<str.count]
     }
     
     fileprivate func generateScript() -> String {
@@ -161,9 +182,10 @@ extension BootpayController {
                      "pg:'\(pg)',",
                      "phone:'\(phone)',",
                      "show_agree_window: '\(show_agree_window)',",
-                     "item: [\(generateItems())],",
+                     "items: [\(generateItems())],",
                      "params: \(dicToJsonString(params).replace(target: "\"", withString: "'")),",
-                     "order_id: '\(order_id)'",
+                     "order_id: '\(order_id)',",
+                     "extra: {app_scheme: '\(getURLSchema())'}",
         ]
         
         if !method.isEmpty {
@@ -200,6 +222,17 @@ extension BootpayController {
         self.order_id = ""
         self.user_info = [:]
         self.params = [:]
+    }
+    
+    fileprivate func getURLSchema() -> String{
+        guard let schemas = Bundle.main.object(forInfoDictionaryKey: "CFBundleURLTypes") as? [[String:Any]],
+            let schema = schemas.first,
+            let urlschemas = schema["CFBundleURLSchemes"] as? [String],
+            let urlschema = urlschemas.first
+            else {
+                return ""
+        }
+        return urlschema
     }
 }
 

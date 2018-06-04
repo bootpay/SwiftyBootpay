@@ -66,11 +66,20 @@ extension ViewController {
     func presentBootpayController() {
         // 통계정보를 위해 사용되는 정보
         // 주문 정보에 담길 상품정보로 배열 형태로 add가 가능함
-        let item = BootpayItem().params {
+        let item1 = BootpayItem().params {
             $0.item_name = "B사 마스카라" // 주문정보에 담길 상품명
             $0.qty = 1 // 해당 상품의 주문 수량
             $0.unique = "123" // 해당 상품의 고유 키
             $0.price = 1000 // 상품의 가격
+        }
+        let item2 = BootpayItem().params {
+            $0.item_name = "C사 셔츠" // 주문정보에 담길 상품명
+            $0.qty = 1 // 해당 상품의 주문 수량
+            $0.unique = "1234" // 해당 상품의 고유 키
+            $0.price = 10000 // 상품의 가격
+            $0.cat1 = "패션"
+            $0.cat2 = "여성상의"
+            $0.cat3 = "블라우스"
         }
         
         // 커스텀 변수로, 서버에서 해당 값을 그대로 리턴 받음
@@ -84,7 +93,7 @@ extension ViewController {
         // 구매자 정보
         let userInfo: [String: String] = [
             "username": "사용자 이름",
-            "email": "사용자 이메일",
+            "email": "user1234@gmail.com",
             "addr": "사용자 주소",
             "phone": "010-1234-4567"
         ]
@@ -98,14 +107,15 @@ extension ViewController {
             $0.order_id = "1234" // 결제 고유번호
             $0.params = customParams // 커스텀 변수
             $0.user_info = userInfo // 구매자 정보
-            $0.pg = "payapp" // 결제할 PG사
+            $0.pg = "danal" // 결제할 PG사
             $0.phone = "010-1234-5678" // 결제할 PG사
-            $0.method = "card" // 결제수단
+            $0.method = "phone" // 결제수단
             $0.sendable = self // 이벤트를 처리할 protocol receiver
         }
         
+        vc.addItem(item: item1) //배열 가능
+        vc.addItem(item: item2) //배열 가능
         
-        vc.addItem(item: item) //배열 가능
         
         self.present(vc, animated: true, completion: nil) // bootpay controller 호출
     }

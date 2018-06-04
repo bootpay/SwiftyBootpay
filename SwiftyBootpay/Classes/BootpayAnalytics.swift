@@ -121,6 +121,7 @@ extension BootpayAnalytics {
 //MARK: Bootpay LifeCycle Fpr Analytics
 extension BootpayAnalytics {
     open func appLaunch(application_id: String) {
+        HTTPCookieStorage.shared.cookieAcceptPolicy = HTTPCookie.AcceptPolicy.always
         self.application_id = application_id
         BootpayDefault.setValue("application_id", value: self.application_id)
     }
@@ -174,7 +175,7 @@ extension BootpayAnalytics {
                   area: BootpayAnalytics.sharedInstance.user.area)
     }
     
-    open func postCall(url: String, page_type: String, img_url: String, item_unique: String, item_name: String) {
+    open func postCall(url: String, page_type: String, img_url: String, item_unique: String, item_name: String) { 
         var components = URLComponents(string: "https://analytics.bootpay.co.kr/call")
         components?.queryItems = [
             URLQueryItem(name: "application_id", value: getApplicationId()),
@@ -202,7 +203,7 @@ extension BootpayAnalytics {
             if isLogin == false { return }
             guard let data = data else { return }
             do {
-                if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
+                if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] { 
                     if let data = json["data"] as? [String : Any], let user_id = data["user_id"] as? String { 
                         BootpayAnalytics.sharedInstance.user.user_id = user_id
                     }
