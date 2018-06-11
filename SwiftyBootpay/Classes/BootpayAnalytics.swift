@@ -6,6 +6,41 @@
 //  Copyright © 2017년 bootpay.co.kr. All rights reserved.
 //
 import Foundation
+import CryptoSwift
+
+extension String {
+    subscript (i: Int) -> Character {
+        return self[index(startIndex, offsetBy: i)]
+    }
+    
+    func aesEncrypt(key: String, iv: String) throws -> String {
+        let data = self.data(using: .utf8)!
+        let encrypted = try! AES(key: key.bytes, blockMode: CBC(iv: iv.bytes), padding: .pkcs7).encrypt([UInt8](data))
+        let encryptedData = Data(encrypted)
+        return encryptedData.base64EncodedString()
+    }
+    
+    func aesDecrypt(key: String, iv: String) throws -> String {
+        let data = Data(base64Encoded: self)!
+        let decrypted = try! AES(key: key.bytes, blockMode: CBC(iv: iv.bytes), padding: .pkcs7).decrypt([UInt8](data))
+        let decryptedData = Data(decrypted)
+        return String(bytes: decryptedData.bytes, encoding: .utf8) ?? "Could not decrypt"
+    }
+    
+    func fromBase64() -> String? {
+        guard let data = Data(base64Encoded: self) else {
+            return nil
+        }
+        
+        return String(data: data, encoding: .utf8)
+    }
+    
+    func toBase64() -> String {
+        return Data(self.utf8).base64EncodedString()
+    }
+}
+
+
 
 //MARK: UserDefault Standard For Session
 class BootpayDefault {
@@ -38,7 +73,10 @@ public class BootpayUser: Params {
 }
 
 public class BootpayAnalytics {
-    public init() {}
+    public init() {
+        self.key = getRandomKey(32)
+        self.iv = getRandomKey(16)
+    }
     
     public static let sharedInstance = BootpayAnalytics()
     var application_id = ""
@@ -48,6 +86,20 @@ public class BootpayAnalytics {
     var last_time = 0 // 접속 종료 시간
     var time = 0 // 미접속 시간
     public var user = BootpayUser()
+    
+    var key = ""
+    var iv = ""
+}
+
+public class BootpayStatItem: Codable, Params {
+    public init() {}
+    
+    public var item_name = ""
+    public var item_img = ""
+    public var unique = ""
+    public var cat1 = ""
+    public var cat2 = ""
+    public var cat3 = ""
 }
 
 extension BootpayAnalytics {
@@ -56,7 +108,7 @@ extension BootpayAnalytics {
         return self.application_id
     }
     
-    open func getUuId() -> String {
+    open func getUUId() -> String {
         if self.uuid == "" { return BootpayDefault.getString(key: "uuid") }
         return self.uuid
     }
@@ -73,7 +125,7 @@ extension BootpayAnalytics {
 }
 
 //MARK: Bootpay Model Update
-extension BootpayAnalytics {    
+extension BootpayAnalytics {
     fileprivate func loadSessionValues() {
         loadUuid()
         loadSkTime()
@@ -116,7 +168,42 @@ extension BootpayAnalytics {
         let since1970 = currentDate.timeIntervalSince1970
         return Int(since1970 * 1000)
     }
+    
+    
+    fileprivate func getRandomKey(_ size: Int) -> String {
+        let keys = "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        var result = ""
+        for i in 0..<size {
+            let ran = Int(arc4random_uniform(UInt32(keys.count)))
+            let index = keys.index(keys.startIndex, offsetBy: ran)
+            result += String(keys[index])
+        }
+        return result
+    }
+    
+    fileprivate func getSessionKey() -> String {
+        return "\(self.key.toBase64())##\(self.iv.toBase64())"
+    }
+    
+    fileprivate func stringify(_ json: Any, prettyPrinted: Bool = false) -> String {
+        var options: JSONSerialization.WritingOptions = []
+        if prettyPrinted {
+            options = JSONSerialization.WritingOptions.prettyPrinted
+        }
+        
+        do {
+            let data = try JSONSerialization.data(withJSONObject: json, options: options)
+            if let string = String(data: data, encoding: String.Encoding.utf8) {
+                return string
+            }
+        } catch {
+            print(error)
+        }
+        
+        return ""
+    }
 }
+
 
 //MARK: Bootpay LifeCycle Fpr Analytics
 extension BootpayAnalytics {
@@ -141,17 +228,6 @@ extension BootpayAnalytics {
 extension BootpayAnalytics {
     open func postLogin(id: String, email: String, gender: Int,
                         birth: String, phone: String, area: String) {
-        var components = URLComponents(string: "https://analytics.bootpay.co.kr/login")
-        components?.queryItems = [
-            URLQueryItem(name: "application_id", value: getApplicationId()),
-            URLQueryItem(name: "id", value: id),
-            URLQueryItem(name: "email", value: email),
-            URLQueryItem(name: "gender", value: "\(gender)"),
-            URLQueryItem(name: "birth", value: birth),
-            URLQueryItem(name: "phone", value: phone),
-            URLQueryItem(name: "area", value: area)
-        ]
-        
         if BootpayAnalytics.sharedInstance.user.id == "" { BootpayAnalytics.sharedInstance.user.id = id }
         if BootpayAnalytics.sharedInstance.user.email == "" { BootpayAnalytics.sharedInstance.user.email = email }
         if BootpayAnalytics.sharedInstance.user.gender == 0 { BootpayAnalytics.sharedInstance.user.gender = gender }
@@ -159,7 +235,29 @@ extension BootpayAnalytics {
         if BootpayAnalytics.sharedInstance.user.phone == "" { BootpayAnalytics.sharedInstance.user.phone = phone }
         if BootpayAnalytics.sharedInstance.user.area == "" { BootpayAnalytics.sharedInstance.user.area = area }
         
-        post(components: components, isLogin: true)
+        let uri = "https://analytics.bootpay.co.kr/login"
+        var params: [String: Any]
+        params = [
+            "ver": "2.0.6",
+            "application_id": getApplicationId(),
+            "id": id,
+            "email": email,
+            "gender": "\(gender)",
+            "birth": birth,
+            "phone": phone,
+            "area": area
+        ]
+        
+        let json = stringify(params)
+        do {
+            let aesBody = try json.aesEncrypt(key: self.key, iv: self.iv)
+            params = [
+                "data": aesBody,
+                "session_key": self.getSessionKey()
+            ]
+            post(url: uri, params: params, isLogin: true)
+            
+        } catch {}
     }
     
     open func postLogin() {
@@ -175,43 +273,73 @@ extension BootpayAnalytics {
                   area: BootpayAnalytics.sharedInstance.user.area)
     }
     
-    open func postCall(url: String, page_type: String, img_url: String, item_unique: String, item_name: String) { 
-        var components = URLComponents(string: "https://analytics.bootpay.co.kr/call")
-        components?.queryItems = [
-            URLQueryItem(name: "application_id", value: getApplicationId()),
-            URLQueryItem(name: "uuid", value: getUuId()),
-            URLQueryItem(name: "referer", value: ""),
-            URLQueryItem(name: "url", value: url),
-            URLQueryItem(name: "sk", value: getSk()),
-            URLQueryItem(name: "user_id", value: BootpayAnalytics.sharedInstance.user.user_id),
-            URLQueryItem(name: "page_type", value: page_type),
-            URLQueryItem(name: "img", value: img_url),
-            URLQueryItem(name: "unique", value: item_unique),
-            URLQueryItem(name: "item_name", value: item_name)
-        ]
-        post(components: components, isLogin: false)
+    open func start(_ url: String, _ page_type: String) {
+        start(url, page_type, items: [])
     }
     
-    open func post(components: URLComponents?, isLogin: Bool) {
-        guard let url = components?.url else { return }
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField: "Content-Type")
-        let session = URLSession.shared
-        let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
-            guard error == nil else { return }
-            if isLogin == false { return }
-            guard let data = data else { return }
-            do {
-                if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] { 
-                    if let data = json["data"] as? [String : Any], let user_id = data["user_id"] as? String { 
-                        BootpayAnalytics.sharedInstance.user.user_id = user_id
-                    }
-                }
-            } catch let error {
-                print(error.localizedDescription)
+    open func start(_ url: String, _ page_type: String, items: [BootpayStatItem]) {
+        let uri = "https://analytics.bootpay.co.kr/call"
+        var params: [String: Any]
+        
+        do {
+            let jsonEncoder = JSONEncoder()
+            let jsonData = try jsonEncoder.encode(items)
+            let json = String(data: jsonData, encoding: String.Encoding.utf8)
+            
+            if let json = json {
+                params = [
+                    //            "ver": "2.0.6",
+                    "application_id": getApplicationId(),
+                    "uuid": getUUId(),
+                    "referer": "",
+                    "sk": getSk(),
+                    "user_id": BootpayAnalytics.sharedInstance.user.user_id,
+                    "url": url,
+                    "page_type": page_type,
+                    "items": json
+                ]
+                
+                let json = stringify(params)
+                do {
+                    let aesBody = try json.aesEncrypt(key: self.key, iv: self.iv)
+                    params = [
+                        "data": aesBody,
+                        "session_key": self.getSessionKey()
+                    ]
+                    post(url: uri, params: params, isLogin: false)
+                    
+                } catch {}
             }
-        })
-        task.resume()
+        } catch {
+            NSLog("BootpayStatItem model to json parsing error")
+        }
+    }
+    
+    open func post(url: String, params: [String: Any], isLogin: Bool) {
+        let session = URLSession.shared
+        let request = NSMutableURLRequest(url: NSURL(string: url)! as URL)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        do{
+            let jsonData = try JSONSerialization.data(withJSONObject: params, options: JSONSerialization.WritingOptions())
+            request.httpBody = jsonData
+            let task = session.dataTask(with: request as URLRequest as URLRequest, completionHandler: {(data, response, error) in
+                guard error == nil else { return }
+                if isLogin == false { return }
+                guard let data = data else { return }
+                do {
+                    if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
+                        if let data = json["data"] as? [String : Any], let user_id = data["user_id"] as? String {
+                            BootpayAnalytics.sharedInstance.user.user_id = user_id
+                        }
+                    }
+                } catch let error {
+                    print(error.localizedDescription)
+                }
+            })
+            task.resume()
+        }catch _ {
+            print ("Oops something happened buddy")
+        }
     }
 }

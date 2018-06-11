@@ -1,23 +1,23 @@
 PODS:
-  - FBSnapshotTestCase (2.1.4):
-    - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
-  - FBSnapshotTestCase/Core (2.1.4)
-  - FBSnapshotTestCase/SwiftSupport (2.1.4):
-    - FBSnapshotTestCase/Core
-  - SwiftyBootpay (0.1.0)
+  - CryptoSwift (0.10.0)
+  - SwiftyBootpay (2.0.5):
+    - CryptoSwift
 
 DEPENDENCIES:
-  - FBSnapshotTestCase (~> 2.1.4)
   - SwiftyBootpay (from `../`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - CryptoSwift
 
 EXTERNAL SOURCES:
   SwiftyBootpay:
     :path: "../"
 
 SPEC CHECKSUMS:
-  FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
-  SwiftyBootpay: c8113030cb0d3d9fac2487932e87af15aad7dbb0
+  CryptoSwift: 6c778d69282bed3b4e975ff97a79d074f20bb011
+  SwiftyBootpay: 033d42c1353500b9324cba0b54dcc447a506d88a
 
-PODFILE CHECKSUM: f2c04a5bd917422cd82495b8eea37d8b64c3cfa6
+PODFILE CHECKSUM: ef15bd16c934d0c22d94d271dc8a8ed7ecde8720
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.5.3

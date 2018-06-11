@@ -1,11 +1,7 @@
 use_frameworks!
 
+
 target 'SwiftyBootpay_Example' do
   pod 'SwiftyBootpay', :path => '../'
-
-  target 'SwiftyBootpay_Tests' do
-    inherit! :search_paths
-
-    pod 'FBSnapshotTestCase' , '~> 2.1.4'
-  end
+   
 end

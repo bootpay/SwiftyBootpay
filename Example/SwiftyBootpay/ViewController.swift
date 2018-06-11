@@ -18,6 +18,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         setUI()
         sendAnaylticsUserLogin() // 유저 로그인 시점에 호출
+        sendAnaylticsPageCall() // 페이지 유입(추적) 시점에 호출, 로그인 통신이 완료된 후에 호출해야 함
     }
     
     func setUI() {
@@ -29,10 +30,9 @@ class ViewController: UIViewController {
     }
     
     @objc func btnClick() {
-        sendAnaylticsPageCall() // 페이지 유입(추적) 시점에 호출, 로그인 통신이 완료된 후에 호출해야 함
         presentBootpayController()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -56,26 +56,51 @@ extension ViewController {
     }
     
     func sendAnaylticsPageCall() {
-        BootpayAnalytics.sharedInstance.postCall(url: "item_list", // 페이지를 구분하는 주소
-                                                 page_type: "아이템", // 페이지 유형|카테고리|태그
-                                                 img_url: "", // 대표 상품 이미지 url
-                                                 item_unique: "1", // 대표 상품의 고유 키
-                                                 item_name: "철산동핫도그") // 대표 상품명
+        let item1 = BootpayStatItem().params {
+            $0.item_name = "마우스" // 주문정보에 담길 상품명
+            $0.item_img = "https://image.mouse.com/1234" // 해당 상품의 주문 수량
+            $0.unique = "ITEM_CODE_MOUSE" // 해당 상품의 고유 키
+        }
+        let item2 = BootpayStatItem().params {
+            $0.item_name = "키보드" // 주문정보에 담길 상품명
+            $0.item_img = "https://image.keyboard.com/12345" // 해당 상품의 주문 수량
+            $0.unique = "ITEM_CODE_KEYBOARD" // 해당 상품의 고유 키
+            $0.cat1 = "패션"
+            $0.cat2 = "여성상의"
+            $0.cat3 = "블라우스"
+        }
+        
+        //        var item1 = BootpayStatItem()
+        //        item1.item_name = "마우스" // 주문정보에 담길 상품명
+        //        item1.item_img = "https://image.mouse.com/1234" // 해당 상품의 주문 수량
+        //        item1.unique = "ITEM_CODE_MOUSE" // 해당 상품의 고유 키
+        //
+        //        let item2 = BootpayStatItem(
+        //            item_name: "키보드",
+        //            item_img: "https://image.keyboard.com/12345",
+        //            unique: "ITEM_CODE_KEYBOARD",
+        //            cat1: "패션",
+        //            cat2: "여성상의",
+        //            cat3: "블라우스"
+        //        )
+        
+        //        BootpayAnalytics.sharedInstance.start("ItemViewController", "ItemDetail")
+        BootpayAnalytics.sharedInstance.start("ItemViewController", "ItemDetail", items: [item1, item2])
     }
     
     func presentBootpayController() {
         // 통계정보를 위해 사용되는 정보
         // 주문 정보에 담길 상품정보로 배열 형태로 add가 가능함
         let item1 = BootpayItem().params {
-            $0.item_name = "B사 마스카라" // 주문정보에 담길 상품명
+            $0.item_name = "마우스" // 주문정보에 담길 상품명
             $0.qty = 1 // 해당 상품의 주문 수량
-            $0.unique = "123" // 해당 상품의 고유 키
+            $0.unique = "ITEM_CODE_MOUSE" // 해당 상품의 고유 키
             $0.price = 1000 // 상품의 가격
         }
         let item2 = BootpayItem().params {
-            $0.item_name = "C사 셔츠" // 주문정보에 담길 상품명
+            $0.item_name = "키보드" // 주문정보에 담길 상품명
             $0.qty = 1 // 해당 상품의 주문 수량
-            $0.unique = "1234" // 해당 상품의 고유 키
+            $0.unique = "ITEM_CODE_KEYBOARD" // 해당 상품의 고유 키
             $0.price = 10000 // 상품의 가격
             $0.cat1 = "패션"
             $0.cat2 = "여성상의"
@@ -117,7 +142,7 @@ extension ViewController {
         vc.addItem(item: item2) //배열 가능
         
         
-        self.present(vc, animated: true, completion: nil) // bootpay controller 호출
+        self.present(vc, animated: true, completion: nil) // 결제창 controller 호출
     }
 }
 

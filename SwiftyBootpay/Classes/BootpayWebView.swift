@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+//import CryptoSwift
 
 public protocol BootpayRequestProtocol {
     func onError(data: [String: Any])
@@ -18,12 +19,11 @@ public protocol BootpayRequestProtocol {
 
 class BootpayWebView: UIView {
     var wv: WKWebView!
- 
-    final let BASE_URL = "https://inapp.bootpay.co.kr/2.0.5/production.html"
-//    final let BASE_URL = "https://inapp.bootpay.co.kr/2.0.5/development.html"
+    
+    final let BASE_URL = "https://inapp.bootpay.co.kr/2.0.6/production.html"
     
     final let bridgeName = "Bootpay_iOS"
- 
+    
     var firstLoad = false
     
     var sendable: BootpayRequestProtocol?
@@ -31,16 +31,7 @@ class BootpayWebView: UIView {
     var parentController: BootpayController!
     
     func bootpayRequest(_ script: String) {
-        
-//        let configuration = WKWebViewConfiguration()
-//        webView = WKWebView(frame: CGRect.zero, configuration: configuration)
-        
-        
         let configuration = WKWebViewConfiguration()
-        
-//        if #available(iOS 9.0, *) {
-//            configuration.websiteDataStore = WKWebsiteDataStore.default()
-//        }
         
         configuration.userContentController.add(self, name: bridgeName)
         wv = WKWebView(frame: self.bounds, configuration: configuration)
@@ -48,30 +39,13 @@ class BootpayWebView: UIView {
         wv.navigationDelegate = self
         self.addSubview(wv)
         
-        
-        
         self.bootpayScript = script
         self.loadUrl(BASE_URL)
     }
-    
-//    func setCookiePolicy() {
-//        let cookieProps: [HTTPCookiePropertyKey : Any] = [
-//            HTTPCookiePropertyKey.domain: URL,
-//            HTTPCookiePropertyKey.path: "/",
-//            HTTPCookiePropertyKey.name: key,
-//            HTTPCookiePropertyKey.value: value,
-//            HTTPCookiePropertyKey.secure: "TRUE",
-//            HTTPCookiePropertyKey.expires: NSDate(timeIntervalSinceNow: ExpTime)
-//        ]
-//        
-//        if let cookie = NSHTTPCookie(properties: cookieProps) {
-//            NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookie(cookie)
-//        }
-//    }
 }
 
 extension BootpayWebView {
-    internal func doJavascript(_ script: String) { 
+    internal func doJavascript(_ script: String) {
         wv.evaluateJavaScript(script, completionHandler: nil)
     }
     
@@ -108,7 +82,7 @@ extension BootpayWebView {
             + "});")
     }
     
-    internal func loadBootapyRequest() { 
+    internal func loadBootapyRequest() {
         doJavascript(self.bootpayScript)
     }
 }
@@ -120,7 +94,7 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
             registerAppId()
             setDevice()
             setAnalytics()
-            loadBootapyRequest() 
+            loadBootapyRequest()
         }
     }
     
@@ -138,7 +112,6 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
         
         
         if let url = navigationAction.request.url {
-            print(url)
             
             if(isItunesURL(url.absoluteString)) {
                 if #available(iOS 10, *) {
@@ -149,7 +122,7 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
                 decisionHandler(.cancel)
             } else if url.scheme != "http" && url.scheme != "https" {
                 if #available(iOS 10, *) {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil) 
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 } else {
                     UIApplication.shared.openURL(url)
                 }
@@ -176,18 +149,16 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
     
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
         let alertController = UIAlertController(title: message, message: nil, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "확인", style: .cancel) { _ in            
+        let cancelAction = UIAlertAction(title: "확인", style: .cancel) { _ in
             completionHandler()
             self.parentController.dismiss()
         }
-//        let cancelAction = UIAlertAction(title: "확인", style: .cancel) { _ in completionHandler() }
         alertController.addAction(cancelAction)
         DispatchQueue.main.async { self.parentController.present(alertController, animated: true, completion: nil) }
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if(message.name == self.bridgeName) {
-            print(message.body)
             guard let body = message.body as? [String: Any] else { return }
             guard let action = body["action"] as? String else { return }
             
@@ -200,6 +171,15 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
             } else if action == "BootpayDone" {
                 sendable?.onDone(data: body)
             }
+        }
+    }
+    
+    func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void) {
+        if(challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust) {
+            let cred = URLCredential(trust: challenge.protectionSpace.serverTrust!)
+            completionHandler(.useCredential, cred)
+        } else {
+            completionHandler(.performDefaultHandling, nil)
         }
     }
 }

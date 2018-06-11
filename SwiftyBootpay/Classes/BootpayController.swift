@@ -48,6 +48,7 @@ extension URL {
     }
 }
 
+
 public protocol Params {}
 
 //// from - devxoul's then (https://github.com/devxoul/Then)
@@ -99,7 +100,7 @@ public class BootpayController: UIViewController {
     public var items = [BootpayItem]()
     public var method = ""
     public var user_info: [String: String] = [:]
-    public var params: [String: String] = [:] 
+    public var params: [String: String] = [:]
     public var order_id = ""
     var isPaying = false
     public var sendable: BootpayRequestProtocol?
@@ -154,12 +155,12 @@ extension BootpayController {
         if wv == nil { wv = BootpayWebView() }
         wv.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
         
-        let script = generateScript() 
+        let script = generateScript()
         wv.bootpayRequest(script)
         wv.sendable = self.sendable
         wv.parentController = self
         self.view.addSubview(wv)
-    } 
+    }
     
     fileprivate func validCheck() throws {
         if price <= 0 { throw "Price is not configured." }
@@ -177,15 +178,15 @@ extension BootpayController {
     fileprivate func generateScript() -> String {
         var array = ["BootPay.request({",
                      "price: '\(price)',",
-                     "application_id: '\(application_id)',",
-                     "name: '\(name)',",
-                     "pg:'\(pg)',",
-                     "phone:'\(phone)',",
-                     "show_agree_window: '\(show_agree_window)',",
-                     "items: [\(generateItems())],",
-                     "params: \(dicToJsonString(params).replace(target: "\"", withString: "'")),",
-                     "order_id: '\(order_id)',",
-                     "extra: {app_scheme: '\(getURLSchema())'}",
+            "application_id: '\(application_id)',",
+            "name: '\(name)',",
+            "pg:'\(pg)',",
+            "phone:'\(phone)',",
+            "show_agree_window: '\(show_agree_window)',",
+            "items: [\(generateItems())],",
+            "params: \(dicToJsonString(params).replace(target: "\"", withString: "'")),",
+            "order_id: '\(order_id)',",
+            "extra: {app_scheme: '\(getURLSchema())'}",
         ]
         
         if !method.isEmpty {
@@ -196,15 +197,15 @@ extension BootpayController {
         }
         
         let result = array +
-                ["}).error(function (data) {",
-                 "webkit.messageHandlers.\(wv.bridgeName).postMessage(data);",
-                 "}).confirm(function (data) {",
-                 "webkit.messageHandlers.\(wv.bridgeName).postMessage(data);",
-                 "}).cancel(function (data) {",
-                 "webkit.messageHandlers.\(wv.bridgeName).postMessage(data);",
-                 "}).done(function (data) {",
-                 "webkit.messageHandlers.\(wv.bridgeName).postMessage(data);",
-                 "});"]
+            ["}).error(function (data) {",
+             "webkit.messageHandlers.\(wv.bridgeName).postMessage(data);",
+                "}).confirm(function (data) {",
+                "webkit.messageHandlers.\(wv.bridgeName).postMessage(data);",
+                "}).cancel(function (data) {",
+                "webkit.messageHandlers.\(wv.bridgeName).postMessage(data);",
+                "}).done(function (data) {",
+                "webkit.messageHandlers.\(wv.bridgeName).postMessage(data);",
+                "});"]
         
         return result.reduce("", +)
     }
