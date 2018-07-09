@@ -154,6 +154,7 @@ extension ViewController: BootpayRequestProtocol {
         print(data)
     }
     
+    // 가상계좌 입금 계좌번호가 발급되면 호출되는 함수입니다.
     func onReady(data: [String: Any]) {
         print("ready")
         print(data)
@@ -180,7 +181,7 @@ extension ViewController: BootpayRequestProtocol {
         print(data)
     }
     
-    //결제창이 닫힐때 실행되는 부분 
+    //결제창이 닫힐때 실행되는 부분
     func onClose() {
         print("close")
         vc.dismiss() //결제창 종료
