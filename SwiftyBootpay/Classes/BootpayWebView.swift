@@ -12,6 +12,8 @@ import WebKit
 
 public protocol BootpayRequestProtocol {
     func onError(data: [String: Any])
+    func onReady(data: [String: Any])
+    func onClose()
     func onConfirm(data: [String: Any])
     func onCancel(data: [String: Any])
     func onDone(data: [String: Any])
@@ -20,7 +22,7 @@ public protocol BootpayRequestProtocol {
 class BootpayWebView: UIView {
     var wv: WKWebView!
     
-    final let BASE_URL = "https://inapp.bootpay.co.kr/2.0.6/production.html"
+    final let BASE_URL = "https://inapp.bootpay.co.kr/2.0.7/production.html"
     
     final let bridgeName = "Bootpay_iOS"
     
@@ -149,23 +151,54 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
     
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
         let alertController = UIAlertController(title: message, message: nil, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "확인", style: .cancel) { _ in
+        let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
+            completionHandler()
+        }
+        let cancelAction = UIAlertAction(title: "결제창 닫기", style: .default) { _ in
             completionHandler()
             self.parentController.dismiss()
         }
+        alertController.addAction(confirmAction)
         alertController.addAction(cancelAction)
         DispatchQueue.main.async { self.parentController.present(alertController, animated: true, completion: nil) }
     }
     
+    func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo,
+                 completionHandler: @escaping (Bool) -> Void) {
+        let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "확인", style: .default, handler: { (action) in
+            completionHandler(true)
+        }))
+        alertController.addAction(UIAlertAction(title: "취소", style: .default, handler: { (action) in
+            completionHandler(false)
+        }))
+        
+        
+        DispatchQueue.main.async { self.parentController.present(alertController, animated: true, completion: nil) }
+         
+    }
+    
+    
+//    - (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL result))completionHandler;
+    
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if(message.name == self.bridgeName) {
-            guard let body = message.body as? [String: Any] else { return }
-            guard let action = body["action"] as? String else { return }
+            guard let body = message.body as? [String: Any] else {
+                if message.body as? String == "close" {
+                    sendable?.onClose()
+                }
+                return
+            }
+            guard let action = body["action"] as? String else {
+                return
+            }
             
             if action == "BootpayCancel" {
                 sendable?.onCancel(data: body)
             } else if action == "BootpayError" {
                 sendable?.onError(data: body)
+            } else if action == "BootpayBankReady" {
+                sendable?.onReady(data: body)
             } else if action == "BootpayConfirm" {
                 sendable?.onConfirm(data: body)
             } else if action == "BootpayDone" {

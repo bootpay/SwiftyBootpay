@@ -199,13 +199,17 @@ extension BootpayController {
         let result = array +
             ["}).error(function (data) {",
              "webkit.messageHandlers.\(wv.bridgeName).postMessage(data);",
-                "}).confirm(function (data) {",
-                "webkit.messageHandlers.\(wv.bridgeName).postMessage(data);",
-                "}).cancel(function (data) {",
-                "webkit.messageHandlers.\(wv.bridgeName).postMessage(data);",
-                "}).done(function (data) {",
-                "webkit.messageHandlers.\(wv.bridgeName).postMessage(data);",
-                "});"]
+             "}).confirm(function (data) {",
+             "webkit.messageHandlers.\(wv.bridgeName).postMessage(data);",
+             "}).ready(function (data) {",
+             "webkit.messageHandlers.\(wv.bridgeName).postMessage(data);",
+             "}).cancel(function (data) {",
+             "webkit.messageHandlers.\(wv.bridgeName).postMessage(data);",
+             "}).close(function () {",
+             "webkit.messageHandlers.\(wv.bridgeName).postMessage('close');",
+             "}).done(function (data) {",
+             "webkit.messageHandlers.\(wv.bridgeName).postMessage(data);",
+             "});"]
         
         return result.reduce("", +)
     }
