@@ -152,7 +152,6 @@ extension ViewController: BootpayRequestProtocol {
     // 에러가 났을때 호출되는 부분
     func onError(data: [String: Any]) {
         print(data)
-        vc.dismiss() // 결제창 종료
     }
     
     func onReady(data: [String: Any]) {
@@ -181,9 +180,9 @@ extension ViewController: BootpayRequestProtocol {
         print(data)
     }
     
-    
+    //결제창이 닫힐때 실행되는 부분 
     func onClose() {
         print("close")
-        vc.dismiss()
+        vc.dismiss() //결제창 종료
     }
 }
