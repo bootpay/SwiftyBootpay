@@ -132,9 +132,9 @@ extension ViewController {
             $0.order_id = "1234" // 결제 고유번호
             $0.params = customParams // 커스텀 변수
             $0.user_info = userInfo // 구매자 정보
-            $0.pg = "danal" // 결제할 PG사
+            $0.pg = "payapp" // 결제할 PG사
             $0.phone = "010-1234-5678" // 결제할 PG사
-            $0.method = "phone" // 결제수단
+            $0.method = "card" // 결제수단
             $0.sendable = self // 이벤트를 처리할 protocol receiver
         }
         

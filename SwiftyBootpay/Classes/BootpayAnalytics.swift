@@ -238,7 +238,7 @@ extension BootpayAnalytics {
         let uri = "https://analytics.bootpay.co.kr/login"
         var params: [String: Any]
         params = [
-            "ver": "2.0.7",
+            "ver": "2.0.8",
             "application_id": getApplicationId(),
             "id": id,
             "email": email,
