@@ -81,6 +81,7 @@ public class BootpayAnalytics {
     public static let sharedInstance = BootpayAnalytics()
     var application_id = ""
     public var uuid = ""
+    let ver = "2.0.9"
     var sk = ""
     var sk_time = 0 // session 유지시간 기본 30분
     var last_time = 0 // 접속 종료 시간
@@ -238,7 +239,7 @@ extension BootpayAnalytics {
         let uri = "https://analytics.bootpay.co.kr/login"
         var params: [String: Any]
         params = [
-            "ver": "2.0.8",
+            "ver": ver,
             "application_id": getApplicationId(),
             "id": id,
             "email": email,
@@ -288,7 +289,7 @@ extension BootpayAnalytics {
             
             if let json = json {
                 params = [
-                    //            "ver": "2.0.6",
+                    "ver": ver,
                     "application_id": getApplicationId(),
                     "uuid": getUUId(),
                     "referer": "",

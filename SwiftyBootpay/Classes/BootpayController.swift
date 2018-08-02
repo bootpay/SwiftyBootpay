@@ -102,6 +102,9 @@ public class BootpayController: UIViewController {
     public var user_info: [String: String] = [:]
     public var params: [String: String] = [:]
     public var order_id = ""
+    public var expire_month = 12 // 정기결제 실행 기간
+    public var vbank_result = 1 // 가상계좌 결과창 안보이게 하기
+    public var quotas = [0,2,3,4,5,6,7,8,9,10,11,12] // 할부 개월 수
     var isPaying = false
     public var sendable: BootpayRequestProtocol?
     
@@ -156,6 +159,7 @@ extension BootpayController {
         wv.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
         
         let script = generateScript()
+        print(script)
         wv.bootpayRequest(script)
         wv.sendable = self.sendable
         wv.parentController = self
@@ -186,7 +190,12 @@ extension BootpayController {
             "items: [\(generateItems())],",
             "params: \(dicToJsonString(params).replace(target: "\"", withString: "'")),",
             "order_id: '\(order_id)',",
-            "extra: {app_scheme: '\(getURLSchema())'}",
+            "extra: {",
+                "app_scheme:'\(getURLSchema())',",
+                "expire_month:'\(expire_month)',",
+                "vbank_result:\(vbank_result),",
+                "quota:'\(quotas.compactMap{String($0)}.joined(separator: ","))'",
+            "}",
         ]
         
         if !method.isEmpty {
@@ -227,6 +236,9 @@ extension BootpayController {
         self.order_id = ""
         self.user_info = [:]
         self.params = [:]
+        self.expire_month = 12 // 정기결제 실행 기간
+        self.vbank_result = 1 // 가상계좌 결과창 안보이게 하기
+        self.quotas = [0,2,3,4,5,6,7,8,9,10,11,12] // 할부 개월 수
     }
     
     fileprivate func getURLSchema() -> String{

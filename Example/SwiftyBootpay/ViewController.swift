@@ -70,20 +70,6 @@ extension ViewController {
             $0.cat3 = "블라우스"
         }
         
-        //        var item1 = BootpayStatItem()
-        //        item1.item_name = "마우스" // 주문정보에 담길 상품명
-        //        item1.item_img = "https://image.mouse.com/1234" // 해당 상품의 주문 수량
-        //        item1.unique = "ITEM_CODE_MOUSE" // 해당 상품의 고유 키
-        //
-        //        let item2 = BootpayStatItem(
-        //            item_name: "키보드",
-        //            item_img: "https://image.keyboard.com/12345",
-        //            unique: "ITEM_CODE_KEYBOARD",
-        //            cat1: "패션",
-        //            cat2: "여성상의",
-        //            cat3: "블라우스"
-        //        )
-        
         //        BootpayAnalytics.sharedInstance.start("ItemViewController", "ItemDetail")
         BootpayAnalytics.sharedInstance.start("ItemViewController", "ItemDetail", items: [item1, item2])
     }
@@ -132,10 +118,11 @@ extension ViewController {
             $0.order_id = "1234" // 결제 고유번호
             $0.params = customParams // 커스텀 변수
             $0.user_info = userInfo // 구매자 정보
-            $0.pg = "payapp" // 결제할 PG사
+            $0.pg = "danal" // 결제할 PG사
             $0.phone = "010-1234-5678" // 결제할 PG사
             $0.method = "card" // 결제수단
             $0.sendable = self // 이벤트를 처리할 protocol receiver
+            $0.quotas = [0,2,3] // // 5만원 이상일 경우 할부 허용범위 설정 가능, (예제는 일시불, 2개월 할부, 3개월 할부 허용)
         }
         
         vc.addItem(item: item1) //배열 가능
