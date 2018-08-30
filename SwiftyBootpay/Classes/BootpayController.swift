@@ -158,8 +158,7 @@ extension BootpayController {
         if wv == nil { wv = BootpayWebView() }
         wv.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
         
-        let script = generateScript()
-        print(script)
+        let script = generateScript() 
         wv.bootpayRequest(script)
         wv.sendable = self.sendable
         wv.parentController = self

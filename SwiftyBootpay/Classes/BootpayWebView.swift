@@ -22,7 +22,7 @@ public protocol BootpayRequestProtocol {
 class BootpayWebView: UIView {
     var wv: WKWebView!
     
-    final let BASE_URL = "https://inapp.bootpay.co.kr/2.0.8/production.html"
+    final let BASE_URL = "https://inapp.bootpay.co.kr/2.0.10/production.html"
     
     final let bridgeName = "Bootpay_iOS"
     

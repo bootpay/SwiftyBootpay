@@ -24,6 +24,10 @@ pod 'SwiftyBootpay'
 
 ehowlsla, jungler@cvdv.me
 
+## 상세문서
+
+[부트페이 메뉴얼](https://docs.bootpay.co.kr/intergration/ios) 을 참조하세요 
+
 ## License
 
 SwiftyBootpay is available under the MIT license. See the LICENSE file for more info.
