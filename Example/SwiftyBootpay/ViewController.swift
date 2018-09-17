@@ -120,7 +120,7 @@ extension ViewController {
             $0.user_info = userInfo // 구매자 정보
             $0.pg = "danal" // 결제할 PG사
             $0.phone = "010-1234-5678" // 결제할 PG사
-            $0.method = "card" // 결제수단
+            $0.method = "phone" // 결제수단
             $0.sendable = self // 이벤트를 처리할 protocol receiver
             $0.quotas = [0,2,3] // // 5만원 이상일 경우 할부 허용범위 설정 가능, (예제는 일시불, 2개월 할부, 3개월 할부 허용)
         }
@@ -152,8 +152,10 @@ extension ViewController: BootpayRequestProtocol {
         print(data)
         
         var iWantPay = true
-        if iWantPay == true {
+        if iWantPay == true {  // 재고가 있을 경우.
             vc.transactionConfirm(data: data) // 결제 승인
+        } else { // 재고가 없어 중간에 결제창을 닫고 싶을 경우
+            vc.removePaymentWindow()
         }
     }
     

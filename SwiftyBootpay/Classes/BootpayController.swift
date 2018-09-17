@@ -126,6 +126,10 @@ extension BootpayController: Params {
         wv.doJavascript("window.BootPay.transactionConfirm(\(json));")
     }
     
+    public func removePaymentWindow() {
+        wv.doJavascript("window.BootPay.removePaymentWindow();")
+    }
+    
     public func dismiss() {
         self.dismiss(animated: true, completion: nil)
     }
