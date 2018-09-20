@@ -104,6 +104,7 @@ public class BootpayController: UIViewController {
     public var order_id = ""
     public var expire_month = 12 // 정기결제 실행 기간
     public var vbank_result = 1 // 가상계좌 결과창 안보이게 하기
+    public var account_expire_at = "" // 가상계좌 입금 만료 기한
     public var quotas = [0,2,3,4,5,6,7,8,9,10,11,12] // 할부 개월 수
     var isPaying = false
     public var sendable: BootpayRequestProtocol?
@@ -193,6 +194,7 @@ extension BootpayController {
             "items: [\(generateItems())],",
             "params: \(dicToJsonString(params).replace(target: "\"", withString: "'")),",
             "order_id: '\(order_id)',",
+            "account_expire_at: '\(account_expire_at)',",
             "extra: {",
                 "app_scheme:'\(getURLSchema())',",
                 "expire_month:'\(expire_month)',",
