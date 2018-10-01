@@ -21,26 +21,19 @@ public protocol BootpayRequestProtocol {
 
 class BootpayWebView: UIView {
     var wv: WKWebView!
-    
     final let BASE_URL = "https://inapp.bootpay.co.kr/2.0.10/production.html"
-    
     final let bridgeName = "Bootpay_iOS"
-    
     var firstLoad = false
-    
     var sendable: BootpayRequestProtocol?
     var bootpayScript = ""
     var parentController: BootpayController!
-    
     func bootpayRequest(_ script: String) {
         let configuration = WKWebViewConfiguration()
-        
         configuration.userContentController.add(self, name: bridgeName)
         wv = WKWebView(frame: self.bounds, configuration: configuration)
         wv.uiDelegate = self
         wv.navigationDelegate = self
         self.addSubview(wv)
-        
         self.bootpayScript = script
         self.loadUrl(BASE_URL)
     }
@@ -66,8 +59,7 @@ extension BootpayWebView {
     }
     
     internal func setDevice() {
-        doJavascript("window.BootPay.setDevice('IOS');")
-        doJavascript("console.log(window.BootPay.deviceType);")
+        doJavascript("window.BootPay.setDevice('IOS');") 
     }
     
     internal func setAnalytics() {

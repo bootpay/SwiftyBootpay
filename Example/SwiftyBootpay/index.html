@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta content="5a52cc39396fa6449880c0f0" name="bootpay-application-id">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <script src="https://cdn.bootpay.co.kr/js/bootpay-2.0.10.min.js" type="application/javascript"></script>
+        <script>
+function payTest() {
+    var ios_application_id = '5a52cc39396fa6449880c0f0'
+    
+    
+    BootPay.request({
+        price: '1000',
+        application_id: ios_application_id,
+        name: '블링블링 마스카라',
+        pg: 'danal',
+        method: 'card',
+        show_agree_window: 0,
+        items: [
+                {
+                item_name: '나는 아이템',
+                qty: 1,
+                unique: '123',
+                price: 1000,
+                cat1: 'TOP',
+                cat2: '티셔츠',
+                cat3: '라운드 티',
+                }
+        ],
+        user_info: {
+            username: '사용자 이름',
+            email: '사용자 이메일',
+            addr: '사용자 주소',
+            phone: '010-1234-4567'
+        },
+        order_id: '고유order_id_1234',
+        params: {callback1: '그대로 콜백받을 변수 1', callback2: '그대로 콜백받을 변수 2', customvar1234: '변수명도 마음대로'},
+        account_expire_at: '2018-05-25',
+        extra: {
+            expire_month: '12',
+            vbank_result: 1,
+            quota: '0,2,3'
+        }
+        }).error(function (data) {
+             webkit.messageHandlers.Bootpay_iOS.postMessage(data);
+        }).cancel(function (data) {
+             webkit.messageHandlers.Bootpay_iOS.postMessage(data);
+        }).ready(function (data) {
+             webkit.messageHandlers.Bootpay_iOS.postMessage(data);
+        }).confirm(function (data) {
+             webkit.messageHandlers.Bootpay_iOS.postMessage(data);
+       }).close(function (data) {
+             webkit.messageHandlers.Bootpay_iOS.postMessage('close');
+       }).done(function (data) {
+             webkit.messageHandlers.Bootpay_iOS.postMessage(data);
+    });
+}
+function printLog() {
+    webkit.messageHandelrs.Bootpay_iOS.postMessage("BootpayCancel");
+}
+        </script>
+    </head>
+    <body>
+        <button onclick='payTest()'>Webapp 연동방식으로 결제시작</button> 
+    </body>
+</html>

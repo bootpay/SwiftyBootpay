@@ -10,21 +10,24 @@ import UIKit
 import SwiftyBootpay
 
 //MARK: ViewController Init
-class ViewController: UIViewController {
+class NativeController: UIViewController {
     var vc: BootpayController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.view.backgroundColor = UIColor.white
         setUI()
         sendAnaylticsUserLogin() // 유저 로그인 시점에 호출
         sendAnaylticsPageCall() // 페이지 유입(추적) 시점에 호출, 로그인 통신이 완료된 후에 호출해야 함
     }
-    
+   
+//   func
+   
     func setUI() {
         let btn = UIButton(type: .roundedRect)
         btn.frame = CGRect(x: 0, y:0, width: self.view.frame.width, height: self.view.frame.height)
-        btn.setTitle("Request", for: .normal)
+        btn.setTitle("Native 연동방식으로 결제시작", for: .normal)
         btn.addTarget(self, action: #selector(btnClick), for: .touchUpInside)
         self.view.addSubview(btn)
     }
@@ -41,7 +44,7 @@ class ViewController: UIViewController {
 
 
 //MARK: Bootpay Event Handle
-extension ViewController {
+extension NativeController {
     func sendAnaylticsUserLogin() {
         BootpayAnalytics.sharedInstance.user.params {
             $0.id = "testUser" // user 고유 id 혹은 로그인 아이디
@@ -103,7 +106,7 @@ extension ViewController {
         
         // 구매자 정보
         let userInfo: [String: String] = [
-            "username": "사용자 이름",
+            "username": "사용자 이름", 
             "email": "user1234@gmail.com",
             "addr": "사용자 주소",
             "phone": "010-1234-4567"
@@ -136,7 +139,7 @@ extension ViewController {
 
 
 //MARK: Bootpay Callback Protocol
-extension ViewController: BootpayRequestProtocol {
+extension NativeController: BootpayRequestProtocol {
     // 에러가 났을때 호출되는 부분
     func onError(data: [String: Any]) {
         print(data)
