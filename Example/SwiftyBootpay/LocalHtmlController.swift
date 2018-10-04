@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 
 
-class WebAppController: UIViewController {
+class LocalHtmlController: UIViewController {
     var webView: WKWebView!
     final let bridgeName = "Bootpay_iOS"
     final let ios_application_id = "5a52cc39396fa6449880c0f0" // iOS
@@ -27,18 +27,11 @@ class WebAppController: UIViewController {
         webView.uiDelegate = self
         webView.navigationDelegate = self
         self.view.addSubview(webView)
-        
-        
-        let url = URL(string: "https://test-shop.bootpay.co.kr")
-        if let url = url {
-            let request = URLRequest(url: url)
-            webView.load(request)
-        }
  
-//        let path = Bundle.main.url(forResource: "index", withExtension: "html")!
-//        webView.loadFileURL(path, allowingReadAccessTo: path)
-//        let request = URLRequest(url: path)
-//        webView.load(request)
+        let path = Bundle.main.url(forResource: "index", withExtension: "html")!
+        webView.loadFileURL(path, allowingReadAccessTo: path)
+        let request = URLRequest(url: path)
+        webView.load(request)
     }
     
     @objc func btnClick() {
@@ -51,7 +44,7 @@ class WebAppController: UIViewController {
     }
 }
 
-extension WebAppController:  WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler  {
+extension LocalHtmlController:  WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler  {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         registerAppId()
         setDevice()
@@ -103,31 +96,11 @@ extension WebAppController:  WKNavigationDelegate, WKUIDelegate, WKScriptMessage
             completionHandler(.performDefaultHandling, nil)
         }
     }
-    
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        
-        
-        if let url = navigationAction.request.url {
-            
-            if url.scheme != "http" && url.scheme != "https" {
-                if #available(iOS 10, *) {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                } else {
-                    UIApplication.shared.openURL(url)
-                }
-                decisionHandler(.cancel)
-            } else {
-                decisionHandler(.allow)
-            }
-        } else {
-            decisionHandler(.allow)
-        }
-    }
 }
 
 
 //MARK: Bootpay Callback Protocol
-extension WebAppController {
+extension LocalHtmlController {
     // 에러가 났을때 호출되는 부분
     func onError(data: [String: Any]) {
         print(data)
@@ -170,7 +143,7 @@ extension WebAppController {
     }
 }
 
-extension WebAppController {
+extension LocalHtmlController {
     internal func doJavascript(_ script: String) {
         webView.evaluateJavaScript(script, completionHandler: nil)
     }

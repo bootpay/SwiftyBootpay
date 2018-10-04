@@ -16,21 +16,26 @@ class RootController: UIViewController {
     }
     
     func setUI() {
-        let btn1 = UIButton(type: .roundedRect)
-        btn1.frame = CGRect(x: 0, y:0, width: self.view.frame.width, height: self.view.frame.height/2)
-        btn1.setTitle("Native 연동", for: .normal)
-        btn1.addTarget(self, action: #selector(nativeClick), for: .touchUpInside)
-        self.view.addSubview(btn1)
-        
-        let btn2 = UIButton(type: .roundedRect)
-        btn2.frame = CGRect(x: 0, y:self.view.frame.height/2, width: self.view.frame.width, height: self.view.frame.height/2)
-        btn2.setTitle("Webapp 연동", for: .normal)
-        btn2.addTarget(self, action: #selector(webappClick), for: .touchUpInside)
-        self.view.addSubview(btn2)
+        let titles = ["Native 연동", "LocalHtml 연동", "WebApp 연동"]
+        let selectors = [#selector(nativeClick), #selector(localHtmlClick), #selector(webappClick)]
+        let array = 0...2
+        let unitHeight = self.view.frame.height / CGFloat(array.count)
+        for i in array {
+            let btn = UIButton(type: .roundedRect)
+            btn.frame = CGRect(x: 0, y: unitHeight * CGFloat(i), width: self.view.frame.width, height: unitHeight)
+            btn.setTitle(titles[i], for: .normal)
+            btn.addTarget(self, action: selectors[i], for: .touchUpInside)
+            self.view.addSubview(btn)
+        }
     }
     
     @objc func nativeClick() {
         let vc = NativeController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func localHtmlClick() {
+        let vc = LocalHtmlController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
