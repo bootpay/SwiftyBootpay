@@ -33,16 +33,7 @@ class WebAppController: UIViewController {
         if let url = url {
             let request = URLRequest(url: url)
             webView.load(request)
-        }
- 
-//        let path = Bundle.main.url(forResource: "index", withExtension: "html")!
-//        webView.loadFileURL(path, allowingReadAccessTo: path)
-//        let request = URLRequest(url: path)
-//        webView.load(request)
-    }
-    
-    @objc func btnClick() {
-//        presentBootpayController()
+        } 
     }
     
     override func didReceiveMemoryWarning() {
@@ -56,10 +47,15 @@ extension WebAppController:  WKNavigationDelegate, WKUIDelegate, WKScriptMessage
         registerAppId()
         setDevice()
         startTrace()
+        registerAppIdDemo()
     }
     
     func registerAppId() {
         doJavascript("BootPay.setApplicationId('\(ios_application_id)');")
+    }
+    
+    func registerAppIdDemo() {
+        doJavascript("window.setApplicationId('\(ios_application_id)');")
     }
     
     internal func setDevice() {
@@ -68,6 +64,40 @@ extension WebAppController:  WKNavigationDelegate, WKUIDelegate, WKScriptMessage
     
     internal func startTrace() {
         doJavascript("BootPay.startTrace();")
+    }
+    
+    func isMatch(_ urlString: String, _ pattern: String) -> Bool {
+        let regex = try! NSRegularExpression(pattern: pattern, options: [])
+        let result = regex.matches(in: urlString, options: [], range: NSRange(location: 0, length: urlString.characters.count))
+        return result.count > 0
+    }
+    
+    func isItunesURL(_ urlString: String) -> Bool {
+        return isMatch(urlString, "\\/\\/itunes\\.apple\\.com\\/")
+    }
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if let url = navigationAction.request.url {
+            if(isItunesURL(url.absoluteString)) {
+                if #available(iOS 10, *) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                } else {
+                    UIApplication.shared.openURL(url)
+                }
+                decisionHandler(.cancel)
+            } else if url.scheme != "http" && url.scheme != "https" {
+                if #available(iOS 10, *) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                } else {
+                    UIApplication.shared.openURL(url)
+                }
+                decisionHandler(.cancel)
+            } else {
+                decisionHandler(.allow)
+            }
+        } else {
+            decisionHandler(.allow)
+        }
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
@@ -104,24 +134,17 @@ extension WebAppController:  WKNavigationDelegate, WKUIDelegate, WKScriptMessage
         }
     }
     
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        
-        
-        if let url = navigationAction.request.url {
-            
-            if url.scheme != "http" && url.scheme != "https" {
+    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+        if navigationAction.targetFrame == nil {
+            if let url = navigationAction.request.url {
                 if #available(iOS 10, *) {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 } else {
                     UIApplication.shared.openURL(url)
                 }
-                decisionHandler(.cancel)
-            } else {
-                decisionHandler(.allow)
             }
-        } else {
-            decisionHandler(.allow)
         }
+        return nil
     }
 }
 
@@ -143,10 +166,10 @@ extension WebAppController {
     func onConfirm(data: [String: Any]) {
         print(data)
         
-        var iWantPay = true
+        let iWantPay = true
         if iWantPay == true {  // 재고가 있을 경우.
-            doJavascript("BootPay.transactionConfirm( \(data) );");
-//            vc.transactionConfirm(data: data) // 결제 승인
+            let json = dicToJsonString(data).replace(target: "\"", withString: "'")
+            doJavascript("BootPay.transactionConfirm( \(json) );"); // 결제 승인
         } else { // 재고가 없어 중간에 결제창을 닫고 싶을 경우
             doJavascript("BootPay.removePaymentWindow();");
         }
@@ -170,8 +193,24 @@ extension WebAppController {
     }
 }
 
+
+
 extension WebAppController {
     internal func doJavascript(_ script: String) {
         webView.evaluateJavaScript(script, completionHandler: nil)
+    }
+    
+    fileprivate func dicToJsonString(_ data: [String: Any]) -> String {
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
+            let jsonStr = String(data: jsonData, encoding: .utf8)
+            if let jsonStr = jsonStr {
+                return jsonStr
+            }
+            return ""
+        } catch {
+            print(error.localizedDescription)
+            return ""
+        }
     }
 }

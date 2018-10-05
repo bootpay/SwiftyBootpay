@@ -31,14 +31,15 @@ function payTest() {
         ],
         user_info: {
             username: '사용자 이름',
-            email: '사용자 이메일',
+            email: 'test@gmail.com',
             addr: '사용자 주소',
             phone: '010-1234-4567'
         },
         order_id: '고유order_id_1234',
         params: {callback1: '그대로 콜백받을 변수 1', callback2: '그대로 콜백받을 변수 2', customvar1234: '변수명도 마음대로'},
-        account_expire_at: '2018-05-25',
+        account_expire_at: '2018-10-10',
         extra: {
+            app_scheme: 'bootpaySample',
             expire_month: '12',
             vbank_result: 1,
             quota: '0,2,3'
@@ -63,6 +64,9 @@ function printLog() {
         </script>
     </head>
     <body>
+        <br>
+        <br>
+        <br>
         <button onclick='payTest()'>Webapp 연동방식으로 결제시작</button> 
     </body>
 </html>

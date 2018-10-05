@@ -103,10 +103,7 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        
-        
         if let url = navigationAction.request.url {
-            
             if(isItunesURL(url.absoluteString)) {
                 if #available(iOS 10, *) {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -127,19 +124,7 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
         } else {
             decisionHandler(.allow)
         }
-    }
-    
-    func getURLSchema() -> String?{
-        guard let schemas = Bundle.main.object(forInfoDictionaryKey: "CFBundleURLTypes") as? [[String:Any]],
-            let schema = schemas.first,
-            let urlschemas = schema["CFBundleURLSchemes"] as? [String],
-            let urlschema = urlschemas.first
-            else {
-                return nil
-        }
-        return urlschema
-    }
-    
+    } 
     
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
         let alertController = UIAlertController(title: message, message: nil, preferredStyle: .alert)
@@ -165,13 +150,9 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
             completionHandler(false)
         }))
         
-        
         DispatchQueue.main.async { self.parentController.present(alertController, animated: true, completion: nil) }
-         
     }
     
-    
-//    - (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL result))completionHandler;
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if(message.name == self.bridgeName) {
@@ -181,9 +162,7 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
                 }
                 return
             }
-            guard let action = body["action"] as? String else {
-                return
-            }
+            guard let action = body["action"] as? String else { return }
             
             if action == "BootpayCancel" {
                 sendable?.onCancel(data: body)
