@@ -14,6 +14,7 @@ class WebAppController: UIViewController {
     var webView: WKWebView!
     final let bridgeName = "Bootpay_iOS"
     final let ios_application_id = "5a52cc39396fa6449880c0f0" // iOS
+//    final let ios_application_id = "5b14c0ffb6d49c40cda92c4e" // iOS
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,10 +45,10 @@ class WebAppController: UIViewController {
 
 extension WebAppController:  WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler  {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        registerAppId()
-        setDevice()
-        startTrace()
-        registerAppIdDemo()
+        registerAppId() //필요시 App ID를 아이폰 값으로 바꿉니다
+        setDevice() //기기환경을 IOS로 등록합니다. 이 작업을 수행해야 통계에 iOS로 잡히며, iOS Application ID 값을 호출하여 결제를 사용할 수 있습니다.
+        startTrace() // 통계 - 페이지 방문
+        registerAppIdDemo() //필요시 App ID를 아이폰 값으로 바꿉니다
     }
     
     func registerAppId() {
@@ -110,7 +111,9 @@ extension WebAppController:  WKNavigationDelegate, WKUIDelegate, WKScriptMessage
             }
             guard let action = body["action"] as? String else {
                 return
-            }            
+            }
+            
+            // 해당 함수 호출
             if action == "BootpayCancel" {
                 onCancel(data: body)
             } else if action == "BootpayError" {
@@ -168,7 +171,7 @@ extension WebAppController {
         
         let iWantPay = true
         if iWantPay == true {  // 재고가 있을 경우.
-            let json = dicToJsonString(data).replace(target: "\"", withString: "'")
+            let json = dicToJsonString(data).replace(target: "'", withString: "\\'")
             doJavascript("BootPay.transactionConfirm( \(json) );"); // 결제 승인
         } else { // 재고가 없어 중간에 결제창을 닫고 싶을 경우
             doJavascript("BootPay.removePaymentWindow();");
@@ -184,12 +187,12 @@ extension WebAppController {
     // 아이템 지급 등 데이터 동기화 로직을 수행합니다
     func onDone(data: [String: Any]) {
         print(data)
+//        self.navigationController?.popViewController(animated: true)
     }
     
     //결제창이 닫힐때 실행되는 부분
     func onClose() {
         print("close")
-//        vc.dismiss() //결제창 종료
     }
 }
 

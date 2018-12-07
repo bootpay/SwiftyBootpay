@@ -78,7 +78,7 @@ public class BootpayItem: Params {
         
         return [
             "{",
-            "item_name: '\(item_name)',",
+            "item_name: '\(item_name.replace(target: "'", withString: "\\'"))',",
             "qty: \(qty),",
             "unique: '\(unique)',",
             "price: \(Int(price)),",
@@ -123,7 +123,8 @@ extension BootpayController: Params {
     }
     
     public func transactionConfirm(data: [String: Any]) {
-        let json = dicToJsonString(data).replace(target: "\"", withString: "'")
+        let json = dicToJsonString(data).replace(target: "'", withString: "\\'")
+        print(json)
         wv.doJavascript("window.BootPay.transactionConfirm(\(json));")
     }
     
@@ -163,7 +164,8 @@ extension BootpayController {
         if wv == nil { wv = BootpayWebView() }
         wv.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
         
-        let script = generateScript() 
+        let script = generateScript()
+        print(script)
         wv.bootpayRequest(script)
         wv.sendable = self.sendable
         wv.parentController = self
@@ -184,10 +186,13 @@ extension BootpayController {
     }
     
     fileprivate func generateScript() -> String {
+//        print(name)
+//        print(name.replace(target: "'", withString: "\'"))
+        
         var array = ["BootPay.request({",
                      "price: '\(price)',",
             "application_id: '\(application_id)',",
-            "name: '\(name)',",
+            "name: '\(name.replace(target: "'", withString: "\\'"))',",
             "pg:'\(pg)',",
             "phone:'\(phone)',",
             "show_agree_window: '\(show_agree_window)',",

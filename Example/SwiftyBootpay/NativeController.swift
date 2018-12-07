@@ -81,7 +81,7 @@ extension NativeController {
         // 통계정보를 위해 사용되는 정보
         // 주문 정보에 담길 상품정보로 배열 형태로 add가 가능함
         let item1 = BootpayItem().params {
-            $0.item_name = "마우스" // 주문정보에 담길 상품명
+            $0.item_name = "미키's 마우스" // 주문정보에 담길 상품명
             $0.qty = 1 // 해당 상품의 주문 수량
             $0.unique = "ITEM_CODE_MOUSE" // 해당 상품의 고유 키
             $0.price = 1000 // 상품의 가격
@@ -117,7 +117,7 @@ extension NativeController {
         // 주문정보 - 실제 결제창에 반영되는 정보
         vc.params {
             $0.price = 1000 // 결제할 금액
-            $0.name = "블링블링 마스카라" // 결제할 상품명
+            $0.name = "블링블링's 마스카라" // 결제할 상품명
             $0.order_id = "1234" // 결제 고유번호
             $0.params = customParams // 커스텀 변수
             $0.user_info = userInfo // 구매자 정보
@@ -155,7 +155,7 @@ extension NativeController: BootpayRequestProtocol {
     func onConfirm(data: [String: Any]) {
         print(data)
         
-        var iWantPay = true
+        let iWantPay = true
         if iWantPay == true {  // 재고가 있을 경우.
             vc.transactionConfirm(data: data) // 결제 승인
         } else { // 재고가 없어 중간에 결제창을 닫고 싶을 경우
@@ -171,6 +171,7 @@ extension NativeController: BootpayRequestProtocol {
     // 결제완료시 호출
     // 아이템 지급 등 데이터 동기화 로직을 수행합니다
     func onDone(data: [String: Any]) {
+        print("onDone")
         print(data)
     }
     
