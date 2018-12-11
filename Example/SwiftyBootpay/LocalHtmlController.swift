@@ -166,7 +166,7 @@ extension LocalHtmlController {
         
         let iWantPay = true
         if iWantPay == true {  // 재고가 있을 경우.
-            let json = dicToJsonString(data).replace(target: "'", withString: "\\'")
+            let json = dicToJsonString(data).replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'")
             doJavascript("BootPay.transactionConfirm( \(json) );"); // 결제 승인
         } else { // 재고가 없어 중간에 결제창을 닫고 싶을 경우
             doJavascript("BootPay.removePaymentWindow();");

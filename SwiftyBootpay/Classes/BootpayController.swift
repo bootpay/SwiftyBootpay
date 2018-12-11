@@ -78,13 +78,13 @@ public class BootpayItem: Params {
         
         return [
             "{",
-            "item_name: '\(item_name.replace(target: "'", withString: "\\'"))',",
+            "item_name: '\(item_name.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'"))',",
             "qty: \(qty),",
             "unique: '\(unique)',",
             "price: \(Int(price)),",
-            "cat1: '\(cat1)',",
-            "cat2: '\(cat2)',",
-            "cat3: '\(cat3)'",
+            "cat1: '\(cat1.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'"))',",
+            "cat2: '\(cat2.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'"))',",
+            "cat3: '\(cat3.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'"))'",
             "}"
             ].reduce("", +)
     }
@@ -192,12 +192,12 @@ extension BootpayController {
         var array = ["BootPay.request({",
                      "price: '\(price)',",
             "application_id: '\(application_id)',",
-            "name: '\(name.replace(target: "'", withString: "\\'"))',",
+            "name: '\(name.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'"))',",
             "pg:'\(pg)',",
             "phone:'\(phone)',",
             "show_agree_window: '\(show_agree_window)',",
             "items: [\(generateItems())],",
-            "params: \(dicToJsonString(params).replace(target: "\"", withString: "'")),",
+            "params: \(dicToJsonString(params).replace(target: "'", withString: "\\'")),",
             "order_id: '\(order_id)',",
             "account_expire_at: '\(account_expire_at)',",
             "extra: {",
@@ -212,7 +212,7 @@ extension BootpayController {
             array.append(",method: '\(method)'")
         }
         if !user_info.isEmpty {
-            array.append(",user_info: \(dicToJsonString(user_info).replace(target: "\"", withString: "'"))")
+            array.append(",user_info: \(dicToJsonString(user_info).replace(target: "'", withString: "\\'"))")
         }
         
         let result = array +
