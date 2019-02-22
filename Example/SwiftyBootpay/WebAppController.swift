@@ -13,8 +13,7 @@ import WebKit
 class WebAppController: UIViewController {
     var webView: WKWebView!
     final let bridgeName = "Bootpay_iOS"
-    final let ios_application_id = "5a52cc39396fa6449880c0f0" // iOS
-//    final let ios_application_id = "5b14c0ffb6d49c40cda92c4e" // iOS
+    final let ios_application_id = "5a52cc39396fa6449880c0f0" // iOS 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,11 +27,12 @@ class WebAppController: UIViewController {
         webView.uiDelegate = self
         webView.navigationDelegate = self
         self.view.addSubview(webView)
-        
+         
         
         
 //        let url = URL(string: "https://g-cdn.bootpay.co.kr/test/payment/index.html")
         let url = URL(string: "https://test-shop.bootpay.co.kr")
+        
         if let url = url {
             let request = URLRequest(url: url)
             webView.load(request)

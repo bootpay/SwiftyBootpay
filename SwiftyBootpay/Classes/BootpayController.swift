@@ -102,6 +102,7 @@ public class BootpayController: UIViewController {
     public var user_info: [String: String] = [:]
     public var params: [String: String] = [:]
     public var order_id = ""
+    public var use_order_id = 0
     public var expire_month = 12 // 정기결제 실행 기간
     public var vbank_result = 1 // 가상계좌 결과창 안보이게 하기
     public var account_expire_at = "" // 가상계좌 입금 만료 기한
@@ -123,8 +124,7 @@ extension BootpayController: Params {
     }
     
     public func transactionConfirm(data: [String: Any]) {
-        let json = dicToJsonString(data).replace(target: "'", withString: "\\'")
-        print(json)
+        let json = dicToJsonString(data).replace(target: "'", withString: "\\'") 
         wv.doJavascript("window.BootPay.transactionConfirm(\(json));")
     }
     
@@ -199,6 +199,7 @@ extension BootpayController {
             "items: [\(generateItems())],",
             "params: \(dicToJsonString(params).replace(target: "'", withString: "\\'")),",
             "order_id: '\(order_id)',",
+            "use_order_id: '\(use_order_id)',",
             "account_expire_at: '\(account_expire_at)',",
             "extra: {",
                 "app_scheme:'\(getURLSchema())',",
@@ -244,6 +245,7 @@ extension BootpayController {
         self.items = [BootpayItem]()
         self.method = ""
         self.order_id = ""
+        self.use_order_id = 0
         self.user_info = [:]
         self.params = [:]
         self.expire_month = 12 // 정기결제 실행 기간
