@@ -60,15 +60,15 @@ extension Params where Self: AnyObject {
 }
 
 //MARK: Bootpay Models
-public class BootpayItem: Params {
-    public init() {}
-    public var item_name = ""
-    public var qty: Int = 0
-    public var unique = ""
-    public var price = Double(0)
-    public var cat1 = ""
-    public var cat2 = ""
-    public var cat3 = ""
+public class BootpayItem: NSObject, Params {
+    public override init() {}
+    @objc public var item_name = ""
+    @objc public var qty: Int = 0
+    @objc public var unique = ""
+    @objc public var price = Double(0)
+    @objc public var cat1 = ""
+    @objc public var cat2 = ""
+    @objc public var cat3 = ""
     
     func toString() -> String {
         if item_name.isEmpty { return "" }
@@ -91,48 +91,50 @@ public class BootpayItem: Params {
 }
 
 public class BootpayController: UIViewController {
-    public var price = Double(0)
-    public var application_id = BootpayAnalytics.sharedInstance.getApplicationId()
-    public var name = ""
-    public var pg = ""
-    public var phone = ""
-    public var show_agree_window = 0
-    public var items = [BootpayItem]()
-    public var method = ""
-    public var user_info: [String: String] = [:]
-    public var params: [String: String] = [:]
-    public var order_id = ""
-    public var use_order_id = 0
-    public var expire_month = 12 // 정기결제 실행 기간
-    public var vbank_result = 1 // 가상계좌 결과창 안보이게 하기
-    public var account_expire_at = "" // 가상계좌 입금 만료 기한
-    public var quotas = [0,2,3,4,5,6,7,8,9,10,11,12] // 할부 개월 수
+    @objc public var price = Double(0)
+    @objc public var application_id = BootpayAnalytics.sharedInstance.getApplicationId()
+    @objc public var name = ""
+    @objc public var pg = ""
+    @objc public var phone = ""
+    @objc public var show_agree_window = 0
+    @objc public var items = [BootpayItem]()
+    @objc public var method = ""
+    @objc public var user_info: [String: String] = [:]
+    @objc public var params: [String: String] = [:]
+    @objc public var order_id = ""
+    @objc public var use_order_id = 0
+    @objc public var expire_month = 12 // 정기결제 실행 기간
+    @objc public var vbank_result = 1 // 가상계좌 결과창 안보이게 하기
+    @objc public var account_expire_at = "" // 가상계좌 입금 만료 기한
+    @objc public var quotas = [0,2,3,4,5,6,7,8,9,10,11,12] // 할부 개월 수
     var isPaying = false
-    public var sendable: BootpayRequestProtocol?
+    @objc public var sendable: BootpayRequestProtocol?
     
     internal var wv: BootpayWebView!
 }
 
 
 extension BootpayController: Params {
+    @objc(addItem:)
     public func addItem(item: BootpayItem) {
         self.items.append(item)
     }
     
+    @objc(setBootpayItems:)
     public func setItems(items: [BootpayItem]) {
         self.items = items
     }
     
-    public func transactionConfirm(data: [String: Any]) {
+    @objc public func transactionConfirm(data: [String: Any]) {
         let json = dicToJsonString(data).replace(target: "'", withString: "\\'") 
         wv.doJavascript("window.BootPay.transactionConfirm(\(json));")
     }
     
-    public func removePaymentWindow() {
+    @objc public func removePaymentWindow() {
         wv.doJavascript("window.BootPay.removePaymentWindow();")
     }
     
-    public func dismiss() {
+    @objc public func dismiss() {
         self.dismiss(animated: true, completion: nil)
     }
     

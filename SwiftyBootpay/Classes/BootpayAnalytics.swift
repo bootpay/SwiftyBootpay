@@ -59,8 +59,8 @@ class BootpayDefault {
 }
 
 //MARK: Bootpay Models
-public class BootpayUser: Params {
-    public init() {}
+public class BootpayUser: NSObject, Params {
+    public override init() {}
     var user_id = ""
     
     public var id = ""
@@ -72,8 +72,10 @@ public class BootpayUser: Params {
     public var area = ""
 }
 
-public class BootpayAnalytics {
-    public init() {
+
+public class BootpayAnalytics: NSObject {
+    public override init() {
+        super.init()
         self.key = getRandomKey(32)
         self.iv = getRandomKey(16)
     }
@@ -81,7 +83,7 @@ public class BootpayAnalytics {
     public static let sharedInstance = BootpayAnalytics()
     var application_id = ""
     public var uuid = ""
-    let ver = "2.1.1"
+    let ver = "2.1.12"
     var sk = ""
     var sk_time = 0 // session 유지시간 기본 30분
     var last_time = 0 // 접속 종료 시간
@@ -92,8 +94,8 @@ public class BootpayAnalytics {
     var iv = ""
 }
 
-public class BootpayStatItem: Codable, Params {
-    public init() {}
+public class BootpayStatItem: NSObject, Codable, Params {
+    public override init() {}
     
     public var item_name = ""
     public var item_img = ""
@@ -208,12 +210,14 @@ extension BootpayAnalytics {
 
 //MARK: Bootpay LifeCycle Fpr Analytics
 extension BootpayAnalytics {
+    @objc(appLaunch:)
     open func appLaunch(application_id: String) {
         HTTPCookieStorage.shared.cookieAcceptPolicy = HTTPCookie.AcceptPolicy.always
         self.application_id = application_id
         BootpayDefault.setValue("application_id", value: self.application_id)
     }
     
+    @objc(sessionActive:)
     open func sessionActive(active: Bool) {
         if active == true {
             loadSessionValues()
@@ -261,7 +265,7 @@ extension BootpayAnalytics {
         } catch {}
     }
     
-    open func postLogin() {
+    @objc public func postLogin() {
         if(BootpayAnalytics.sharedInstance.user.id == "") {
             NSLog("Bootpay Analytics Warning: postLogin() not Work!! Please check id is not empty")
             return
@@ -274,11 +278,11 @@ extension BootpayAnalytics {
                   area: BootpayAnalytics.sharedInstance.user.area)
     }
     
-    open func start(_ url: String, _ page_type: String) {
+    @objc public func start(_ url: String, _ page_type: String) {
         start(url, page_type, items: [])
     }
     
-    open func start(_ url: String, _ page_type: String, items: [BootpayStatItem]) {
+    @objc public func start(_ url: String, _ page_type: String, items: [BootpayStatItem]) {
         let uri = "https://analytics.bootpay.co.kr/call"
         var params: [String: Any]
         
@@ -316,7 +320,7 @@ extension BootpayAnalytics {
         }
     }
     
-    open func post(url: String, params: [String: Any], isLogin: Bool) {
+    @objc public func post(url: String, params: [String: Any], isLogin: Bool) {
         let session = URLSession.shared
         let request = NSMutableURLRequest(url: NSURL(string: url)! as URL)
         request.httpMethod = "POST"

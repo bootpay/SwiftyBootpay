@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 //import CryptoSwift
 
-public protocol BootpayRequestProtocol {
+@objc public protocol BootpayRequestProtocol {
     func onError(data: [String: Any])
     func onReady(data: [String: Any])
     func onClose()
