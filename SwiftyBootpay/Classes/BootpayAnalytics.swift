@@ -83,7 +83,7 @@ public class BootpayAnalytics: NSObject {
     @objc public static let sharedInstance = BootpayAnalytics()
     var application_id = ""
     public var uuid = ""
-    let ver = "2.1.17"
+    let ver = "2.1.18"
     var sk = ""
     var sk_time = 0 // session 유지시간 기본 30분
     var last_time = 0 // 접속 종료 시간

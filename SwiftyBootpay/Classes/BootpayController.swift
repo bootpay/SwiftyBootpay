@@ -125,16 +125,19 @@ extension BootpayController: Params {
         self.items = items
     }
     
-    @objc public func transactionConfirm(data: [String: Any]) {
+    @objc(transactionConfirm:)
+    public func transactionConfirm(data: [String: Any]) {
         let json = dicToJsonString(data).replace(target: "'", withString: "\\'") 
         wv.doJavascript("window.BootPay.transactionConfirm(\(json));")
     }
     
-    @objc public func removePaymentWindow() {
+    @objc(removePaymentWindow)
+    public func removePaymentWindow() {
         wv.doJavascript("window.BootPay.removePaymentWindow();")
     }
     
-    @objc public func dismiss() {
+    @objc(dismiss)
+    public func dismiss() {
         self.dismiss(animated: true, completion: nil)
     }
     
