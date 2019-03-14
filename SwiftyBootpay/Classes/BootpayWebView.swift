@@ -11,12 +11,12 @@ import WebKit
 //import CryptoSwift
 
 @objc public protocol BootpayRequestProtocol {
-    func onError(data: [String: Any])
-    func onReady(data: [String: Any])
-    func onClose()
-    func onConfirm(data: [String: Any])
-    func onCancel(data: [String: Any])
-    func onDone(data: [String: Any])
+    @objc(onError:) func onError(data: [String: Any])
+    @objc(onReady:) func onReady(data: [String: Any])
+    @objc func onClose()
+    @objc(onConfirm:) func onConfirm(data: [String: Any])
+    @objc(onCancel:) func onCancel(data: [String: Any])
+    @objc(onDone:) func onDone(data: [String: Any])
 }
 
 class BootpayWebView: UIView {
