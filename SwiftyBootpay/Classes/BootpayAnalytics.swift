@@ -63,13 +63,13 @@ public class BootpayUser: NSObject, Params {
     public override init() {}
     var user_id = ""
     
-    public var id = ""
-    public var username = ""
-    public var email = ""
-    public var gender = 0
-    public var birth = ""
-    public var phone = ""
-    public var area = ""
+    @objc public var id = ""
+    @objc public var username = ""
+    @objc public var email = ""
+    @objc public var gender = 0
+    @objc public var birth = ""
+    @objc public var phone = ""
+    @objc public var area = ""
 }
 
 
