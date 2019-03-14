@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftyBootpay'
-  s.version          = '2.1.12'
+  s.version          = '2.1.13'
   s.summary          = 'PG Plugin For Swift'
 
 # This description is used to generate tags and improve search results.
@@ -26,6 +26,7 @@ Pod::Spec.new do |s|
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '11.0'
+  s.swift_version = '4.2'
 
   s.source_files = 'SwiftyBootpay/Classes/**/*'
   
