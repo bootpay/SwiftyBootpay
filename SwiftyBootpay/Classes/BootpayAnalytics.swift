@@ -83,12 +83,12 @@ public class BootpayAnalytics: NSObject {
     @objc public static let sharedInstance = BootpayAnalytics()
     var application_id = ""
     public var uuid = ""
-    let ver = "2.1.14"
+    let ver = "2.1.15"
     var sk = ""
     var sk_time = 0 // session 유지시간 기본 30분
     var last_time = 0 // 접속 종료 시간
     var time = 0 // 미접속 시간
-    public var user = BootpayUser()
+    @objc public var user = BootpayUser()
     
     var key = ""
     var iv = ""
@@ -97,12 +97,12 @@ public class BootpayAnalytics: NSObject {
 public class BootpayStatItem: NSObject, Codable, Params {
     public override init() {}
     
-    public var item_name = ""
-    public var item_img = ""
-    public var unique = ""
-    public var cat1 = ""
-    public var cat2 = ""
-    public var cat3 = ""
+    @objc public var item_name = ""
+    @objc public var item_img = ""
+    @objc public var unique = ""
+    @objc public var cat1 = ""
+    @objc public var cat2 = ""
+    @objc public var cat3 = ""
 }
 
 extension BootpayAnalytics {
