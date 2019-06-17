@@ -90,44 +90,7 @@
 		7E3538A6992A38276764936A9733493D /* AFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA54B44DC90109CA358EDF4C2A932B9 /* AFError.swift */; };
 		7F424C046646FE578B5BAA8AE3D30B37 /* ObjectMapper-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A8DDE2F2F63DD2E1A0FD739607333A2E /* ObjectMapper-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7F81290E4FCD14135D45DD2277FF7230 /* CompactMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A4E113D6D2E432AB0DA19F31AFC48A /* CompactMap.swift */; };
-		810656B022B21F21007206D1 /* RemoteOrderCForm.h in Headers */ = {isa = PBXBuildFile; fileRef = 8106566322B21F17007206D1 /* RemoteOrderCForm.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		810656B122B21F21007206D1 /* PushCType.h in Headers */ = {isa = PBXBuildFile; fileRef = 8106566422B21F17007206D1 /* PushCType.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		810656B222B21F21007206D1 /* BootpayCStatItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8106566522B21F17007206D1 /* BootpayCStatItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		810656B322B21F21007206D1 /* BootpayCUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 8106566622B21F17007206D1 /* BootpayCUX.m */; };
-		810656B422B21F21007206D1 /* BootpayCDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 8106566722B21F17007206D1 /* BootpayCDefault.m */; };
-		810656B522B21F21007206D1 /* BootpayC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8106566822B21F17007206D1 /* BootpayC.m */; };
-		810656B622B21F21007206D1 /* BootpayCController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8106566922B21F17007206D1 /* BootpayCController.m */; };
-		810656B722B21F21007206D1 /* BootpayCExtra.m in Sources */ = {isa = PBXBuildFile; fileRef = 8106566A22B21F17007206D1 /* BootpayCExtra.m */; };
-		810656B822B21F21007206D1 /* BootpayCUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8106566B22B21F17007206D1 /* BootpayCUser.m */; };
-		810656B922B21F21007206D1 /* RemoteCLink.h in Headers */ = {isa = PBXBuildFile; fileRef = 8106566C22B21F17007206D1 /* RemoteCLink.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		810656BA22B21F21007206D1 /* BootpayCItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8106566D22B21F17007206D1 /* BootpayCItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		810656BB22B21F21007206D1 /* BootpayCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8106566E22B21F17007206D1 /* BootpayCRequest.m */; };
-		810656BC22B21F21007206D1 /* RemoteOrderCPre.m in Sources */ = {isa = PBXBuildFile; fileRef = 8106566F22B21F17007206D1 /* RemoteOrderCPre.m */; };
-		810656BD22B21F21007206D1 /* SMSCPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = 8106567022B21F17007206D1 /* SMSCPayload.m */; };
-		810656BE22B21F21007206D1 /* BootpayCWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8106567122B21F17007206D1 /* BootpayCWebView.m */; };
-		810656BF22B21F21007206D1 /* BootpayCDefault.h in Headers */ = {isa = PBXBuildFile; fileRef = 8106567222B21F17007206D1 /* BootpayCDefault.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		810656C022B21F21007206D1 /* BootpayCUX.h in Headers */ = {isa = PBXBuildFile; fileRef = 8106567322B21F17007206D1 /* BootpayCUX.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		810656C122B21F21007206D1 /* BootpayCStatItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8106567422B21F17007206D1 /* BootpayCStatItem.m */; };
-		810656C222B21F21007206D1 /* RemoteOrderCForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 8106567522B21F17007206D1 /* RemoteOrderCForm.m */; };
-		810656C322B21F21007206D1 /* BootpayCUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 8106567622B21F17007206D1 /* BootpayCUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		810656C422B21F21007206D1 /* BootpayCExtra.h in Headers */ = {isa = PBXBuildFile; fileRef = 8106567722B21F17007206D1 /* BootpayCExtra.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		810656C522B21F21007206D1 /* BootpayCController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8106567822B21F17007206D1 /* BootpayCController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		810656C622B21F21007206D1 /* BootpayC.h in Headers */ = {isa = PBXBuildFile; fileRef = 8106567922B21F17007206D1 /* BootpayC.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		810656C722B21F21007206D1 /* RemoteOrderCPre.h in Headers */ = {isa = PBXBuildFile; fileRef = 8106567A22B21F17007206D1 /* RemoteOrderCPre.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		810656C822B21F21007206D1 /* BootpayCRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 8106567B22B21F17007206D1 /* BootpayCRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		810656C922B21F21007206D1 /* RemoteCLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 8106567C22B21F17007206D1 /* RemoteCLink.m */; };
-		810656CA22B21F21007206D1 /* BootpayCItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8106567D22B21F17007206D1 /* BootpayCItem.m */; };
-		810656CB22B21F21007206D1 /* BootpayCWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8106567E22B21F17007206D1 /* BootpayCWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		810656CC22B21F21007206D1 /* SMSCPayload.h in Headers */ = {isa = PBXBuildFile; fileRef = 8106567F22B21F17007206D1 /* SMSCPayload.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		810656CD22B21F21007206D1 /* BootpayUnity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8106568022B21F17007206D1 /* BootpayUnity.mm */; };
-		810656CE22B21F29007206D1 /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 8106568222B21F17007206D1 /* NSString+Base64.m */; };
-		810656CF22B21F29007206D1 /* AESCrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = 8106568322B21F17007206D1 /* AESCrypt.m */; };
-		810656D022B21F29007206D1 /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 8106568422B21F17007206D1 /* NSData+Base64.h */; };
-		810656D122B21F29007206D1 /* NSData+CommonCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 8106568522B21F17007206D1 /* NSData+CommonCrypto.h */; };
-		810656D222B21F29007206D1 /* AESCrypt.h in Headers */ = {isa = PBXBuildFile; fileRef = 8106568622B21F17007206D1 /* AESCrypt.h */; };
-		810656D322B21F29007206D1 /* NSString+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 8106568722B21F17007206D1 /* NSString+Base64.h */; };
-		810656D422B21F29007206D1 /* NSData+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 8106568822B21F17007206D1 /* NSData+CommonCrypto.m */; };
-		810656D522B21F29007206D1 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 8106568922B21F17007206D1 /* NSData+Base64.m */; };
+		817DC45022B76C2700DFFF21 /* UnityCBootpay.zip in Resources */ = {isa = PBXBuildFile; fileRef = 817DC44F22B76C2600DFFF21 /* UnityCBootpay.zip */; };
 		87646781F3CA197B0FADF65A73F36CDD /* TransformOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A58FA499A0531960AAA5948DCF6F066 /* TransformOf.swift */; };
 		8B6BF3261CD6188D9D508F8DE26BF471 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2668608634261E561E7C7088D31CB4DF /* Array+Extension.swift */; };
 		8BFF04442A40B87380A8F7A3735869D1 /* PCBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE6A94615B1450B92B00813DB8D8C12 /* PCBC.swift */; };
@@ -421,44 +384,7 @@
 		79A4E113D6D2E432AB0DA19F31AFC48A /* CompactMap.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CompactMap.swift; path = Sources/CryptoSwift/CompactMap.swift; sourceTree = "<group>"; };
 		7A58FA499A0531960AAA5948DCF6F066 /* TransformOf.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TransformOf.swift; path = Sources/TransformOf.swift; sourceTree = "<group>"; };
 		7C676A1F7B8737B5DEAD0BA15CE02818 /* UInt16+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UInt16+Extension.swift"; path = "Sources/CryptoSwift/UInt16+Extension.swift"; sourceTree = "<group>"; };
-		8106566322B21F17007206D1 /* RemoteOrderCForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteOrderCForm.h; sourceTree = "<group>"; };
-		8106566422B21F17007206D1 /* PushCType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushCType.h; sourceTree = "<group>"; };
-		8106566522B21F17007206D1 /* BootpayCStatItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BootpayCStatItem.h; sourceTree = "<group>"; };
-		8106566622B21F17007206D1 /* BootpayCUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BootpayCUX.m; sourceTree = "<group>"; };
-		8106566722B21F17007206D1 /* BootpayCDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BootpayCDefault.m; sourceTree = "<group>"; };
-		8106566822B21F17007206D1 /* BootpayC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BootpayC.m; sourceTree = "<group>"; };
-		8106566922B21F17007206D1 /* BootpayCController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BootpayCController.m; sourceTree = "<group>"; };
-		8106566A22B21F17007206D1 /* BootpayCExtra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BootpayCExtra.m; sourceTree = "<group>"; };
-		8106566B22B21F17007206D1 /* BootpayCUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BootpayCUser.m; sourceTree = "<group>"; };
-		8106566C22B21F17007206D1 /* RemoteCLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteCLink.h; sourceTree = "<group>"; };
-		8106566D22B21F17007206D1 /* BootpayCItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BootpayCItem.h; sourceTree = "<group>"; };
-		8106566E22B21F17007206D1 /* BootpayCRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BootpayCRequest.m; sourceTree = "<group>"; };
-		8106566F22B21F17007206D1 /* RemoteOrderCPre.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteOrderCPre.m; sourceTree = "<group>"; };
-		8106567022B21F17007206D1 /* SMSCPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSCPayload.m; sourceTree = "<group>"; };
-		8106567122B21F17007206D1 /* BootpayCWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BootpayCWebView.m; sourceTree = "<group>"; };
-		8106567222B21F17007206D1 /* BootpayCDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BootpayCDefault.h; sourceTree = "<group>"; };
-		8106567322B21F17007206D1 /* BootpayCUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BootpayCUX.h; sourceTree = "<group>"; };
-		8106567422B21F17007206D1 /* BootpayCStatItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BootpayCStatItem.m; sourceTree = "<group>"; };
-		8106567522B21F17007206D1 /* RemoteOrderCForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteOrderCForm.m; sourceTree = "<group>"; };
-		8106567622B21F17007206D1 /* BootpayCUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BootpayCUser.h; sourceTree = "<group>"; };
-		8106567722B21F17007206D1 /* BootpayCExtra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BootpayCExtra.h; sourceTree = "<group>"; };
-		8106567822B21F17007206D1 /* BootpayCController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BootpayCController.h; sourceTree = "<group>"; };
-		8106567922B21F17007206D1 /* BootpayC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BootpayC.h; sourceTree = "<group>"; };
-		8106567A22B21F17007206D1 /* RemoteOrderCPre.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteOrderCPre.h; sourceTree = "<group>"; };
-		8106567B22B21F17007206D1 /* BootpayCRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BootpayCRequest.h; sourceTree = "<group>"; };
-		8106567C22B21F17007206D1 /* RemoteCLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteCLink.m; sourceTree = "<group>"; };
-		8106567D22B21F17007206D1 /* BootpayCItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BootpayCItem.m; sourceTree = "<group>"; };
-		8106567E22B21F17007206D1 /* BootpayCWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BootpayCWebView.h; sourceTree = "<group>"; };
-		8106567F22B21F17007206D1 /* SMSCPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSCPayload.h; sourceTree = "<group>"; };
-		8106568022B21F17007206D1 /* BootpayUnity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BootpayUnity.mm; sourceTree = "<group>"; };
-		8106568222B21F17007206D1 /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64.m"; sourceTree = "<group>"; };
-		8106568322B21F17007206D1 /* AESCrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESCrypt.m; sourceTree = "<group>"; };
-		8106568422B21F17007206D1 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
-		8106568522B21F17007206D1 /* NSData+CommonCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+CommonCrypto.h"; sourceTree = "<group>"; };
-		8106568622B21F17007206D1 /* AESCrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESCrypt.h; sourceTree = "<group>"; };
-		8106568722B21F17007206D1 /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64.h"; sourceTree = "<group>"; };
-		8106568822B21F17007206D1 /* NSData+CommonCrypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+CommonCrypto.m"; sourceTree = "<group>"; };
-		8106568922B21F17007206D1 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		817DC44F22B76C2600DFFF21 /* UnityCBootpay.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = UnityCBootpay.zip; path = SwiftyBootpay/Classes/UnityCBootpay.zip; sourceTree = "<group>"; };
 		82EEF01C018D1F4AA506DD252D668890 /* AlamofireImage-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "AlamofireImage-Info.plist"; sourceTree = "<group>"; };
 		84474F997FAE7ADD5821CE0849B8BE11 /* EnumTransform.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EnumTransform.swift; path = Sources/EnumTransform.swift; sourceTree = "<group>"; };
 		851A25D05A86606ACA890205F02AE62C /* Alamofire-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-umbrella.h"; sourceTree = "<group>"; };
@@ -828,68 +754,6 @@
 			path = "Target Support Files/Pods-SwiftyBootpay_Example";
 			sourceTree = "<group>";
 		};
-		8106566122B21F17007206D1 /* UnityCBootpay */ = {
-			isa = PBXGroup;
-			children = (
-				8106566222B21F17007206D1 /* BootpayC */,
-				8106568022B21F17007206D1 /* BootpayUnity.mm */,
-				8106568122B21F17007206D1 /* AESCrypt */,
-			);
-			name = UnityCBootpay;
-			path = SwiftyBootpay/Classes/UnityCBootpay;
-			sourceTree = "<group>";
-		};
-		8106566222B21F17007206D1 /* BootpayC */ = {
-			isa = PBXGroup;
-			children = (
-				8106566322B21F17007206D1 /* RemoteOrderCForm.h */,
-				8106566422B21F17007206D1 /* PushCType.h */,
-				8106566522B21F17007206D1 /* BootpayCStatItem.h */,
-				8106566622B21F17007206D1 /* BootpayCUX.m */,
-				8106566722B21F17007206D1 /* BootpayCDefault.m */,
-				8106566822B21F17007206D1 /* BootpayC.m */,
-				8106566922B21F17007206D1 /* BootpayCController.m */,
-				8106566A22B21F17007206D1 /* BootpayCExtra.m */,
-				8106566B22B21F17007206D1 /* BootpayCUser.m */,
-				8106566C22B21F17007206D1 /* RemoteCLink.h */,
-				8106566D22B21F17007206D1 /* BootpayCItem.h */,
-				8106566E22B21F17007206D1 /* BootpayCRequest.m */,
-				8106566F22B21F17007206D1 /* RemoteOrderCPre.m */,
-				8106567022B21F17007206D1 /* SMSCPayload.m */,
-				8106567122B21F17007206D1 /* BootpayCWebView.m */,
-				8106567222B21F17007206D1 /* BootpayCDefault.h */,
-				8106567322B21F17007206D1 /* BootpayCUX.h */,
-				8106567422B21F17007206D1 /* BootpayCStatItem.m */,
-				8106567522B21F17007206D1 /* RemoteOrderCForm.m */,
-				8106567622B21F17007206D1 /* BootpayCUser.h */,
-				8106567722B21F17007206D1 /* BootpayCExtra.h */,
-				8106567822B21F17007206D1 /* BootpayCController.h */,
-				8106567922B21F17007206D1 /* BootpayC.h */,
-				8106567A22B21F17007206D1 /* RemoteOrderCPre.h */,
-				8106567B22B21F17007206D1 /* BootpayCRequest.h */,
-				8106567C22B21F17007206D1 /* RemoteCLink.m */,
-				8106567D22B21F17007206D1 /* BootpayCItem.m */,
-				8106567E22B21F17007206D1 /* BootpayCWebView.h */,
-				8106567F22B21F17007206D1 /* SMSCPayload.h */,
-			);
-			path = BootpayC;
-			sourceTree = "<group>";
-		};
-		8106568122B21F17007206D1 /* AESCrypt */ = {
-			isa = PBXGroup;
-			children = (
-				8106568222B21F17007206D1 /* NSString+Base64.m */,
-				8106568322B21F17007206D1 /* AESCrypt.m */,
-				8106568422B21F17007206D1 /* NSData+Base64.h */,
-				8106568522B21F17007206D1 /* NSData+CommonCrypto.h */,
-				8106568622B21F17007206D1 /* AESCrypt.h */,
-				8106568722B21F17007206D1 /* NSString+Base64.h */,
-				8106568822B21F17007206D1 /* NSData+CommonCrypto.m */,
-				8106568922B21F17007206D1 /* NSData+Base64.m */,
-			);
-			path = AESCrypt;
-			sourceTree = "<group>";
-		};
 		81561B6C7DF8FB4E0836940AAD5F012F /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -994,7 +858,7 @@
 		DD3B40388B105F390D87A6AD5C407CBE /* SwiftyBootpay */ = {
 			isa = PBXGroup;
 			children = (
-				8106566122B21F17007206D1 /* UnityCBootpay */,
+				817DC44F22B76C2600DFFF21 /* UnityCBootpay.zip */,
 				A8E2B3A88E5A51F980189ED230A93D73 /* Bootpay.swift */,
 				36FE798B624A562701EB408166A7A2AF /* BootpayAnalytics.swift */,
 				F1A805C6FFA360B9BD84ADD7CB8AB497 /* BootpayController.swift */,
@@ -1080,26 +944,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				810656CB22B21F21007206D1 /* BootpayCWebView.h in Headers */,
-				810656C022B21F21007206D1 /* BootpayCUX.h in Headers */,
-				810656C622B21F21007206D1 /* BootpayC.h in Headers */,
-				810656CC22B21F21007206D1 /* SMSCPayload.h in Headers */,
-				810656B222B21F21007206D1 /* BootpayCStatItem.h in Headers */,
-				810656D022B21F29007206D1 /* NSData+Base64.h in Headers */,
-				810656BF22B21F21007206D1 /* BootpayCDefault.h in Headers */,
 				3E895D7BC1268FC5B58E90B24C2A1E32 /* SwiftyBootpay-umbrella.h in Headers */,
-				810656D222B21F29007206D1 /* AESCrypt.h in Headers */,
-				810656BA22B21F21007206D1 /* BootpayCItem.h in Headers */,
-				810656B922B21F21007206D1 /* RemoteCLink.h in Headers */,
-				810656B022B21F21007206D1 /* RemoteOrderCForm.h in Headers */,
-				810656D122B21F29007206D1 /* NSData+CommonCrypto.h in Headers */,
-				810656C722B21F21007206D1 /* RemoteOrderCPre.h in Headers */,
-				810656C322B21F21007206D1 /* BootpayCUser.h in Headers */,
-				810656C422B21F21007206D1 /* BootpayCExtra.h in Headers */,
-				810656C822B21F21007206D1 /* BootpayCRequest.h in Headers */,
-				810656B122B21F21007206D1 /* PushCType.h in Headers */,
-				810656C522B21F21007206D1 /* BootpayCController.h in Headers */,
-				810656D322B21F29007206D1 /* NSString+Base64.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1322,6 +1167,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				817DC45022B76C2700DFFF21 /* UnityCBootpay.zip in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1385,40 +1231,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				16A7AFC667758AC3EF258E33B3EEBAC4 /* Bootpay.swift in Sources */,
-				810656C122B21F21007206D1 /* BootpayCStatItem.m in Sources */,
 				A77EFC3344E8F8A1B0BE63778B13C741 /* BootpayAnalytics.swift in Sources */,
 				96E71F9D96D368D22BD398EB0ED9D4D9 /* BootpayController.swift in Sources */,
-				810656B322B21F21007206D1 /* BootpayCUX.m in Sources */,
-				810656B822B21F21007206D1 /* BootpayCUser.m in Sources */,
-				810656CE22B21F29007206D1 /* NSString+Base64.m in Sources */,
 				8FD289E277E9320C6BE1C15156D112A3 /* BootpayExtra.swift in Sources */,
-				810656BB22B21F21007206D1 /* BootpayCRequest.m in Sources */,
-				810656B722B21F21007206D1 /* BootpayCExtra.m in Sources */,
 				2826207E2A50FAD63C800E36CC53F2E2 /* BootpayItem.swift in Sources */,
 				0D37254E54FBF2AEE65DC8D219D892B3 /* BootpayParams.swift in Sources */,
 				971E96623D4AD6BF1BCDA077A3F33B23 /* BootpayRequest.swift in Sources */,
 				1E429A59F60895D3FE76A71A055BC514 /* BootpayStatItem.swift in Sources */,
 				D73A1BB8FA12270F83440B2AC0465565 /* BootpayUser.swift in Sources */,
-				810656CD22B21F21007206D1 /* BootpayUnity.mm in Sources */,
-				810656CA22B21F21007206D1 /* BootpayCItem.m in Sources */,
-				810656D522B21F29007206D1 /* NSData+Base64.m in Sources */,
 				BBF59C7A3A4A039E0763217512BECFEC /* BootpayUX.swift in Sources */,
-				810656BD22B21F21007206D1 /* SMSCPayload.m in Sources */,
 				69D937FC6FA682B4DAED22C8C4D5CF07 /* BootpayWebView.swift in Sources */,
-				810656C922B21F21007206D1 /* RemoteCLink.m in Sources */,
 				281BFA9E9F14E58B4FB66CA4F026F179 /* PushType.swift in Sources */,
 				2726D0CBBAC4F41B136B0B7BE83DC5D9 /* RemoteLink.swift in Sources */,
-				810656B622B21F21007206D1 /* BootpayCController.m in Sources */,
 				68E557059BED1CA86CE23AE24DFD2597 /* RemoteOrderForm.swift in Sources */,
 				45F3D191017D98895F486FD01A1EC28A /* RemoteOrderPre.swift in Sources */,
-				810656CF22B21F29007206D1 /* AESCrypt.m in Sources */,
-				810656D422B21F29007206D1 /* NSData+CommonCrypto.m in Sources */,
-				810656BE22B21F21007206D1 /* BootpayCWebView.m in Sources */,
-				810656C222B21F21007206D1 /* RemoteOrderCForm.m in Sources */,
-				810656BC22B21F21007206D1 /* RemoteOrderCPre.m in Sources */,
 				06FBDAB7CCC135FBD995E601BEAF74C3 /* SMSPayload.swift in Sources */,
-				810656B422B21F21007206D1 /* BootpayCDefault.m in Sources */,
-				810656B522B21F21007206D1 /* BootpayC.m in Sources */,
 				D99E3334DADF4AD5515750F5462F024E /* SwiftyBootpay-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -43,8 +43,8 @@ class RootController: UIViewController {
     }
     
     @objc func nativeCClick() {
-        let vc = NativeCController()
-        self.navigationController?.pushViewController(vc, animated: true)
+//        let vc = NativeCController()
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func localHtmlClick() {
