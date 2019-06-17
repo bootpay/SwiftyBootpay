@@ -78,10 +78,7 @@ class NativeController: UIViewController {
       }
       
       let request = BootpayRequest()
-      
-      
       //         $0.application_id = "5a52cc39396fa6449880c0f0"
-      
       // 주문정보 - 실제 결제창에 반영되는 정보
       request.params {
          $0.price = 1000 // 결제할 금액
@@ -95,6 +92,7 @@ class NativeController: UIViewController {
          //            $0.method = "card" // 결제수단
          $0.methods = ["card", "phone"]
          $0.sms_use = true
+         $0.ux = "BOOTPAY_REMOTE_LINK"
       }
       var items = [BootpayItem]()
       items.append(item1)
@@ -107,7 +105,9 @@ class NativeController: UIViewController {
          $0.rps = ["010-4033-4678"]
       }
       
-      Bootpay.request_link(request, items: items, user: bootUser, extra: nil, smsPayload: smsPayload)
+      
+      Bootpay.request(self, sendable: self, request: request, user: bootUser, items: items, smsPayload: smsPayload)
+//      Bootpay.request_link(request, items: items, user: bootUser, extra: nil, smsPayload: smsPayload)
    }
    
    @objc func remoteOrderClick() {
@@ -162,6 +162,7 @@ class NativeController: UIViewController {
          //            $0.method = "card" // 결제수단
          $0.methods = ["card", "phone"]
          $0.sms_use = true
+         $0.ux = "BOOTPAY_REMOTE_FORM"
       }
       var items = [BootpayItem]()
       items.append(item1)
@@ -174,7 +175,8 @@ class NativeController: UIViewController {
          $0.rps = ["010-4033-4678"]
       }
       
-      Bootpay.request_form(request, items: items, user: bootUser, extra: nil, smsPayload: smsPayload, remoteForm: nil)
+      Bootpay.request(self, sendable: self, request: request, user: bootUser, items: items, smsPayload: smsPayload)
+//      Bootpay.request_form(request, user: bootUser, items: items, extra: nil, smsPayload: smsPayload, remoteForm: nil)
    
    }
    
@@ -230,6 +232,7 @@ class NativeController: UIViewController {
          //            $0.method = "card" // 결제수단
          $0.methods = ["card", "phone"]
          $0.sms_use = true
+         $0.ux = "BOOTPAY_REMOTE_PRE"
       }
       var items = [BootpayItem]()
       items.append(item1)
@@ -242,7 +245,8 @@ class NativeController: UIViewController {
          $0.rps = ["010-4033-4678"]
       }
       
-      Bootpay.request_pre(request, items: items, user: bootUser, extra: nil, smsPayload: smsPayload, remotePre: nil)
+      Bootpay.request(self, sendable: self, request: request, user: bootUser, items: items, smsPayload: smsPayload)
+//      Bootpay.request_pre(request, user: bootUser, items: items, extra: nil, smsPayload: smsPayload, remotePre: nil)
       
    }
     
@@ -341,31 +345,25 @@ extension NativeController {
          $0.order_id = "1234_1234_124" // 결제 고유번호
          $0.params = customParams // 커스텀 변수
 //         $0.user_info = bootUser
-         $0.pg = "inicis" // 결제할 PG사
+         $0.pg = "payletter" // 결제할 PG사
          //            $0.account_expire_at = "2018-09-25" // 가상계좌 입금기간 제한 ( yyyy-mm-dd 포멧으로 입력해주세요. 가상계좌만 적용됩니다. 오늘 날짜보다 더 뒤(미래)여야 합니다 )
          //            $0.method = "card" // 결제수단
          $0.show_agree_window = false
-         $0.method = "bank"
+         $0.method = "card"
+         $0.ux = "PG_DIALOG"
 //         $0.methods = ["card", "phone"]
          //            $0.sendable = self // 이벤트를 처리할 protocol receiver
 //         $0.extra.quotas = [0,2,3] // // 5만원 이상일 경우 할부 허용범위 설정 가능, (예제는 일시불, 2개월 할부, 3개월 할부 허용)
       }
       
+      let extra = BootpayExtra()
+      extra.quotas = [0, 2, 3]
+      
       var items = [BootpayItem]()
       items.append(item1)
       items.append(item2)
       
-      vc = BootpayController()
-        // 주문정보 - 실제 결제창에 반영되는 정보
-      vc.request = request
-      vc.user = bootUser
-      vc.extra.quotas = [0, 2, 3]
-      vc.sendable = self
-      vc.items = items
-      
-//      vc.addItem(item: item1) //배열 가능
-//      vc.addItem(item: item2) //배열 가능
-      self.present(vc, animated: true, completion: nil) // 결제창 controller 호출
+      Bootpay.request(self, sendable: self, request: request, user: bootUser, items: items, extra: extra) 
     }
 }
 
@@ -389,9 +387,10 @@ extension NativeController: BootpayRequestProtocol {
         
         let iWantPay = true
         if iWantPay == true {  // 재고가 있을 경우.
-            vc.transactionConfirm(data: data) // 결제 승인
+//         Bootpay.trans
+            Bootpay.transactionConfirm(data: data) // 결제 승인
         } else { // 재고가 없어 중간에 결제창을 닫고 싶을 경우
-            vc.removePaymentWindow()
+            Bootpay.dismiss(self)
         }
     }
     
@@ -410,6 +409,7 @@ extension NativeController: BootpayRequestProtocol {
     //결제창이 닫힐때 실행되는 부분
     func onClose() {
         print("close")
-        vc.dismiss() //결제창 종료
+      
+      Bootpay.dismiss(self)
     }
 }

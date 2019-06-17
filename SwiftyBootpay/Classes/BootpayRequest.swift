@@ -28,17 +28,8 @@ public class BootpayRequest: NSObject, BootpayParams, Mappable  {
     @objc public var show_agree_window = false
     
     @objc public var boot_key = ""
-//    @objc public var items = [BootpayItem]()
-    
-//    @objc public var user_info: [String: String] = [:]
-//    @objc public var user_info = BootpayUser()
-//    @objc public var extra = BootpayExtra()
-//    @objc public var remote_link = RemoteLink()
-//    @objc public var remote_form = RemoteOrderForm()
-//    @objc public var remote_pre = RemoteOrderPre()
-//    @objc public var sms_payload = SMSPayload()
-    @objc public var sms_use = false
-    
+    @objc public var ux = "PG_DIALOG"
+    @objc public var sms_use = false    
     
     public override init() {}
     public required init?(map: Map) {
@@ -61,14 +52,7 @@ public class BootpayRequest: NSObject, BootpayParams, Mappable  {
         show_agree_window <- map["show_agree_window"]
         
         boot_key <- map["boot_key"]
-//        items <- map["items"]
-        
-//        user_info <- map["user_info"]
-//        extra <- map["extra"]
-//        remote_link <- map["remote_link"]
-//        remote_form <- map["remote_form"]
-//        remote_pre <- map["remote_pre"]
-//        sms_payload <- map["sms_payload"]
+        ux <- map["ux"]
         sms_use <- map["sms_use"]
     }
     
@@ -113,7 +97,6 @@ public class BootpayRequest: NSObject, BootpayParams, Mappable  {
         self.order_id = ""
         self.use_order_id = false
         self.params = [:]
-         
     }
     
     fileprivate func getURLSchema() -> String{

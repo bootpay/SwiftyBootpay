@@ -100,7 +100,6 @@ extension BootpayController: BootpayParams {
     public func transactionConfirm(data: [String: Any]) {
         let json = Bootpay.dicToJsonString(data).replace(target: "'", withString: "\\'") 
         wv.doJavascript("window.BootPay.transactionConfirm(\(json));")
-//        uniy
     }
     
     @objc(removePaymentWindow)

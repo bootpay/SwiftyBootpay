@@ -8,12 +8,12 @@
 enum BootpayUX : String {
     case PG_DIALOG // 일반 PG 결제
     case PG_SUBSCRIPT // 일반 PG사 정기결제
-    case PG_SUBSCRIPT_RESERVE // 일반 PG사 정기결제지만 예약결제처럼 사용할 때 사용
-    case BOOTPAY_DIALOG // 부트페이 통합 결제창
-    case BOOTPAY_ROCKET // 부트페이 로켓결제
-    case BOOTPAY_ROCKET_TEMPORARY // 부트페이 로켓결제 - 카드수기처럼 쓸 수 있는 형태
+//    case PG_SUBSCRIPT_RESERVE // 일반 PG사 정기결제지만 예약결제처럼 사용할 때 사용
+//    case BOOTPAY_DIALOG // 부트페이 통합 결제창
+//    case BOOTPAY_ROCKET // 부트페이 로켓결제
+//    case BOOTPAY_ROCKET_TEMPORARY // 부트페이 로켓결제 - 카드수기처럼 쓸 수 있는 형태
     case BOOTPAY_REMOTE_LINK // 결제링크 바로 생성
-    case BOOTPAY_REMOTE_ORDER // 결제폼 생성
+    case BOOTPAY_REMOTE_FORM // 결제폼 생성
     case BOOTPAY_REMOTE_PRE // 사전예약 생성
     
     //    BOOTPAY_CARD_SIMPLE, // 부트페이 로켓결제 일부

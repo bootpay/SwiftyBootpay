@@ -84,6 +84,55 @@ class BootpayDefault {
         return nil
     }
     
+    public static func dismiss(_ vc: UIViewController) {
+        vc.dismiss(animated: true, completion: nil)
+    }
+    
+    public static func request(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, request: BootpayRequest,  user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, smsPayload: SMSPayload? = nil, remoteForm: RemoteOrderForm? = nil, remotePre: RemoteOrderPre? = nil) {
+        
+        if(!checkValid(request: request, user: user, items: items, extra: extra, smsPayload: smsPayload, remoteForm: remoteForm, remotePre: remotePre)) { return }
+        
+        switch request.ux {
+        case BootpayUX.PG_DIALOG.rawValue:
+            request_dialog(viewController, sendable: sendable, request: request, user: user, items: items, extra: extra, smsPayload: smsPayload)
+        case BootpayUX.PG_SUBSCRIPT.rawValue:
+            request_dialog(viewController, sendable: sendable, request: request, user: user, items: items, extra: extra, smsPayload: smsPayload)
+        case BootpayUX.BOOTPAY_REMOTE_LINK.rawValue:
+            request_link(request, items: items, user: user, extra: extra, smsPayload: smsPayload)
+        case BootpayUX.BOOTPAY_REMOTE_FORM.rawValue:
+            request_form(request, user: user, items: items, extra: extra, smsPayload: smsPayload, remoteForm: remoteForm)
+        case BootpayUX.BOOTPAY_REMOTE_PRE.rawValue:
+            request_pre(request, user: user, items: items, extra: extra, smsPayload: smsPayload, remotePre: remotePre)
+        default:
+            return
+        }
+    }
+    
+    private static func checkValid(request: BootpayRequest,  user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, smsPayload: SMSPayload? = nil, remoteForm: RemoteOrderForm? = nil, remotePre: RemoteOrderPre? = nil) -> Bool {
+        
+        
+        return true
+    }
+    
+    public static func request_dialog(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, request: BootpayRequest,  user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, smsPayload: SMSPayload? = nil) {
+        
+//        sharedInstance.vc.request = request
+//        if let user = user { sharedInstance.vc.user = user }
+//        if let extra = extra { sharedInstance.vc.extra = extra }
+//        if let sendable = sendable { sharedInstance.vc.sendable = sendable }
+//        if let items = items { sharedInstance.vc.items = items }
+//        viewController.present(sharedInstance.vc, animated: true, completion: nil)
+        if sharedInstance.vc == nil {
+            sharedInstance.vc = BootpayController()
+        }
+        sharedInstance.vc?.request = request
+        if let user = user { sharedInstance.vc?.user = user }
+        if let extra = extra { sharedInstance.vc?.extra = extra }
+        if let sendable = sendable { sharedInstance.vc?.sendable = sendable }
+        if let items = items { sharedInstance.vc?.items = items }
+        viewController.present(sharedInstance.vc!, animated: true, completion: nil)
+    }
+    
     public static func request_link(_ request: BootpayRequest, items: [BootpayItem]?, user: BootpayUser?, extra: BootpayExtra?, smsPayload: SMSPayload?) {
         
         let requestString = request.toJSONString() ?? ""
@@ -105,7 +154,7 @@ class BootpayDefault {
         }
     }
     
-    public static func request_form(_ request: BootpayRequest, items: [BootpayItem]?, user: BootpayUser?, extra: BootpayExtra?, smsPayload: SMSPayload?, remoteForm: RemoteOrderForm?) {
+    public static func request_form(_ request: BootpayRequest, user: BootpayUser?, items: [BootpayItem]?, extra: BootpayExtra?, smsPayload: SMSPayload?, remoteForm: RemoteOrderForm?) {
         
         let requestString = request.toJSONString() ?? ""
         let itemsString = items?.toJSONString() ?? ""
@@ -137,7 +186,7 @@ class BootpayDefault {
         }
     }
     
-    public static func request_pre(_ request: BootpayRequest, items: [BootpayItem]?, user: BootpayUser?, extra: BootpayExtra?, smsPayload: SMSPayload?, remotePre: RemoteOrderPre?) {
+    public static func request_pre(_ request: BootpayRequest, user: BootpayUser?, items: [BootpayItem]?, extra: BootpayExtra?, smsPayload: SMSPayload?, remotePre: RemoteOrderPre?) {
         
         let requestString = request.toJSONString() ?? ""
         let itemsString = items?.toJSONString() ?? ""
@@ -150,7 +199,6 @@ class BootpayDefault {
             pre.params {
                 $0.n = request.name
                 $0.e_p = "\(request.price)"
-//                $0.pg = request.pg
             }
             remotePreString = pre.toJSONString() ?? ""
         }
@@ -185,6 +233,7 @@ class BootpayDefault {
     var last_time = 0 // 접속 종료 시간
     var time = 0 // 미접속 시간
     @objc public var user = BootpayUser()
+    @objc public var vc: BootpayController?
     
     var key = ""
     var iv = ""
@@ -310,5 +359,10 @@ extension Bootpay {
             self.last_time = currentTime
             BootpayDefault.setValue("last_time", value: self.last_time)
         }
+    }
+    
+    @objc(transactionConfirm:)
+    public static func transactionConfirm(data: [String: Any]) {
+        sharedInstance.vc?.transactionConfirm(data: data)
     }
 }
