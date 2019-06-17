@@ -1,5 +1,5 @@
 //
-//  PGAvailable.swift
+//  BootpayPGAvailable.swift
 //  Alamofire
 //
 //  Created by YoonTaesup on 2019. 6. 14..
@@ -9,36 +9,36 @@ import Foundation
 
 
 public class PGAvailable {
-//    private static let pgData = [
-//        PG.KCP : [Method.PHONE, Method.CARD, Method.BANK, Method.VBANK, Method.SUBSCRIPT_CARD],
-//        PG.DANAL : [Method.PHONE, Method.CARD, Method.BANK, Method.VBANK],
-//        PG.INICIS : [Method.PHONE, Method.CARD, Method.BANK, Method.VBANK],
-//        PG.NICEPAY : [Method.PHONE, Method.CARD, Method.BANK, Method.VBANK],
-//        PG.PAYAPP : [Method.PHONE, Method.CARD, Method.BANK, Method.VBANK],
-//        PG.LGUP : [Method.PHONE, Method.CARD, Method.BANK, Method.VBANK],
-//        PG.KAKAO : [Method.EASY,  Method.SUBSCRIPT_CARD],
-//        PG.PAYCO : [Method.EASY],
-//        PG.EASYPAY : [Method.PHONE, Method.CARD, Method.BANK, Method.VBANK],
-//        PG.KICC : [Method.PHONE, Method.CARD, Method.BANK, Method.VBANK],
-//        PG.JTNET : [Method.PHONE, Method.CARD, Method.BANK, Method.VBANK],
-//        PG.TPAY : [Method.PHONE, Method.CARD, Method.BANK, Method.VBANK],
-//        PG.MOBILIANS : [Method.PHONE],
-//        PG.PAYAPP : [Method.PHONE, Method.CARD, Method.BANK, Method.VBANK, Method.SUBSCRIPT_CARD]
+//    private static let BootpayPGData = [
+//        BootpayPG.KCP : [Method.PHONE, Method.CARD, Method.BANK, Method.VBANK, Method.SUBSCRIPT_CARD],
+//        BootpayPG.DANAL : [Method.PHONE, Method.CARD, Method.BANK, Method.VBANK],
+//        BootpayPG.INICIS : [Method.PHONE, Method.CARD, Method.BANK, Method.VBANK],
+//        BootpayPG.NICEPAY : [Method.PHONE, Method.CARD, Method.BANK, Method.VBANK],
+//        BootpayPG.PAYAPP : [Method.PHONE, Method.CARD, Method.BANK, Method.VBANK],
+//        BootpayPG.LGUP : [Method.PHONE, Method.CARD, Method.BANK, Method.VBANK],
+//        BootpayPG.KAKAO : [Method.EASY,  Method.SUBSCRIPT_CARD],
+//        BootpayPG.PAYCO : [Method.EASY],
+//        BootpayPG.EASYPAY : [Method.PHONE, Method.CARD, Method.BANK, Method.VBANK],
+//        BootpayPG.KICC : [Method.PHONE, Method.CARD, Method.BANK, Method.VBANK],
+//        BootpayPG.JTNET : [Method.PHONE, Method.CARD, Method.BANK, Method.VBANK],
+//        BootpayPG.TPAY : [Method.PHONE, Method.CARD, Method.BANK, Method.VBANK],
+//        BootpayPG.MOBILIANS : [Method.PHONE],
+//        BootpayPG.PAYAPP : [Method.PHONE, Method.CARD, Method.BANK, Method.VBANK, Method.SUBSCRIPT_CARD]
 //    ]
 //
-//    static func getDefaultMethods(_ pg: String) -> [Method] {
-//        if let key = PG(rawValue: pg) {
-//            return pgData[key] ?? []
+//    static func getDefaultMethods(_ BootpayPG: String) -> [Method] {
+//        if let key = BootpayPG(rawValue: BootpayPG) {
+//            return BootpayPGData[key] ?? []
 //        }
 //        return []
 //    }
 //
-//    static func isUXPGDefault(_ ux: BootpayUX) -> Bool {
-//        return ux == BootpayUX.PG_DIALOG
+//    static func isUXBootpayPGDefault(_ ux: BootpayUX) -> Bool {
+//        return ux == BootpayUX.BootpayPG_DIALOG
 //    }
 //
-//    static func isUXPGSubscript(_ ux: BootpayUX) -> Bool {
-//        return ux == BootpayUX.PG_SUBSCRIPT
+//    static func isUXBootpayPGSubscript(_ ux: BootpayUX) -> Bool {
+//        return ux == BootpayUX.BootpayPG_SUBSCRIPT
 //    }
 //
 //    static func isUXBootpayApi(_ ux: BootpayUX) -> Bool {
