@@ -128,10 +128,6 @@
 		810656D322B21F29007206D1 /* NSString+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 8106568722B21F17007206D1 /* NSString+Base64.h */; };
 		810656D422B21F29007206D1 /* NSData+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 8106568822B21F17007206D1 /* NSData+CommonCrypto.m */; };
 		810656D522B21F29007206D1 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 8106568922B21F17007206D1 /* NSData+Base64.m */; };
-		817DC44D22B7672700DFFF21 /* PG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817DC44B22B7672600DFFF21 /* PG.swift */; };
-		817DC44E22B7672700DFFF21 /* ValidRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817DC44C22B7672600DFFF21 /* ValidRequest.swift */; };
-		81FBC37E22B3818B004AB54F /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FBC37922B38182004AB54F /* Method.swift */; };
-		81FBC37F22B395D6004AB54F /* PGAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FBC37522B37CB9004AB54F /* PGAvailable.swift */; };
 		87646781F3CA197B0FADF65A73F36CDD /* TransformOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A58FA499A0531960AAA5948DCF6F066 /* TransformOf.swift */; };
 		8B6BF3261CD6188D9D508F8DE26BF471 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2668608634261E561E7C7088D31CB4DF /* Array+Extension.swift */; };
 		8BFF04442A40B87380A8F7A3735869D1 /* PCBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE6A94615B1450B92B00813DB8D8C12 /* PCBC.swift */; };
@@ -463,10 +459,6 @@
 		8106568722B21F17007206D1 /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64.h"; sourceTree = "<group>"; };
 		8106568822B21F17007206D1 /* NSData+CommonCrypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+CommonCrypto.m"; sourceTree = "<group>"; };
 		8106568922B21F17007206D1 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
-		817DC44B22B7672600DFFF21 /* PG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PG.swift; path = SwiftyBootpay/Classes/PG.swift; sourceTree = "<group>"; };
-		817DC44C22B7672600DFFF21 /* ValidRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ValidRequest.swift; path = SwiftyBootpay/Classes/ValidRequest.swift; sourceTree = "<group>"; };
-		81FBC37522B37CB9004AB54F /* PGAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PGAvailable.swift; path = SwiftyBootpay/Classes/PGAvailable.swift; sourceTree = "<group>"; };
-		81FBC37922B38182004AB54F /* Method.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Method.swift; path = SwiftyBootpay/Classes/Method.swift; sourceTree = "<group>"; };
 		82EEF01C018D1F4AA506DD252D668890 /* AlamofireImage-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "AlamofireImage-Info.plist"; sourceTree = "<group>"; };
 		84474F997FAE7ADD5821CE0849B8BE11 /* EnumTransform.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EnumTransform.swift; path = Sources/EnumTransform.swift; sourceTree = "<group>"; };
 		851A25D05A86606ACA890205F02AE62C /* Alamofire-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-umbrella.h"; sourceTree = "<group>"; };
@@ -1013,16 +1005,12 @@
 				5BAEB0F1B9294D3E21EAC527DE79FF36 /* BootpayStatItem.swift */,
 				C1AA542490ABD7810E508645FB13DF42 /* BootpayUser.swift */,
 				2B7C8555168CCD86D3FE4590FB8569CD /* BootpayUX.swift */,
-				817DC44B22B7672600DFFF21 /* PG.swift */,
-				817DC44C22B7672600DFFF21 /* ValidRequest.swift */,
 				66468A2DC6587649FDFCA27B5B15DB1F /* BootpayWebView.swift */,
 				4A084584FB43499BA7EC9F7883154028 /* PushType.swift */,
 				54D8715346AD314B2F85EADF336175CD /* RemoteLink.swift */,
 				4A6C09F109E45C8C7897FE21D4AA9D5D /* RemoteOrderForm.swift */,
 				665C72AB9342DBD4BEFE32089EE41F2E /* RemoteOrderPre.swift */,
 				C3014FF751DBC6F6037B18C244753130 /* SMSPayload.swift */,
-				81FBC37522B37CB9004AB54F /* PGAvailable.swift */,
-				81FBC37922B38182004AB54F /* Method.swift */,
 				506359DF46EFEF2931D36221DDCCCFE7 /* Pod */,
 				41166DE4C900225DA5F4C4FCF7445914 /* Support Files */,
 			);
@@ -1405,12 +1393,10 @@
 				810656CE22B21F29007206D1 /* NSString+Base64.m in Sources */,
 				8FD289E277E9320C6BE1C15156D112A3 /* BootpayExtra.swift in Sources */,
 				810656BB22B21F21007206D1 /* BootpayCRequest.m in Sources */,
-				81FBC37E22B3818B004AB54F /* Method.swift in Sources */,
 				810656B722B21F21007206D1 /* BootpayCExtra.m in Sources */,
 				2826207E2A50FAD63C800E36CC53F2E2 /* BootpayItem.swift in Sources */,
 				0D37254E54FBF2AEE65DC8D219D892B3 /* BootpayParams.swift in Sources */,
 				971E96623D4AD6BF1BCDA077A3F33B23 /* BootpayRequest.swift in Sources */,
-				817DC44E22B7672700DFFF21 /* ValidRequest.swift in Sources */,
 				1E429A59F60895D3FE76A71A055BC514 /* BootpayStatItem.swift in Sources */,
 				D73A1BB8FA12270F83440B2AC0465565 /* BootpayUser.swift in Sources */,
 				810656CD22B21F21007206D1 /* BootpayUnity.mm in Sources */,
@@ -1431,8 +1417,6 @@
 				810656C222B21F21007206D1 /* RemoteOrderCForm.m in Sources */,
 				810656BC22B21F21007206D1 /* RemoteOrderCPre.m in Sources */,
 				06FBDAB7CCC135FBD995E601BEAF74C3 /* SMSPayload.swift in Sources */,
-				81FBC37F22B395D6004AB54F /* PGAvailable.swift in Sources */,
-				817DC44D22B7672700DFFF21 /* PG.swift in Sources */,
 				810656B422B21F21007206D1 /* BootpayCDefault.m in Sources */,
 				810656B522B21F21007206D1 /* BootpayC.m in Sources */,
 				D99E3334DADF4AD5515750F5462F024E /* SwiftyBootpay-dummy.m in Sources */,
