@@ -66,3 +66,4 @@ public class SMSPayload: NSObject, BootpayParams, Mappable  {
         files <- map["files"]
     }
 }
+ 

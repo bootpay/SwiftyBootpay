@@ -12,15 +12,14 @@ import ObjectMapper
 //MARK: Bootpay Models
 public class RemoteOrderPre: NSObject, BootpayParams, Mappable {
     public override init() {}
-    @objc public var e_p = ""
-    @objc public var is_r_n = false
-    @objc public var is_sale = false
-    @objc public var s_at = Date()
-    @objc public var e_at = TimeInterval(0)
-    @objc public var desc_html = ""
-    @objc public var n = ""
-    @objc public var cn = ""
-//    public var BootpayCExtra;
+    @objc public var e_p = "" //예상 가격, 미입력시 안보여줌
+    @objc public var is_r_n = false //구매자명 받을지 말지
+    @objc public var is_sale = false //세일기간 정할지 말지
+    @objc public var s_at = Date() //예약 시작일
+    @objc public var e_at = TimeInterval(0) //예약 종료일
+    @objc public var desc_html = "" //상품설명 html
+    @objc public var n = "" //상품명
+    @objc public var cn = "" //보여질 업체명
     
     public required init?(map: Map) {
     }

@@ -9,12 +9,12 @@ import ObjectMapper
 public class BootpayStatItem: NSObject, Mappable, BootpayParams {
     public override init() {}
     
-    @objc public var item_name = ""
-    @objc public var item_img = ""
-    @objc public var unique = ""
-    @objc public var cat1 = ""
-    @objc public var cat2 = ""
-    @objc public var cat3 = ""
+    @objc public var item_name = "" //상품명
+    @objc public var item_img = "" //상품이미지 주소 
+    @objc public var unique = "" //상품의 고유 PK
+    @objc public var cat1 = "" //카테고리 상
+    @objc public var cat2 = "" //카테고리 중
+    @objc public var cat3 = "" //카테고리 하
      
     public required init?(map: Map) {
     }

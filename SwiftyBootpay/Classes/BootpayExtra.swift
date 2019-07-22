@@ -14,7 +14,7 @@ public class BootpayExtra: NSObject, BootpayParams, Mappable {
     @objc public var quotas = [Int]() //할부허용 범위 (5만원 이상 구매시)
     @objc public var app_scheme = "" //app2app 결제시 return 받을 intent scheme
     @objc public var app_scheme_host = "" //app2app 결제시 return 받을 intent scheme host
-    @objc public var ux = "" //로켓페이 옵션 등 다양한 용도로 사용이 가능하다
+    @objc public var ux = "" //다양한 결제시나리오를 지원하기 위한 용도로 사용됨
     
     public override init() {}
     public required init?(map: Map) {

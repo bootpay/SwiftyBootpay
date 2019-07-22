@@ -5,16 +5,16 @@
 //  Created by YoonTaesup on 2019. 4. 12..
 //
 
-enum BootpayUX : String {
-    case PG_DIALOG // 일반 PG 결제
-    case PG_SUBSCRIPT // 일반 PG사 정기결제
+public struct BootpayUX {
+    public static let PG_DIALOG = "PG_DIALOG" // 일반 PG 결제
+    public static let PG_SUBSCRIPT = "PG_SUBSCRIPT" // 일반 PG사 정기결제
 //    case PG_SUBSCRIPT_RESERVE // 일반 PG사 정기결제지만 예약결제처럼 사용할 때 사용
 //    case BOOTPAY_DIALOG // 부트페이 통합 결제창
 //    case BOOTPAY_ROCKET // 부트페이 로켓결제
 //    case BOOTPAY_ROCKET_TEMPORARY // 부트페이 로켓결제 - 카드수기처럼 쓸 수 있는 형태
-    case BOOTPAY_REMOTE_LINK // 결제링크 바로 생성
-    case BOOTPAY_REMOTE_FORM // 결제폼 생성
-    case BOOTPAY_REMOTE_PRE // 사전예약 생성
+    public static let BOOTPAY_REMOTE_LINK = "BOOTPAY_REMOTE_LINK" // 결제링크 바로 생성
+    public static let BOOTPAY_REMOTE_FORM = "BOOTPAY_REMOTE_FORM" // 결제폼 생성
+    public static let BOOTPAY_REMOTE_PRE = "BOOTPAY_REMOTE_PRE" // 사전예약 생성
     
     //    BOOTPAY_CARD_SIMPLE, // 부트페이 로켓결제 일부
     //    BOOTPAY_SUBSCRIPT_ROCKET, // 부트페이 로켓결제
@@ -28,13 +28,13 @@ enum BootpayUX : String {
     //    BOOTPAY_SWIPE, // SWIPE 결제
     //    BOOTPAY_NFC, // NFC
     //    BOOTPAY_SAMSUNGPAY, // 삼성페이
-    case APP2APP_REMOTE // 원격결제, 리모트
-    case APP2APP_CARD_SIMPLE // 외부앱 - 수기결제
-    case APP2APP_NFC // 외부앱 - NFC
-    case APP2APP_SAMSUNGPAY // 외부앱 - 삼성페이
-    case APP2APP_SUBSCRIPT // 외부앱 - 정기결제
-    case APP2APP_CASH_RECEIPT // 현금영수증
-    case APP2APP_OCR // 외부앱
-    case NONE
+    public static let APP2APP_REMOTE = "APP2APP_REMOTE" // 원격결제, 리모트
+    public static let APP2APP_CARD_SIMPLE = "APP2APP_CARD_SIMPLE"// 외부앱 - 수기결제
+    public static let APP2APP_NFC = "APP2APP_NFC"// 외부앱 - NFC
+    public static let APP2APP_SAMSUNGPAY = "APP2APP_SAMSUNGPAY" // 외부앱 - 삼성페이
+    public static let APP2APP_SUBSCRIPT = "APP2APP_SUBSCRIPT" // 외부앱 - 정기결제
+    public static let APP2APP_CASH_RECEIPT = "APP2APP_CASH_RECEIPT" // 현금영수증
+    public static let APP2APP_OCR = "APP2APP_OCR" // 외부앱
+    public static let NONE = "NONE"
 }
 

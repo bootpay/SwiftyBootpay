@@ -88,20 +88,20 @@ class BootpayDefault {
         vc.dismiss(animated: true, completion: nil)
     }
     
-    public static func request(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, request: BootpayRequest,  user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, smsPayload: SMSPayload? = nil, remoteForm: RemoteOrderForm? = nil, remotePre: RemoteOrderPre? = nil) {
+    public static func request(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, request: BootpayRequest,  user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, smsPayload: SMSPayload? = nil, remoteForm: RemoteOrderForm? = nil, remotePre: RemoteOrderPre? = nil, addView: Bool? = false) {
         
         if(!checkValid(request: request, user: user, items: items, extra: extra, smsPayload: smsPayload, remoteForm: remoteForm, remotePre: remotePre)) { return }
         
         switch request.ux {
-        case BootpayUX.PG_DIALOG.rawValue:
+        case BootpayUX.PG_DIALOG:
+            request_dialog(viewController, sendable: sendable, request: request, user: user, items: items, extra: extra, smsPayload: smsPayload, addView: addView)
+        case BootpayUX.PG_SUBSCRIPT:
             request_dialog(viewController, sendable: sendable, request: request, user: user, items: items, extra: extra, smsPayload: smsPayload)
-        case BootpayUX.PG_SUBSCRIPT.rawValue:
-            request_dialog(viewController, sendable: sendable, request: request, user: user, items: items, extra: extra, smsPayload: smsPayload)
-        case BootpayUX.BOOTPAY_REMOTE_LINK.rawValue:
+        case BootpayUX.BOOTPAY_REMOTE_LINK:
             request_link(request, items: items, user: user, extra: extra, smsPayload: smsPayload)
-        case BootpayUX.BOOTPAY_REMOTE_FORM.rawValue:
+        case BootpayUX.BOOTPAY_REMOTE_FORM:
             request_form(request, user: user, items: items, extra: extra, smsPayload: smsPayload, remoteForm: remoteForm)
-        case BootpayUX.BOOTPAY_REMOTE_PRE.rawValue:
+        case BootpayUX.BOOTPAY_REMOTE_PRE:
             request_pre(request, user: user, items: items, extra: extra, smsPayload: smsPayload, remotePre: remotePre)
         default:
             return
@@ -114,7 +114,7 @@ class BootpayDefault {
         return true
     }
     
-    public static func request_dialog(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, request: BootpayRequest,  user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, smsPayload: SMSPayload? = nil) {
+    public static func request_dialog(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, request: BootpayRequest,  user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, smsPayload: SMSPayload? = nil, addView: Bool? = false) {
         
 //        sharedInstance.vc.request = request
 //        if let user = user { sharedInstance.vc.user = user }
@@ -130,7 +130,11 @@ class BootpayDefault {
         if let extra = extra { sharedInstance.vc?.extra = extra }
         if let sendable = sendable { sharedInstance.vc?.sendable = sendable }
         if let items = items { sharedInstance.vc?.items = items }
-        viewController.present(sharedInstance.vc!, animated: true, completion: nil)
+        if (addView == true) {
+            viewController.view.addSubview(sharedInstance.vc!.view)
+        } else {
+            viewController.present(sharedInstance.vc!, animated: true, completion: nil)
+        }
     }
     
     public static func request_link(_ request: BootpayRequest, items: [BootpayItem]?, user: BootpayUser?, extra: BootpayExtra?, smsPayload: SMSPayload?) {

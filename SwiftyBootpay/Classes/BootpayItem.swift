@@ -12,13 +12,13 @@ import ObjectMapper
 //MARK: Bootpay Models
 public class BootpayItem: NSObject, BootpayParams, Mappable {
     public override init() {}
-    @objc public var item_name = ""
-    @objc public var qty: Int = 0
-    @objc public var unique = ""
-    @objc public var price = Double(0)
-    @objc public var cat1 = ""
-    @objc public var cat2 = ""
-    @objc public var cat3 = ""
+    @objc public var item_name = "" //아이템 이름
+    @objc public var qty: Int = 0  //상품 판매된 수량
+    @objc public var unique = "" //상품의 고유 PK
+    @objc public var price = Double(0) //상품 하나당 판매 가격
+    @objc public var cat1 = "" //카테고리 상
+    @objc public var cat2 = "" //카테고리 중
+    @objc public var cat3 = "" //카테고리 하
     
 //    public override init() {}
     public required init?(map: Map) {
