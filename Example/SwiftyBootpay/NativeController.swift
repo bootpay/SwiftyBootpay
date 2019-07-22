@@ -378,7 +378,7 @@ extension NativeController: BootpayRequestProtocol {
 //         Bootpay.trans
             Bootpay.transactionConfirm(data: data) // 결제 승인
         } else { // 재고가 없어 중간에 결제창을 닫고 싶을 경우
-            Bootpay.dismiss(self)
+            Bootpay.dismiss()
         }
     }
     
@@ -397,7 +397,6 @@ extension NativeController: BootpayRequestProtocol {
     //결제창이 닫힐때 실행되는 부분
     func onClose() {
         print("close")
-      
-      Bootpay.dismiss(self)
+        Bootpay.dismiss()
     }
 }

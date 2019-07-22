@@ -84,9 +84,6 @@ class BootpayDefault {
         return nil
     }
     
-    public static func dismiss(_ vc: UIViewController) {
-        vc.dismiss(animated: true, completion: nil)
-    }
     
     public static func request(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, request: BootpayRequest,  user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, smsPayload: SMSPayload? = nil, remoteForm: RemoteOrderForm? = nil, remotePre: RemoteOrderPre? = nil, addView: Bool? = false) {
         
@@ -368,5 +365,11 @@ extension Bootpay {
     @objc(transactionConfirm:)
     public static func transactionConfirm(data: [String: Any]) {
         sharedInstance.vc?.transactionConfirm(data: data)
+    }
+    
+    @objc(dismiss)
+    public static func dismiss() {
+        sharedInstance.vc?.dismiss()
+        sharedInstance.vc?.view.removeFromSuperview()
     }
 }

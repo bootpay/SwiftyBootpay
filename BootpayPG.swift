@@ -38,5 +38,5 @@ public struct PG {
     @objc public static let TPAY = PG.TPAY
     @objc public static let MOBILIANS = PG.MOBILIANS
     @objc public static let PAYLETTER = PG.PAYLETTER
-    @objc public static let BOOTPAY = PG.BOOTPAY 
+    @objc public static let BOOTPAY = PG.BOOTPAY
 }
