@@ -91,7 +91,7 @@
 		7F424C046646FE578B5BAA8AE3D30B37 /* ObjectMapper-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A8DDE2F2F63DD2E1A0FD739607333A2E /* ObjectMapper-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7F81290E4FCD14135D45DD2277FF7230 /* CompactMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A4E113D6D2E432AB0DA19F31AFC48A /* CompactMap.swift */; };
 		8153C32022E5411B00851944 /* BootpayMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8153C31E22E53F2800851944 /* BootpayMethod.swift */; };
-		8153C32322E5472800851944 /* BootpayPG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8153C32122E5472200851944 /* BootpayPG.swift */; };
+		8153C32522E5C63D00851944 /* BootpayPG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8153C32422E5C63D00851944 /* BootpayPG.swift */; };
 		817DC45022B76C2700DFFF21 /* UnityCBootpay.zip in Resources */ = {isa = PBXBuildFile; fileRef = 817DC44F22B76C2600DFFF21 /* UnityCBootpay.zip */; };
 		87646781F3CA197B0FADF65A73F36CDD /* TransformOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A58FA499A0531960AAA5948DCF6F066 /* TransformOf.swift */; };
 		8B6BF3261CD6188D9D508F8DE26BF471 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2668608634261E561E7C7088D31CB4DF /* Array+Extension.swift */; };
@@ -387,7 +387,7 @@
 		7A58FA499A0531960AAA5948DCF6F066 /* TransformOf.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TransformOf.swift; path = Sources/TransformOf.swift; sourceTree = "<group>"; };
 		7C676A1F7B8737B5DEAD0BA15CE02818 /* UInt16+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UInt16+Extension.swift"; path = "Sources/CryptoSwift/UInt16+Extension.swift"; sourceTree = "<group>"; };
 		8153C31E22E53F2800851944 /* BootpayMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BootpayMethod.swift; path = SwiftyBootpay/Classes/BootpayMethod.swift; sourceTree = "<group>"; };
-		8153C32122E5472200851944 /* BootpayPG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootpayPG.swift; sourceTree = "<group>"; };
+		8153C32422E5C63D00851944 /* BootpayPG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BootpayPG.swift; path = SwiftyBootpay/Classes/BootpayPG.swift; sourceTree = "<group>"; };
 		817DC44F22B76C2600DFFF21 /* UnityCBootpay.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = UnityCBootpay.zip; path = SwiftyBootpay/Classes/UnityCBootpay.zip; sourceTree = "<group>"; };
 		82EEF01C018D1F4AA506DD252D668890 /* AlamofireImage-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "AlamofireImage-Info.plist"; sourceTree = "<group>"; };
 		84474F997FAE7ADD5821CE0849B8BE11 /* EnumTransform.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EnumTransform.swift; path = Sources/EnumTransform.swift; sourceTree = "<group>"; };
@@ -868,7 +868,6 @@
 				F1A805C6FFA360B9BD84ADD7CB8AB497 /* BootpayController.swift */,
 				A8DD1FED5763BC1A2A97ECEF490BC1EB /* BootpayExtra.swift */,
 				8153C31E22E53F2800851944 /* BootpayMethod.swift */,
-				8153C32122E5472200851944 /* BootpayPG.swift */,
 				2E91322B0B30DBB8B11B49D1205BDAD3 /* BootpayItem.swift */,
 				91C2EED662FA6D2BF9614AE2AEFB273E /* BootpayParams.swift */,
 				4E9CCD6B01B90A448EC8BA249D7CBC66 /* BootpayRequest.swift */,
@@ -883,6 +882,7 @@
 				C3014FF751DBC6F6037B18C244753130 /* SMSPayload.swift */,
 				506359DF46EFEF2931D36221DDCCCFE7 /* Pod */,
 				41166DE4C900225DA5F4C4FCF7445914 /* Support Files */,
+				8153C32422E5C63D00851944 /* BootpayPG.swift */,
 			);
 			name = SwiftyBootpay;
 			path = ../..;
@@ -1252,7 +1252,7 @@
 				2726D0CBBAC4F41B136B0B7BE83DC5D9 /* RemoteLink.swift in Sources */,
 				68E557059BED1CA86CE23AE24DFD2597 /* RemoteOrderForm.swift in Sources */,
 				45F3D191017D98895F486FD01A1EC28A /* RemoteOrderPre.swift in Sources */,
-				8153C32322E5472800851944 /* BootpayPG.swift in Sources */,
+				8153C32522E5C63D00851944 /* BootpayPG.swift in Sources */,
 				06FBDAB7CCC135FBD995E601BEAF74C3 /* SMSPayload.swift in Sources */,
 				D99E3334DADF4AD5515750F5462F024E /* SwiftyBootpay-dummy.m in Sources */,
 			);

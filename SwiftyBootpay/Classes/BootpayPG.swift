@@ -1,10 +1,10 @@
 //
 //  BootpayPG.swift
-//  Alamofire
+//  SwiftyBootpay
 //
 //  Created by YoonTaesup on 2019. 7. 22..
 //
-
+  
 public struct PG {
     public static let KCP = "kcp"
     public static let DANAL = "danal"
@@ -40,3 +40,4 @@ public struct PG {
     @objc public static let PAYLETTER = PG.PAYLETTER
     @objc public static let BOOTPAY = PG.BOOTPAY
 }
+
