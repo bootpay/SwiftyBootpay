@@ -5,7 +5,7 @@
 //  Created by YoonTaesup on 2019. 4. 12..
 //
 
-public struct BootpayUX {
+public struct UX {
     public static let PG_DIALOG = "PG_DIALOG" // 일반 PG 결제
     public static let PG_SUBSCRIPT = "PG_SUBSCRIPT" // 일반 PG사 정기결제
 //    case PG_SUBSCRIPT_RESERVE // 일반 PG사 정기결제지만 예약결제처럼 사용할 때 사용
@@ -36,5 +36,24 @@ public struct BootpayUX {
     public static let APP2APP_CASH_RECEIPT = "APP2APP_CASH_RECEIPT" // 현금영수증
     public static let APP2APP_OCR = "APP2APP_OCR" // 외부앱
     public static let NONE = "NONE"
+}
+
+@objc public class BootpayUX: NSObject {
+    public static let PG_DIALOG = UX.PG_DIALOG
+    public static let PG_SUBSCRIPT = UX.PG_SUBSCRIPT
+    
+    public static let BOOTPAY_REMOTE_LINK = UX.BOOTPAY_REMOTE_LINK
+    public static let BOOTPAY_REMOTE_FORM = UX.BOOTPAY_REMOTE_FORM
+    public static let BOOTPAY_REMOTE_PRE = UX.BOOTPAY_REMOTE_PRE
+    
+    public static let APP2APP_REMOTE = UX.APP2APP_REMOTE
+    public static let APP2APP_CARD_SIMPLE = UX.APP2APP_CARD_SIMPLE
+    public static let APP2APP_NFC = UX.APP2APP_NFC
+    
+    public static let APP2APP_SAMSUNGPAY = UX.APP2APP_SAMSUNGPAY
+    public static let APP2APP_SUBSCRIPT = UX.APP2APP_SUBSCRIPT
+    public static let APP2APP_CASH_RECEIPT = UX.APP2APP_CASH_RECEIPT
+    public static let APP2APP_OCR = UX.APP2APP_OCR
+    public static let NONE = UX.NONE 
 }
 

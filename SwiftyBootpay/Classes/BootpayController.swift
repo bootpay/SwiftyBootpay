@@ -54,7 +54,7 @@ extension URL {
 
 
 
-public class BootpayController: UIViewController {
+@objc public class BootpayController: UIViewController {
     @objc public var request = BootpayRequest()
     @objc public var user = BootpayUser()
     @objc public var extra = BootpayExtra()

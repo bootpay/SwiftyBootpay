@@ -6,7 +6,7 @@
 //
 import ObjectMapper
 
-public class RemoteOrderForm: NSObject, BootpayParams, Mappable {
+@objc public class RemoteOrderForm: NSObject, BootpayParams, Mappable {
     public override init() {}
     @objc public var m_id = ""
     @objc public var pg = ""

@@ -93,15 +93,15 @@ class BootpayDefault {
         if(!checkValid(request: request, user: user, items: items, extra: extra, smsPayload: smsPayload, remoteForm: remoteForm, remotePre: remotePre)) { return }
         
         switch request.ux {
-        case BootpayUX.PG_DIALOG:
+        case UX.PG_DIALOG:
             request_dialog(viewController, sendable: sendable, request: request, user: user, items: items, extra: extra, smsPayload: smsPayload, addView: addView)
-        case BootpayUX.PG_SUBSCRIPT:
+        case UX.PG_SUBSCRIPT:
             request_dialog(viewController, sendable: sendable, request: request, user: user, items: items, extra: extra, smsPayload: smsPayload)
-        case BootpayUX.BOOTPAY_REMOTE_LINK:
+        case UX.BOOTPAY_REMOTE_LINK:
             request_link(request, items: items, user: user, extra: extra, smsPayload: smsPayload)
-        case BootpayUX.BOOTPAY_REMOTE_FORM:
+        case UX.BOOTPAY_REMOTE_FORM:
             request_form(request, user: user, items: items, extra: extra, smsPayload: smsPayload, remoteForm: remoteForm)
-        case BootpayUX.BOOTPAY_REMOTE_PRE:
+        case UX.BOOTPAY_REMOTE_PRE:
             request_pre(request, user: user, items: items, extra: extra, smsPayload: smsPayload, remotePre: remotePre)
         default:
             return

@@ -10,7 +10,7 @@ import ObjectMapper
 //import "UnityCBootpay/BootpayCExtra.h"
 
 //MARK: Bootpay Models
-public class RemoteOrderPre: NSObject, BootpayParams, Mappable {
+@objc public class RemoteOrderPre: NSObject, BootpayParams, Mappable {
     public override init() {}
     @objc public var e_p = "" //예상 가격, 미입력시 안보여줌
     @objc public var is_r_n = false //구매자명 받을지 말지

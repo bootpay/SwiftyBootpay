@@ -10,7 +10,7 @@ import Foundation
  
 
 //MARK: Bootpay Rest Api for Analytics
-public class BootpayAnalytics {
+@objc public class BootpayAnalytics:  NSObject {
     @objc public static func postLogin(id: String, email: String, gender: Int,
                         birth: String, phone: String, area: String) {
         if Bootpay.sharedInstance.user.id == "" { Bootpay.sharedInstance.user.id = id }

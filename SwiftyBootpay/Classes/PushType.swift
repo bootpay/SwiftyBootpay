@@ -5,7 +5,7 @@
 //  Created by YoonTaesup on 2019. 4. 12..
 //
 
-public class PushType: NSObject {
+@objc public class PushType: NSObject {
     static let SMS = 1
     static let LMS = 2
     static let MMS = 3

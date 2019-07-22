@@ -6,7 +6,7 @@
 //
 import ObjectMapper
 
-public class SMSPayload: NSObject, BootpayParams, Mappable  {
+@objc public class SMSPayload: NSObject, BootpayParams, Mappable  {
     static let REMOTE_ORDER_TYPE_FORM = 1
     static let REMOTE_ORDER_TYPE_PRE = 2
     

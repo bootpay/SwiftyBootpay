@@ -6,7 +6,7 @@
 //
 import ObjectMapper
 
-public class RemoteLink: NSObject, BootpayParams, Mappable {
+@objc public class RemoteLink: NSObject, BootpayParams, Mappable {
     @objc public var member = "" // 부트페이에서 발급한 부계정 고유 키
     @objc public var is_receive_member = false // 구매자 이름 입력 허용할지 말지
     @objc public var seller_name = "" // 보여질 판매자명, 없으면 등록된 상점명이 보여짐
