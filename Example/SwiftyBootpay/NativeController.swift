@@ -332,7 +332,7 @@ extension NativeController {
          let request = BootpayRequest()
          request.params {
             $0.price = 1000 // 결제할 금액
-            $0.name = "블링\"블링's 마스카라" // 결제할 상품명
+            $0.name = "블링블링's 마스카라" // 결제할 상품명
             $0.order_id = "1234_1234_124" // 결제 고유번호
             $0.params = customParams // 커스텀 변수
    //         $0.user_info = bootUser

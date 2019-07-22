@@ -23,20 +23,20 @@ public struct PG {
     public static let BOOTPAY = "bootpay"
 }
 
-@objc class BootpayPG: NSObject {
-    public static let KCP = PG.KCP
-    public static let DANAL = PG.DANAL
-    public static let INICIS = PG.INICIS
-    public static let NICEPAY = PG.NICEPAY
-    public static let LGUP = PG.LGUP
-    public static let PAYAPP = PG.PAYAPP
-    public static let KAKAO = PG.KAKAO
-    public static let PAYCO = PG.PAYCO
-    public static let KICC = PG.KICC
-    public static let EASYPAY = PG.EASYPAY
-    public static let JTNET = PG.JTNET
-    public static let TPAY = PG.TPAY
-    public static let MOBILIANS = PG.MOBILIANS
-    public static let PAYLETTER = PG.PAYLETTER
-    public static let BOOTPAY = PG.BOOTPAY 
+@objc public class BootpayPG: NSObject {
+    @objc public static let KCP = PG.KCP
+    @objc public static let DANAL = PG.DANAL
+    @objc public static let INICIS = PG.INICIS
+    @objc public static let NICEPAY = PG.NICEPAY
+    @objc public static let LGUP = PG.LGUP
+    @objc public static let PAYAPP = PG.PAYAPP
+    @objc public static let KAKAO = PG.KAKAO
+    @objc public static let PAYCO = PG.PAYCO
+    @objc public static let KICC = PG.KICC
+    @objc public static let EASYPAY = PG.EASYPAY
+    @objc public static let JTNET = PG.JTNET
+    @objc public static let TPAY = PG.TPAY
+    @objc public static let MOBILIANS = PG.MOBILIANS
+    @objc public static let PAYLETTER = PG.PAYLETTER
+    @objc public static let BOOTPAY = PG.BOOTPAY 
 }

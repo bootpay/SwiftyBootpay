@@ -17,14 +17,14 @@ public struct Method {
     public static let EASY = "easy"; // 간편결제
 }
 
-@objc class BootpayMethod: NSObject {
-    public static let CARD = Method.CARD 
-    public static let CARD_SIMPLE = Method.CARD_SIMPLE
-    public static let BANK = Method.BANK
-    public static let VBANK = Method.VBANK
-    public static let PHONE = Method.PHONE
-    public static let SUBSCRIPT_CARD = Method.SUBSCRIPT_CARD
-    public static let SUBSCRIPT_PHONE = Method.SUBSCRIPT_PHONE
-    public static let AUTH = Method.AUTH
-    public static let EASY = Method.EASY
+@objc public class BootpayMethod: NSObject {
+    @objc public static let CARD = Method.CARD
+    @objc public static let CARD_SIMPLE = Method.CARD_SIMPLE
+    @objc public static let BANK = Method.BANK
+    @objc public static let VBANK = Method.VBANK
+    @objc public static let PHONE = Method.PHONE
+    @objc public static let SUBSCRIPT_CARD = Method.SUBSCRIPT_CARD
+    @objc public static let SUBSCRIPT_PHONE = Method.SUBSCRIPT_PHONE
+    @objc public static let AUTH = Method.AUTH
+    @objc public static let EASY = Method.EASY
 }

@@ -39,21 +39,21 @@ public struct UX {
 }
 
 @objc public class BootpayUX: NSObject {
-    public static let PG_DIALOG = UX.PG_DIALOG
-    public static let PG_SUBSCRIPT = UX.PG_SUBSCRIPT
+    @objc public static let PG_DIALOG = UX.PG_DIALOG
+    @objc public static let PG_SUBSCRIPT = UX.PG_SUBSCRIPT
     
-    public static let BOOTPAY_REMOTE_LINK = UX.BOOTPAY_REMOTE_LINK
-    public static let BOOTPAY_REMOTE_FORM = UX.BOOTPAY_REMOTE_FORM
-    public static let BOOTPAY_REMOTE_PRE = UX.BOOTPAY_REMOTE_PRE
+    @objc public static let BOOTPAY_REMOTE_LINK = UX.BOOTPAY_REMOTE_LINK
+    @objc public static let BOOTPAY_REMOTE_FORM = UX.BOOTPAY_REMOTE_FORM
+    @objc public static let BOOTPAY_REMOTE_PRE = UX.BOOTPAY_REMOTE_PRE
     
-    public static let APP2APP_REMOTE = UX.APP2APP_REMOTE
-    public static let APP2APP_CARD_SIMPLE = UX.APP2APP_CARD_SIMPLE
-    public static let APP2APP_NFC = UX.APP2APP_NFC
+    @objc public static let APP2APP_REMOTE = UX.APP2APP_REMOTE
+    @objc public static let APP2APP_CARD_SIMPLE = UX.APP2APP_CARD_SIMPLE
+    @objc public static let APP2APP_NFC = UX.APP2APP_NFC
     
-    public static let APP2APP_SAMSUNGPAY = UX.APP2APP_SAMSUNGPAY
-    public static let APP2APP_SUBSCRIPT = UX.APP2APP_SUBSCRIPT
-    public static let APP2APP_CASH_RECEIPT = UX.APP2APP_CASH_RECEIPT
-    public static let APP2APP_OCR = UX.APP2APP_OCR
-    public static let NONE = UX.NONE 
+    @objc public static let APP2APP_SAMSUNGPAY = UX.APP2APP_SAMSUNGPAY
+    @objc public static let APP2APP_SUBSCRIPT = UX.APP2APP_SUBSCRIPT
+    @objc public static let APP2APP_CASH_RECEIPT = UX.APP2APP_CASH_RECEIPT
+    @objc public static let APP2APP_OCR = UX.APP2APP_OCR
+    @objc public static let NONE = UX.NONE
 }
 

@@ -6,10 +6,10 @@
 //
 
 @objc public class PushType: NSObject {
-    static let SMS = 1
-    static let LMS = 2
-    static let MMS = 3
-    static let KAKAO_A = 4
-    static let KAKAO_C = 5
-    static let PUSH = 10
+    @objc static let SMS = 1
+    @objc static let LMS = 2
+    @objc static let MMS = 3
+    @objc static let KAKAO_A = 4
+    @objc static let KAKAO_C = 5
+    @objc static let PUSH = 10
 }
