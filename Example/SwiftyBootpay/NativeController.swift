@@ -77,10 +77,10 @@ class NativeController: UIViewController {
          $0.phone = "010-1234-4567"
       }
       
-      let request = BootpayRequest()
+      let payload = BootpayPayload()
       //         $0.application_id = "5a52cc39396fa6449880c0f0"
       // 주문정보 - 실제 결제창에 반영되는 정보
-      request.params {
+      payload.params {
          $0.price = 1000 // 결제할 금액
          $0.name = "블링\"블링's 마스카라" // 결제할 상품명
          $0.order_id = "1234_1234_124" // 결제 고유번호
@@ -106,7 +106,7 @@ class NativeController: UIViewController {
       }
       
       
-      Bootpay.request(self, sendable: self, request: request, user: bootUser, items: items, smsPayload: smsPayload)
+      Bootpay.request(self, sendable: self, payload: payload, user: bootUser, items: items, smsPayload: smsPayload)
 //      Bootpay.request_link(request, items: items, user: bootUser, extra: nil, smsPayload: smsPayload)
    }
    
@@ -144,13 +144,13 @@ class NativeController: UIViewController {
          $0.phone = "010-1234-4567"
       }
       
-      let request = BootpayRequest()
+      let payload = BootpayPayload()
       
       
       //         $0.application_id = "5a52cc39396fa6449880c0f0"
       
       // 주문정보 - 실제 결제창에 반영되는 정보
-      request.params {
+      payload.params {
          $0.price = 1000 // 결제할 금액
          $0.name = "블링\"블링's 마스카라" // 결제할 상품명
          $0.order_id = "1234_1234_124" // 결제 고유번호
@@ -176,7 +176,7 @@ class NativeController: UIViewController {
          $0.rps = ["010-4033-4678"]
       }
       
-      Bootpay.request(self, sendable: self, request: request, user: bootUser, items: items, smsPayload: smsPayload)
+      Bootpay.request(self, sendable: self, payload: payload, user: bootUser, items: items, smsPayload: smsPayload)
 //      Bootpay.request_form(request, user: bootUser, items: items, extra: nil, smsPayload: smsPayload, remoteForm: nil)
    
    }
@@ -215,13 +215,13 @@ class NativeController: UIViewController {
          $0.phone = "010-1234-4567"
       }
       
-      let request = BootpayRequest()
+      let payload = BootpayPayload()
       
       
       //         $0.application_id = "5a52cc39396fa6449880c0f0"
       
       // 주문정보 - 실제 결제창에 반영되는 정보
-      request.params {
+      payload.params {
          $0.price = 1000 // 결제할 금액
          $0.name = "블링\"블링's 마스카라" // 결제할 상품명
          $0.order_id = "1234_1234_124" // 결제 고유번호
@@ -246,7 +246,7 @@ class NativeController: UIViewController {
          $0.rps = ["010-4033-4678"]
       }
       
-      Bootpay.request(self, sendable: self, request: request, user: bootUser, items: items, smsPayload: smsPayload)
+      Bootpay.request(self, sendable: self, payload: payload, user: bootUser, items: items, smsPayload: smsPayload)
 //      Bootpay.request_pre(request, user: bootUser, items: items, extra: nil, smsPayload: smsPayload, remotePre: nil)
       
    }
@@ -329,8 +329,8 @@ extension NativeController {
             $0.phone = "010-1234-4567"
          }
       
-         let request = BootpayRequest()
-         request.params {
+         let payload = BootpayPayload()
+         payload.params {
             $0.price = 1000 // 결제할 금액
             $0.name = "블링블링's 마스카라" // 결제할 상품명
             $0.order_id = "1234_1234_124" // 결제 고유번호
@@ -351,7 +351,7 @@ extension NativeController {
          items.append(item1)
          items.append(item2)
       
-      Bootpay.request(self, sendable: self, request: request, user: bootUser, items: items, extra: extra, addView: true)
+      Bootpay.request(self, sendable: self, payload: payload, user: bootUser, items: items, extra: extra, addView: true)
     }
 }
 

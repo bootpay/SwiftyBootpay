@@ -8,7 +8,7 @@
 import Foundation
 import ObjectMapper
 
-public class BootpayRequest: NSObject, BootpayParams, Mappable  {
+public class BootpayPayload: NSObject, BootpayParams, Mappable  {
     
     @objc public var application_id = Bootpay.sharedInstance.getApplicationId()
     @objc public var pg = ""

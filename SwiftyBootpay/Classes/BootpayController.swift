@@ -55,7 +55,7 @@ extension URL {
 
 
 @objc public class BootpayController: UIViewController {
-    @objc public var request = BootpayRequest()
+    @objc public var payload = BootpayPayload()
     @objc public var user = BootpayUser()
     @objc public var extra = BootpayExtra()
     @objc public var items = [BootpayItem]()  
@@ -128,7 +128,7 @@ extension BootpayController {
         if wv == nil { wv = BootpayWebView() }
         wv.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
         
-        let script = request.generateScript(wv.bridgeName, items: items, user: user, extra: extra)
+        let script = payload.generateScript(wv.bridgeName, items: items, user: user, extra: extra)
         
         wv.bootpayRequest(script)
         wv.sendable = self.sendable

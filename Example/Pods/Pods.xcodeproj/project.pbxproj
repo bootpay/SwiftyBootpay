@@ -111,7 +111,7 @@
 		9369F7B56B997D7CB6D5451AFAA0C4F4 /* OFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3876F8DE82EE5ED8FD3F49A193F567E3 /* OFB.swift */; };
 		96E71F9D96D368D22BD398EB0ED9D4D9 /* BootpayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A805C6FFA360B9BD84ADD7CB8AB497 /* BootpayController.swift */; };
 		970AB0DCDC59EA0530415233ABDB6E75 /* BlockMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FB773C081B46DE4A0FEA9BD33653EB /* BlockMode.swift */; };
-		971E96623D4AD6BF1BCDA077A3F33B23 /* BootpayRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9CCD6B01B90A448EC8BA249D7CBC66 /* BootpayRequest.swift */; };
+		971E96623D4AD6BF1BCDA077A3F33B23 /* BootpayPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9CCD6B01B90A448EC8BA249D7CBC66 /* BootpayPayload.swift */; };
 		991BD190737B8F4F6BA3EE4E1F79A050 /* CustomDateFormatTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E63BD955F5ED7564C1B755F7EB79DBF /* CustomDateFormatTransform.swift */; };
 		9A591561CF28EE328D0A50B30EDC97C6 /* HMAC+Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356B04DB59CAB044FF7780B8D8993FA3 /* HMAC+Foundation.swift */; };
 		9C5371C8EABA2C61D0B420980985B02F /* Rabbit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1649B630B600D255DF7C70EB42F3B699 /* Rabbit.swift */; };
@@ -343,7 +343,7 @@
 		4DFB0D99737974AC3656612859B02D0E /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4E097397553730BB730EE830E21E6464 /* DataTransform.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DataTransform.swift; path = Sources/DataTransform.swift; sourceTree = "<group>"; };
 		4E2DC5BADD59F04AFC8FDE16CCC965D0 /* Int+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Int+Extension.swift"; path = "Sources/CryptoSwift/Int+Extension.swift"; sourceTree = "<group>"; };
-		4E9CCD6B01B90A448EC8BA249D7CBC66 /* BootpayRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BootpayRequest.swift; path = SwiftyBootpay/Classes/BootpayRequest.swift; sourceTree = "<group>"; };
+		4E9CCD6B01B90A448EC8BA249D7CBC66 /* BootpayPayload.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BootpayPayload.swift; path = SwiftyBootpay/Classes/BootpayPayload.swift; sourceTree = "<group>"; };
 		4F7E8A62D0814FB69F98CCEA59F784B9 /* ECB.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ECB.swift; path = Sources/CryptoSwift/BlockMode/ECB.swift; sourceTree = "<group>"; };
 		5049A3E6096C19CE3F37B60D3F72A4F1 /* AES.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AES.swift; path = Sources/CryptoSwift/AES.swift; sourceTree = "<group>"; };
 		50F982ABFB663E0D541CD3814F997452 /* URLTransform.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = URLTransform.swift; path = Sources/URLTransform.swift; sourceTree = "<group>"; };
@@ -870,7 +870,7 @@
 				8153C31E22E53F2800851944 /* BootpayMethod.swift */,
 				2E91322B0B30DBB8B11B49D1205BDAD3 /* BootpayItem.swift */,
 				91C2EED662FA6D2BF9614AE2AEFB273E /* BootpayParams.swift */,
-				4E9CCD6B01B90A448EC8BA249D7CBC66 /* BootpayRequest.swift */,
+				4E9CCD6B01B90A448EC8BA249D7CBC66 /* BootpayPayload.swift */,
 				5BAEB0F1B9294D3E21EAC527DE79FF36 /* BootpayStatItem.swift */,
 				C1AA542490ABD7810E508645FB13DF42 /* BootpayUser.swift */,
 				2B7C8555168CCD86D3FE4590FB8569CD /* BootpayUX.swift */,
@@ -1243,7 +1243,7 @@
 				8FD289E277E9320C6BE1C15156D112A3 /* BootpayExtra.swift in Sources */,
 				2826207E2A50FAD63C800E36CC53F2E2 /* BootpayItem.swift in Sources */,
 				0D37254E54FBF2AEE65DC8D219D892B3 /* BootpayParams.swift in Sources */,
-				971E96623D4AD6BF1BCDA077A3F33B23 /* BootpayRequest.swift in Sources */,
+				971E96623D4AD6BF1BCDA077A3F33B23 /* BootpayPayload.swift in Sources */,
 				1E429A59F60895D3FE76A71A055BC514 /* BootpayStatItem.swift in Sources */,
 				D73A1BB8FA12270F83440B2AC0465565 /* BootpayUser.swift in Sources */,
 				BBF59C7A3A4A039E0763217512BECFEC /* BootpayUX.swift in Sources */,

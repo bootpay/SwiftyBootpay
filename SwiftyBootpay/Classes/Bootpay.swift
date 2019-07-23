@@ -85,33 +85,33 @@ class BootpayDefault {
     }
     
     
-    public static func request(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, request: BootpayRequest,  user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, smsPayload: SMSPayload? = nil, remoteForm: RemoteOrderForm? = nil, remotePre: RemoteOrderPre? = nil, addView: Bool? = false) {
-        
-        if(!checkValid(request: request, user: user, items: items, extra: extra, smsPayload: smsPayload, remoteForm: remoteForm, remotePre: remotePre)) { return }
-        
-        switch request.ux {
-        case UX.PG_DIALOG:
-            request_dialog(viewController, sendable: sendable, request: request, user: user, items: items, extra: extra, smsPayload: smsPayload, addView: addView)
-        case UX.PG_SUBSCRIPT:
-            request_dialog(viewController, sendable: sendable, request: request, user: user, items: items, extra: extra, smsPayload: smsPayload)
-        case UX.BOOTPAY_REMOTE_LINK:
-            request_link(request, items: items, user: user, extra: extra, smsPayload: smsPayload)
-        case UX.BOOTPAY_REMOTE_FORM:
-            request_form(request, user: user, items: items, extra: extra, smsPayload: smsPayload, remoteForm: remoteForm)
-        case UX.BOOTPAY_REMOTE_PRE:
-            request_pre(request, user: user, items: items, extra: extra, smsPayload: smsPayload, remotePre: remotePre)
-        default:
-            return
-        }
-    }
-    
-    private static func checkValid(request: BootpayRequest,  user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, smsPayload: SMSPayload? = nil, remoteForm: RemoteOrderForm? = nil, remotePre: RemoteOrderPre? = nil) -> Bool {
+    private static func checkValid(payload: BootpayPayload,  user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, smsPayload: SMSPayload? = nil, remoteForm: RemoteOrderForm? = nil, remotePre: RemoteOrderPre? = nil) -> Bool {
         
         
         return true
     }
     
-    public static func request_dialog(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, request: BootpayRequest,  user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, smsPayload: SMSPayload? = nil, addView: Bool? = false) {
+    public static func request(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, payload: BootpayPayload,  user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, smsPayload: SMSPayload? = nil, remoteForm: RemoteOrderForm? = nil, remotePre: RemoteOrderPre? = nil, addView: Bool? = false) {
+        
+        if(!checkValid(payload: payload, user: user, items: items, extra: extra, smsPayload: smsPayload, remoteForm: remoteForm, remotePre: remotePre)) { return }
+        
+        switch payload.ux {
+        case UX.PG_DIALOG:
+            request_dialog(viewController, sendable: sendable, payload: payload, user: user, items: items, extra: extra, smsPayload: smsPayload, addView: addView)
+        case UX.PG_SUBSCRIPT:
+            request_dialog(viewController, sendable: sendable, payload: payload, user: user, items: items, extra: extra, smsPayload: smsPayload)
+        case UX.BOOTPAY_REMOTE_LINK:
+            request_link(payload, items: items, user: user, extra: extra, smsPayload: smsPayload)
+        case UX.BOOTPAY_REMOTE_FORM:
+            request_form(payload, user: user, items: items, extra: extra, smsPayload: smsPayload, remoteForm: remoteForm)
+        case UX.BOOTPAY_REMOTE_PRE:
+            request_pre(payload, user: user, items: items, extra: extra, smsPayload: smsPayload, remotePre: remotePre)
+        default:
+            return
+        }
+    }
+    
+    private static func request_dialog(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, payload: BootpayPayload,  user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, smsPayload: SMSPayload? = nil, addView: Bool? = false) {
         
 //        sharedInstance.vc.request = request
 //        if let user = user { sharedInstance.vc.user = user }
@@ -122,7 +122,7 @@ class BootpayDefault {
         if sharedInstance.vc == nil {
             sharedInstance.vc = BootpayController()
         }
-        sharedInstance.vc?.request = request
+        sharedInstance.vc?.payload = payload
         if let user = user { sharedInstance.vc?.user = user }
         if let extra = extra { sharedInstance.vc?.extra = extra }
         if let sendable = sendable { sharedInstance.vc?.sendable = sendable }
@@ -134,9 +134,9 @@ class BootpayDefault {
         }
     }
     
-    public static func request_link(_ request: BootpayRequest, items: [BootpayItem]?, user: BootpayUser?, extra: BootpayExtra?, smsPayload: SMSPayload?) {
+    private static func request_link(_ payload: BootpayPayload, items: [BootpayItem]?, user: BootpayUser?, extra: BootpayExtra?, smsPayload: SMSPayload?) {
         
-        let requestString = request.toJSONString() ?? ""
+        let requestString = payload.toJSONString() ?? ""
         let itemsString = items?.toJSONString() ?? ""
         let userString = user?.toJSONString() ?? ""
         let extraString = extra?.toJSONString() ?? ""
@@ -155,9 +155,9 @@ class BootpayDefault {
         }
     }
     
-    public static func request_form(_ request: BootpayRequest, user: BootpayUser?, items: [BootpayItem]?, extra: BootpayExtra?, smsPayload: SMSPayload?, remoteForm: RemoteOrderForm?) {
+    private static func request_form(_ payload: BootpayPayload, user: BootpayUser?, items: [BootpayItem]?, extra: BootpayExtra?, smsPayload: SMSPayload?, remoteForm: RemoteOrderForm?) {
         
-        let requestString = request.toJSONString() ?? ""
+        let requestString = payload.toJSONString() ?? ""
         let itemsString = items?.toJSONString() ?? ""
         let userString = user?.toJSONString() ?? ""
         let extraString = extra?.toJSONString() ?? ""
@@ -166,9 +166,9 @@ class BootpayDefault {
         if remoteFormString.count == 0 {
             let form = RemoteOrderForm()
             form.params {
-                $0.n = request.name
-                $0.ip = request.price
-                $0.pg = request.pg
+                $0.n = payload.name
+                $0.ip = payload.price
+                $0.pg = payload.pg
             }
             remoteFormString = form.toJSONString() ?? ""
         }
@@ -187,9 +187,9 @@ class BootpayDefault {
         }
     }
     
-    public static func request_pre(_ request: BootpayRequest, user: BootpayUser?, items: [BootpayItem]?, extra: BootpayExtra?, smsPayload: SMSPayload?, remotePre: RemoteOrderPre?) {
+    public static func request_pre(_ payload: BootpayPayload, user: BootpayUser?, items: [BootpayItem]?, extra: BootpayExtra?, smsPayload: SMSPayload?, remotePre: RemoteOrderPre?) {
         
-        let requestString = request.toJSONString() ?? ""
+        let requestString = payload.toJSONString() ?? ""
         let itemsString = items?.toJSONString() ?? ""
         let userString = user?.toJSONString() ?? ""
         let extraString = extra?.toJSONString() ?? ""
@@ -198,8 +198,8 @@ class BootpayDefault {
         if remotePreString.count == 0 {
             let pre = RemoteOrderPre()
             pre.params {
-                $0.n = request.name
-                $0.e_p = "\(request.price)"
+                $0.n = payload.name
+                $0.e_p = "\(payload.price)"
             }
             remotePreString = pre.toJSONString() ?? ""
         }
@@ -371,5 +371,12 @@ extension Bootpay {
     public static func dismiss() {
         sharedInstance.vc?.dismiss()
         sharedInstance.vc?.view.removeFromSuperview()
+    }
+    
+    
+    @objc(request_objc:::::::::)
+    public static func request_objc(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, payload: BootpayPayload,  user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, smsPayload: SMSPayload? = nil, remoteForm: RemoteOrderForm? = nil, remotePre: RemoteOrderPre? = nil) {
+        
+        request(viewController, sendable: sendable, payload: payload, user: user, items: items, extra: extra, smsPayload: smsPayload, addView: false) 
     }
 }
