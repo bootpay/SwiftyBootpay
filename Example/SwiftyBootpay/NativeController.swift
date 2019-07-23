@@ -101,8 +101,8 @@ class NativeController: UIViewController {
       let smsPayload = SMSPayload()
       smsPayload.params {
          $0.msg = "결제링크 안내입니다\n[결제링크]"
-         $0.sp = "010-4033-4678"
-         $0.rps = ["010-4033-4678"]
+         $0.sp = "010-1234-4678"
+         $0.rps = ["010-1234-4678"]
       }
       
       
@@ -172,8 +172,8 @@ class NativeController: UIViewController {
       let smsPayload = SMSPayload()
       smsPayload.params {
          $0.msg = "결제링크 안내입니다\n[결제링크]"
-         $0.sp = "010-4033-4678"
-         $0.rps = ["010-4033-4678"]
+         $0.sp = "010-1234-4678"
+         $0.rps = ["010-1234-4678"]
       }
       
       Bootpay.request(self, sendable: self, payload: payload, user: bootUser, items: items, smsPayload: smsPayload)
@@ -242,8 +242,8 @@ class NativeController: UIViewController {
       let smsPayload = SMSPayload()
       smsPayload.params {
          $0.msg = "결제링크 안내입니다\n[결제링크]"
-         $0.sp = "010-4033-4678"
-         $0.rps = ["010-4033-4678"]
+         $0.sp = "010-1234-4678"
+         $0.rps = ["010-1234-4678"]
       }
       
       Bootpay.request(self, sendable: self, payload: payload, user: bootUser, items: items, smsPayload: smsPayload)
