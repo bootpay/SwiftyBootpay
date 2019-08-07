@@ -24,7 +24,7 @@ import WebKit
     final let BASE_URL = "https://inapp.bootpay.co.kr/3.0.4/production.html"
     final let bridgeName = "Bootpay_iOS"
     var firstLoad = false
-    var sendable: BootpayRequestProtocol?
+    weak var sendable: BootpayRequestProtocol?
     var bootpayScript = ""
     var parentController: BootpayController!
     func bootpayRequest(_ script: String) {

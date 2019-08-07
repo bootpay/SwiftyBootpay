@@ -78,7 +78,7 @@ extension URL {
 //    @objc public var account_expire_at = "" // 가상계좌 입금 만료 기한
 //    @objc public var quotas = [0,2,3,4,5,6,7,8,9,10,11,12] // 할부 개월 수
     var isPaying = false
-    @objc public var sendable: BootpayRequestProtocol?
+    @objc public weak var sendable: BootpayRequestProtocol?
     
     internal var wv: BootpayWebView!
 }
