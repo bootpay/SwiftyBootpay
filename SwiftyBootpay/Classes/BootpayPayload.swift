@@ -119,7 +119,7 @@ public class BootpayPayload: NSObject, BootpayParams, Mappable  {
         let expire_month = extra?.expire_month ?? 0
         let vbank_result = extra?.vbank_result ?? false
         let quota = extra?.quotas.compactMap{String($0)}.joined(separator: ",") ?? ""
-        
+        let locale = extra?.locale ?? "ko"
         
         var array = ["BootPay.request({",
                      "price: '\(price)',",
@@ -139,6 +139,7 @@ public class BootpayPayload: NSObject, BootpayParams, Mappable  {
             "expire_month:'\(expire_month)',",
             "vbank_result:\(vbank_result),",
             "quota:'\(quota)'",
+            "locale:'\(locale)'",
             "}",
             ]
         

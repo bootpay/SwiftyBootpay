@@ -1,0 +1,21 @@
+version: "Apple Swift version 5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)"
+options: "0d48368561e7346907ee1423f140ec28"
+build_time: [1571185851, 265674000]
+inputs:
+  "/Users/ehowlsla/Xcode Projects/SwiftyBootpay/Example/Pods/Alamofire/Source/AFError.swift": [1571185667, 705951733]
+  "/Users/ehowlsla/Xcode Projects/SwiftyBootpay/Example/Pods/Alamofire/Source/Alamofire.swift": [1571185667, 706119540]
+  "/Users/ehowlsla/Xcode Projects/SwiftyBootpay/Example/Pods/Alamofire/Source/DispatchQueue+Alamofire.swift": [1571185667, 706262771]
+  "/Users/ehowlsla/Xcode Projects/SwiftyBootpay/Example/Pods/Alamofire/Source/MultipartFormData.swift": [1571185667, 706407098]
+  "/Users/ehowlsla/Xcode Projects/SwiftyBootpay/Example/Pods/Alamofire/Source/NetworkReachabilityManager.swift": [1571185667, 706557437]
+  "/Users/ehowlsla/Xcode Projects/SwiftyBootpay/Example/Pods/Alamofire/Source/Notifications.swift": [1571185667, 706649614]
+  "/Users/ehowlsla/Xcode Projects/SwiftyBootpay/Example/Pods/Alamofire/Source/ParameterEncoding.swift": [1571185667, 706786714]
+  "/Users/ehowlsla/Xcode Projects/SwiftyBootpay/Example/Pods/Alamofire/Source/Request.swift": [1571185667, 706962633]
+  "/Users/ehowlsla/Xcode Projects/SwiftyBootpay/Example/Pods/Alamofire/Source/Response.swift": [1571185667, 707106437]
+  "/Users/ehowlsla/Xcode Projects/SwiftyBootpay/Example/Pods/Alamofire/Source/ResponseSerialization.swift": [1571185667, 707255585]
+  "/Users/ehowlsla/Xcode Projects/SwiftyBootpay/Example/Pods/Alamofire/Source/Result.swift": [1571185667, 707375159]
+  "/Users/ehowlsla/Xcode Projects/SwiftyBootpay/Example/Pods/Alamofire/Source/ServerTrustPolicy.swift": [1571185667, 707506042]
+  "/Users/ehowlsla/Xcode Projects/SwiftyBootpay/Example/Pods/Alamofire/Source/SessionDelegate.swift": [1571185667, 707696972]
+  "/Users/ehowlsla/Xcode Projects/SwiftyBootpay/Example/Pods/Alamofire/Source/SessionManager.swift": [1571185667, 707893776]
+  "/Users/ehowlsla/Xcode Projects/SwiftyBootpay/Example/Pods/Alamofire/Source/TaskDelegate.swift": [1571185667, 708097843]
+  "/Users/ehowlsla/Xcode Projects/SwiftyBootpay/Example/Pods/Alamofire/Source/Timeline.swift": [1571185667, 708206276]
+  "/Users/ehowlsla/Xcode Projects/SwiftyBootpay/Example/Pods/Alamofire/Source/Validation.swift": [1571185667, 708314187]

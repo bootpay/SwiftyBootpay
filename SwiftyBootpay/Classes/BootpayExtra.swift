@@ -15,6 +15,7 @@ public class BootpayExtra: NSObject, BootpayParams, Mappable {
     @objc public var app_scheme = "" //app2app 결제시 return 받을 intent scheme
     @objc public var app_scheme_host = "" //app2app 결제시 return 받을 intent scheme host
     @objc public var ux = "" //다양한 결제시나리오를 지원하기 위한 용도로 사용됨
+    @objc public var locale = "ko" //결제창 언어지원
     
     public override init() {}
     public required init?(map: Map) {
@@ -29,5 +30,6 @@ public class BootpayExtra: NSObject, BootpayParams, Mappable {
         app_scheme <- map["app_scheme"]
         app_scheme_host <- map["app_scheme_host"]
         ux <- map["ux"]
+        locale <- map["locale"]
     }
 }
