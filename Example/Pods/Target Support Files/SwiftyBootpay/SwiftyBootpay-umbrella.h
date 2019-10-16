@@ -9,20 +9,8 @@
 #endif
 #endif
 #endif
- 
-//#import "BootpayCController.h"
-//#import "BootpayCUser.h"
-//#import "BootpayCExtra.h"
-//#import "BootpayCItem.h"
-//#import "BootpayCStatItem.h"
-//#import "BootpayCUX.h"
-//#import "PushCType.h"
-//#import "RemoteCLink.h"
-//#import "RemoteOrderCForm.h"
-//#import "RemoteOrderCPre.h"
-//#import "SMSCPayload.h"
-//#import "BootpayCRequest.h"
-//#import "BootpayCWebView.h"
+
+#import "SwiftyBootpay-ObjectC-Bridge.h"
 
 FOUNDATION_EXPORT double SwiftyBootpayVersionNumber;
 FOUNDATION_EXPORT const unsigned char SwiftyBootpayVersionString[];

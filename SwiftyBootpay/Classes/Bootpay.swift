@@ -122,7 +122,12 @@ class BootpayDefault {
         if sharedInstance.vc == nil {
             sharedInstance.vc = BootpayController()
         }
+//        sharedInstance.application_id = Bootpay.
+        
         sharedInstance.vc?.payload = payload
+        sharedInstance.vc?.payload.application_id = sharedInstance.application_id
+         
+        
         if let user = user { sharedInstance.vc?.user = user }
         if let extra = extra { sharedInstance.vc?.extra = extra }
         if let sendable = sendable { sharedInstance.vc?.sendable = sendable }

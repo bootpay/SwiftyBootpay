@@ -138,7 +138,7 @@ public class BootpayPayload: NSObject, BootpayParams, Mappable  {
             "app_scheme:'\(getURLSchema())',",
             "expire_month:'\(expire_month)',",
             "vbank_result:\(vbank_result),",
-            "quota:'\(quota)'",
+            "quota:'\(quota)',",
             "locale:'\(locale)'",
             "}",
             ]
