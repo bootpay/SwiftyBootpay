@@ -119,10 +119,10 @@ class BootpayDefault {
 //        if let sendable = sendable { sharedInstance.vc.sendable = sendable }
 //        if let items = items { sharedInstance.vc.items = items }
 //        viewController.present(sharedInstance.vc, animated: true, completion: nil)
-        if sharedInstance.vc == nil {
-            sharedInstance.vc = BootpayController()
-        }
-//        sharedInstance.application_id = Bootpay.
+//        if sharedInstance.vc == nil {
+//            sharedInstance.vc = BootpayController()
+//        }
+        sharedInstance.vc = BootpayController() 
         
         sharedInstance.vc?.payload = payload
         sharedInstance.vc?.payload.application_id = sharedInstance.application_id
