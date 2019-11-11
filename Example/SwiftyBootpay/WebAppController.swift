@@ -13,7 +13,7 @@ import WebKit
 class WebAppController: UIViewController {
     var webView: WKWebView!
     final let bridgeName = "Bootpay_iOS"
-    final let ios_application_id = "5a52cc39396fa6449880c0f0" // iOS 
+    final let ios_application_id = "5b8f6a4d396fa665fdc2b5e9" // iOS 
     
     override func viewDidLoad() {
         super.viewDidLoad()
