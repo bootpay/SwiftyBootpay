@@ -40,5 +40,7 @@ Pod::Spec.new do |s|
   s.dependency 'CryptoSwift'  
   s.dependency 'Alamofire',  '~> 5.0.0-rc.3'
   s.dependency 'ObjectMapper'
+#  s.dependency 'AlamofireObjectMapper'
+#  s.dependency 'AlamofireImage'
   
 end
