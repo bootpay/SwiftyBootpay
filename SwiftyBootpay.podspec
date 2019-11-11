@@ -38,9 +38,7 @@ Pod::Spec.new do |s|
   
   s.static_framework = true
   s.dependency 'CryptoSwift'  
-  s.dependency 'Alamofire',  '~> 5.0.0-rc.2'
+  s.dependency 'Alamofire',  '~> 5.0.0-rc.3'
   s.dependency 'ObjectMapper'
-  s.dependency 'AlamofireObjectMapper', '~> 6.2.0'
-  s.dependency 'AlamofireImage', '~> 4.0.0-beta.6'
   
 end
