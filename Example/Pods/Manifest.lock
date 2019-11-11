@@ -1,16 +1,9 @@
 PODS:
-  - Alamofire (4.9.0)
-  - AlamofireImage (3.5.2):
-    - Alamofire (~> 4.8)
-  - AlamofireObjectMapper (5.2.1):
-    - Alamofire (~> 4.7)
-    - ObjectMapper (~> 3.4)
-  - CryptoSwift (1.1.2)
+  - Alamofire (5.0.0-rc.3)
+  - CryptoSwift (1.1.3)
   - ObjectMapper (3.5.1)
-  - SwiftyBootpay (3.0.49):
-    - Alamofire
-    - AlamofireImage
-    - AlamofireObjectMapper
+  - SwiftyBootpay (3.0.493):
+    - Alamofire (~> 5.0.0-rc.3)
     - CryptoSwift
     - ObjectMapper
 
@@ -20,8 +13,6 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
-    - AlamofireImage
-    - AlamofireObjectMapper
     - CryptoSwift
     - ObjectMapper
 
@@ -30,13 +21,11 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Alamofire: afc3e7c6db61476cb45cdd23fed06bad03bbc321
-  AlamofireImage: 63cfe3baf1370be6c498149687cf6db3e3b00999
-  AlamofireObjectMapper: 1989f690e982b71921b9253f53a4f33a9bc00d88
-  CryptoSwift: 31dacd1f13427439ddae5b5cbaae4c8dbc43047e
+  Alamofire: ca8c0de6906873be89d6deec5c8de279e00bf872
+  CryptoSwift: 6b6e488df0598b3e9fa49254ed1a65e8c1b1e10b
   ObjectMapper: 70187b8941977c62ccfb423caf6b50be405cabf0
-  SwiftyBootpay: 794ce50904c1213c4a9d2d236cc56c145f13d81e
+  SwiftyBootpay: e15e2bb9388a63831b306c0bd0892ac4b76eba0d
 
 PODFILE CHECKSUM: c286c6f0a203519149ce94c6a5310148b7a2a2ba
 
-COCOAPODS: 1.8.1
+COCOAPODS: 1.8.3

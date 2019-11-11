@@ -153,10 +153,12 @@ class BootpayDefault {
         params["params"] = extraString
         params["sms_payload"] = smsPayloadString
         
-        Alamofire.request("https://api-ehowlsla.bootpay.co.kr/app/rest/remote_link", method: .post, parameters: params)
+//        Alamofire.Request
+        
+        AF.request("https://api.bootpay.co.kr/app/rest/remote_link", method: .post, parameters: params)
             .validate()
             .responseJSON { response in
-                print(response.result.value ?? "")
+                print(response.value ?? "")
         }
     }
     
@@ -185,10 +187,10 @@ class BootpayDefault {
         params["sms_payload"] = smsPayloadString
         params["remote_form"] = remoteFormString
         
-        Alamofire.request("https://api-ehowlsla.bootpay.co.kr/app/rest/remote_form", method: .post, parameters: params)
+        AF.request("https://api-ehowlsla.bootpay.co.kr/app/rest/remote_form", method: .post, parameters: params)
             .validate()
             .responseJSON { response in
-                print(response.result.value ?? "")
+                print(response.value ?? "")
         }
     }
     
@@ -216,10 +218,10 @@ class BootpayDefault {
         params["sms_payload"] = smsPayloadString
         params["remote_pre"] = remotePreString
         
-        Alamofire.request("https://api-ehowlsla.bootpay.co.kr/app/rest/remote_pre", method: .post, parameters: params)
+        AF.request("https://api-ehowlsla.bootpay.co.kr/app/rest/remote_pre", method: .post, parameters: params)
             .validate()
             .responseJSON { response in
-                print(response.result.value ?? "")
+                print(response.value ?? "")
         }
     }
 

@@ -1,6 +1,6 @@
 {
   "name": "SwiftyBootpay",
-  "version": "3.0.49",
+  "version": "3.0.493",
   "summary": "PG Plugin For Swift",
   "homepage": "https://github.com/bootpay/SwiftyBootpay",
   "license": {
@@ -12,7 +12,7 @@
   },
   "source": {
     "git": "https://github.com/bootpay/SwiftyBootpay.git",
-    "tag": "3.0.49"
+    "tag": "3.0.493"
   },
   "platforms": {
     "ios": "11.0"
@@ -25,15 +25,9 @@
 
     ],
     "Alamofire": [
-
+      "~> 5.0.0-rc.3"
     ],
     "ObjectMapper": [
-
-    ],
-    "AlamofireObjectMapper": [
-
-    ],
-    "AlamofireImage": [
 
     ]
   },
