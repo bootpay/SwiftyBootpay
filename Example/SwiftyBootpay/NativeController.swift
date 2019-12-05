@@ -335,17 +335,21 @@ extension NativeController {
             $0.name = "블링블링's 마스카라" // 결제할 상품명
             $0.order_id = "1234_1234_124" // 결제 고유번호
             $0.params = customParams // 커스텀 변수
-//            $0.application_id = "5a52cc39396fa6449880c0f0"
+            $0.application_id = "5b8f6a4d396fa665fdc2b5e9"
+//            $0.application_id = "5b9f51264457636ab9a07cdd"
+            
+//
    //         $0.user_info = bootUser
-            $0.pg = PG.KCP // 결제할 PG사
+            $0.pg = BootpayPG.INICIS // 결제할 PG사
             //            $0.account_expire_at = "2018-09-25" // 가상계좌 입금기간 제한 ( yyyy-mm-dd 포멧으로 입력해주세요. 가상계좌만 적용됩니다. 오늘 날짜보다 더 뒤(미래)여야 합니다 )
-            //            $0.method = "card" // 결제수단
+//                        $0.method = "card" // 결제수단
             $0.show_agree_window = false
-            $0.method = Method.CARD
+            $0.method = Method.BANK
             $0.ux = UX.PG_DIALOG
          }
       
          let extra = BootpayExtra()
+      
          extra.quotas = [0, 2, 3] // 5만원 이상일 경우 할부 허용범위 설정 가능, (예제는 일시불, 2개월 할부, 3개월 할부 허용)
 //         extra.locale = "en"
       
@@ -377,7 +381,6 @@ extension NativeController: BootpayRequestProtocol {
         
         let iWantPay = true
         if iWantPay == true {  // 재고가 있을 경우.
-//         Bootpay.trans
             Bootpay.transactionConfirm(data: data) // 결제 승인
         } else { // 재고가 없어 중간에 결제창을 닫고 싶을 경우
             Bootpay.dismiss()

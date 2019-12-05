@@ -17,8 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // 해당 프로젝트(아이폰)의 application id 값을 설정합니다. 결제와 통계 모두를 위해 꼭 필요합니다.
-//        5b9f51264457636ab9a07cdd
-        Bootpay.sharedInstance.appLaunch(application_id: "5a52cc39396fa6449880c0f0") // production sample
+        
+//        Bootpay.sharedInstance.appLaunch(application_id: "5b9f51264457636ab9a07cdd") // production sample
+        Bootpay.sharedInstance.appLaunch(application_id: "5b8f6a4d396fa665fdc2b5e9") // production sample
         
         return true
     }
