@@ -99,6 +99,16 @@ public class BootpayPayload: NSObject, BootpayParams, Mappable  {
         self.params = [:]
     }
     
+    fileprivate func getPopup(extra: BootpayExtra?) -> Int { 
+        if pg == "nicepay" && extra?.popup == 0 {
+            let floatVersion = (UIDevice.current.systemVersion as NSString).floatValue
+            if floatVersion < 13 {
+                return 1
+            }
+        }
+        return extra?.popup ?? 0
+    }
+    
     fileprivate func getURLSchema() -> String{
         guard let schemas = Bundle.main.object(forInfoDictionaryKey: "CFBundleURLTypes") as? [[String:Any]],
             let schema = schemas.first,
@@ -139,6 +149,7 @@ public class BootpayPayload: NSObject, BootpayParams, Mappable  {
             "expire_month:'\(expire_month)',",
             "vbank_result:\(vbank_result),",
             "quota:'\(quota)',",
+            "popup: \(getPopup(extra: extra)),",
             "locale:'\(locale)'",
             "}",
             ]
@@ -170,6 +181,7 @@ public class BootpayPayload: NSObject, BootpayParams, Mappable  {
                 "webkit.messageHandlers.\(bridgeName).postMessage(data);",
                 "});"]
         
+        print(result.reduce("", +))
         return result.reduce("", +)
     }
     
