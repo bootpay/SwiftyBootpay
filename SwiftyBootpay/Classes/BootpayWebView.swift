@@ -8,7 +8,7 @@
 
 import UIKit
 import WebKit
-//import CryptoSwift
+//import
 
 @objc public protocol BootpayRequestProtocol {
     @objc(onError:) func onError(data: [String: Any])
