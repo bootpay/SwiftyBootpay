@@ -220,8 +220,9 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
 
             wv.wv.uiDelegate = self
             wv.wv.navigationDelegate = self
+            wv.sendable = self.sendable 
 //            wv.uiDelegate = self
-            print(wv.frame)
+//            print(wv.frame)
             wv.startRequest(navigationAction.request)
 
             self.addSubview(wv.wv)
