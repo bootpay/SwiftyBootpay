@@ -374,6 +374,11 @@ extension Bootpay {
         sharedInstance.vc?.transactionConfirm(data: data)
     }
     
+    @objc(removePaymentWindow)
+    public static func removePaymentWindow() {
+           sharedInstance.vc?.removePaymentWindow()
+    }
+    
     @objc(dismiss)
     public static func dismiss() {
         sharedInstance.vc?.dismiss()

@@ -21,7 +21,8 @@ import WebKit
 
 @objc class BootpayWebView: UIView {
     var wv: WKWebView!
-    
+
+    let configuration = WKWebViewConfiguration()
     
     var popupWV: WKWebView!
 //    final let BASE_URL = "https://inapp.bootpay.co.kr/3.1.0/development.html"
@@ -33,7 +34,6 @@ import WebKit
     var parentController: BootpayController!
     func bootpayRequest(_ script: String) {
         HTTPCookieStorage.shared.cookieAcceptPolicy = HTTPCookie.AcceptPolicy.always  // 현대카드 등 쿠키설정 이슈 해결을 위해 필요
-        let configuration = WKWebViewConfiguration()
         configuration.userContentController.add(self, name: bridgeName)
         wv = WKWebView(frame: self.bounds, configuration: configuration)
         wv.uiDelegate = self
@@ -60,6 +60,7 @@ extension BootpayWebView {
     }
     
     func startRequest(_ request: URLRequest) {
+        
         wv.load(request)
     }
     
@@ -177,6 +178,8 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
         if(message.name == self.bridgeName) {
             guard let body = message.body as? [String: Any] else {
                 if message.body as? String == "close" {
+//                    Bootpay.sharedInstance.sendab
+//                    Bootpay.sharedInstance.vc.sendable.onClose()
                     sendable?.onClose()
                 }
                 return
@@ -190,10 +193,6 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
             } else if action == "BootpayBankReady" {
                 sendable?.onReady(data: body)
             } else if action == "BootpayConfirm" {
-//                print("confirm")
-//                if popupWV != nil {
-//                    popupWV.removeFromSuperview()
-//                }
                 sendable?.onConfirm(data: body)
             } else if action == "BootpayDone" {
                 sendable?.onDone(data: body)
@@ -211,24 +210,30 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
     }
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-        if navigationAction.targetFrame == nil {
-                        
-            let wv = BootpayWebView()
-            let configuration = WKWebViewConfiguration()
-            configuration.userContentController.add(self, name: bridgeName)
-            wv.wv = WKWebView(frame: self.bounds, configuration: configuration)
+//         let wv = WKWebView()
+         let wv = WKWebView(frame: self.bounds, configuration: configuration)
+        wv.load(navigationAction.request)
+        wv.uiDelegate = self
+        wv.navigationDelegate = self
+        self.addSubview(wv)
+        
+//        wv.frame = self.bounds
+        
+        
+//                   let configuration = WKWebViewConfiguration()
+//                   configuration.userContentController.add(self, name: bridgeName)
+        
+//                   wv.wv = WKWebView(frame: self.bounds, configuration: configuration)
 
-            wv.wv.uiDelegate = self
-            wv.wv.navigationDelegate = self
-            wv.sendable = self.sendable 
-//            wv.uiDelegate = self
-//            print(wv.frame)
-            wv.startRequest(navigationAction.request)
+                   
+        
+                   
+//        wv.sendable = self.sendable
+//                   wv.startRequest(navigationAction.request)
 
-            self.addSubview(wv.wv)
-            self.popupWV  = wv.wv
-        }
-        return nil
+       
+//                   self.popupWV  = wv.wv
+        return wv
     }
 }
 

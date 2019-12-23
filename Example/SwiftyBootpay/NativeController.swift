@@ -34,8 +34,15 @@ class NativeController: UIViewController {
          btn.setTitle(titles[i], for: .normal)
          btn.addTarget(self, action: selectors[i], for: .touchUpInside)
          self.view.addSubview(btn)
-      } 
+      }
+      
+     navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(goClose))
     }
+   
+   @objc func goClose() {
+      Bootpay.removePaymentWindow()
+   
+   }
     
    
    @objc func nativeClick() {
@@ -351,7 +358,7 @@ extension NativeController {
          let extra = BootpayExtra()
       
          extra.quotas = [0, 2, 3] // 5만원 이상일 경우 할부 허용범위 설정 가능, (예제는 일시불, 2개월 할부, 3개월 할부 허용)
-//         extra.locale = "en"
+         extra.popup = 1
       
          var items = [BootpayItem]()
          items.append(item1)
