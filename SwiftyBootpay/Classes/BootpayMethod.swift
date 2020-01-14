@@ -15,6 +15,8 @@ public struct Method {
     public static let SUBSCRIPT_PHONE = "phone_rebill"; // 휴대폰 정기결제
     public static let AUTH = "auth"; // 본인인증
     public static let EASY = "easy"; // 간편결제
+    public static let PAYCO = "payco"; // 페이코
+    public static let KAKAO = "kakao"; // 카카오
 }
 
 @objc public class BootpayMethod: NSObject {
@@ -27,4 +29,6 @@ public struct Method {
     @objc public static let SUBSCRIPT_PHONE = Method.SUBSCRIPT_PHONE
     @objc public static let AUTH = Method.AUTH
     @objc public static let EASY = Method.EASY
+    @objc public static let PAYCO = Method.PAYCO
+    @objc public static let KAKAO = Method.KAKAO
 }
