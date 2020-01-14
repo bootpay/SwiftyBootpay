@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftyBootpay'
-  s.version          = '3.1.3'
+  s.version          = '3.1.4'
   s.summary          = 'PG Plugin For Swift'
 
 # This description is used to generate tags and improve search results.
