@@ -134,13 +134,13 @@ public class BootpayPayload: NSObject, BootpayParams, Mappable  {
         var array = ["BootPay.request({",
                      "price: '\(price)',",
             "application_id: '\(application_id)',",
-            "name: '\(name.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'"))',",
+            "name: '\(name.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'").replace(target: "\n", withString: ""))',",
             "pg:'\(pg)',",
             "phone:'\(userPhone)',",
 //            "show_agree_window: \(show_agree_window),",
             "show_agree_window: \(show_agree_window == true ? 1 : 0),",
             "items: [\(itemsString)],",
-            "params: \(Bootpay.dicToJsonString(params).replace(target: "'", withString: "\\'")),",
+            "params: \(Bootpay.dicToJsonString(params).replace(target: "'", withString: "\\'").replace(target: "'\n", withString: "")),",
             "order_id: '\(order_id)',",
             "use_order_id: '\(use_order_id)',",
             "account_expire_at: '\(account_expire_at)',",
@@ -162,7 +162,7 @@ public class BootpayPayload: NSObject, BootpayParams, Mappable  {
             array.append(",methods: \(listToJson(methods))")
         }
         
-        let userJson = user?.toJSONString()?.replace(target: "'", withString: "\\'") ?? ""
+        let userJson = user?.toString() ?? ""
         array.append(",user_info: \(userJson)")
         
         

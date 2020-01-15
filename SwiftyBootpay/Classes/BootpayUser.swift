@@ -32,6 +32,21 @@ public class BootpayUser: NSObject, BootpayParams, Mappable {
     @objc public var phone = ""
     @objc public var area = ""
     
+    func toString() -> String {
+
+        return [
+            "{",
+            "id: '\(id.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'").replace(target: "'\n", withString: ""))',",
+            "user_id: '\(user_id.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'").replace(target: "'\n", withString: ""))',",
+            "email: '\(email.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'").replace(target: "'\n", withString: ""))',",
+            "gender: \(Int(gender)),",
+            "birth: '\(birth.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'").replace(target: "'\n", withString: ""))',",
+            "phone: '\(phone.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'").replace(target: "'\n", withString: ""))',",
+            "phone: '\(phone.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'").replace(target: "'\n", withString: ""))',",
+            "}"
+            ].reduce("", +)
+    }
+    
 //    @objc public func toJson() -> String {
 //        do {
 //            let jsonEncoder = JSONEncoder()

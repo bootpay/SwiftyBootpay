@@ -42,13 +42,13 @@ public class BootpayItem: NSObject, BootpayParams, Mappable {
 
         return [
             "{",
-            "item_name: '\(item_name.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'"))',",
+            "item_name: '\(item_name.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'").replace(target: "'\n", withString: ""))',",
             "qty: \(qty),",
             "unique: '\(unique)',",
             "price: \(Int(price)),",
-            "cat1: '\(cat1.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'"))',",
-            "cat2: '\(cat2.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'"))',",
-            "cat3: '\(cat3.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'"))'",
+            "cat1: '\(cat1.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'").replace(target: "'\n", withString: ""))',",
+            "cat2: '\(cat2.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'").replace(target: "'\n", withString: ""))',",
+            "cat3: '\(cat3.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'").replace(target: "'\n", withString: ""))'",
             "}"
             ].reduce("", +)
     }
