@@ -17,6 +17,7 @@ public class BootpayExtra: NSObject, BootpayParams, Mappable {
     @objc public var ux = "" //다양한 결제시나리오를 지원하기 위한 용도로 사용됨
     @objc public var locale = "ko" //결제창 언어지원
     @objc public var popup = 0
+    @objc public var disp_cash_result = "Y"; // 현금영수증 보일지 말지.. 가상계좌 KCP 옵션
     
     public override init() {}
     public required init?(map: Map) {
@@ -33,5 +34,6 @@ public class BootpayExtra: NSObject, BootpayParams, Mappable {
         ux <- map["ux"]
         locale <- map["locale"]
         popup <- map["popup"]
+        disp_cash_result <- map["disp_cash_result"]
     }
 }
