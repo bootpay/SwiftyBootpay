@@ -125,7 +125,7 @@ class BootpayDefault {
         sharedInstance.vc = BootpayController() 
         
         sharedInstance.vc?.payload = payload
-        sharedInstance.vc?.payload.application_id = sharedInstance.application_id
+        if(payload.application_id.isEmpty) { sharedInstance.vc?.payload.application_id = sharedInstance.application_id }
          
         
         if let user = user { sharedInstance.vc?.user = user }

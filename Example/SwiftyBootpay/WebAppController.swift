@@ -30,12 +30,9 @@ class WebAppController: UIViewController {
         self.view.addSubview(webView)
         
         
-//        let url = URL(string: "https://g-cdn.bootpay.co.kr/test/payment/index.html")
-        let url = URL(string: "https://test-shop.bootpay.co.kr") 
-        
-        
-
-//        let url = URL(string: "https://yuhadayo.com/payment/payment-request/Oy5eVOmOMaEP")
+        let url = URL(string: "https://g-cdn.bootpay.co.kr/test/payment/index.html")
+//        let url = URL(string: "https://test-shop.bootpay.co.kr") 
+         
         
         
         

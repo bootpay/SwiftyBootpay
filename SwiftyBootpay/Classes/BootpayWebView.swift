@@ -25,8 +25,7 @@ import WebKit
     let configuration = WKWebViewConfiguration()
     
     var popupWV: WKWebView!
-//    final let BASE_URL = "https://inapp.bootpay.co.kr/3.1.0/development.html"
-    final let BASE_URL = "https://inapp.bootpay.co.kr/3.1.0/production.html"
+    final let BASE_URL = "https://inapp.bootpay.co.kr/3.2.0/production.html"
     final let bridgeName = "Bootpay_iOS"
     var firstLoad = false
     weak var sendable: BootpayRequestProtocol?
