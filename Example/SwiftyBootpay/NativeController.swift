@@ -24,9 +24,10 @@ class NativeController: UIViewController {
     }
    
     func setUI() {
-      let titles = ["Native 결제요청", "RemoteLink 결제", "RemoteOrder 결제", "RemotePre 결제"]
-      let selectors = [#selector(nativeClick), #selector(remoteLinkClick), #selector(remoteOrderClick), #selector(remotePreClick)]
-      let array = 0...3
+      let titles = ["일반 결제 테스트", "인앱결제(원스토어) 테스트"]
+      let selectors = [#selector(nativeClick), #selector(onestoreClick)]
+//      let selectors = [#selector(onestoreClick), #selector(nativeClick), #selector(remoteLinkClick), #selector(remoteOrderClick), #selector(remotePreClick)]
+      let array = 0...(titles.count-1)
       let unitHeight = self.view.frame.height / CGFloat(array.count)
       for i in array {
          let btn = UIButton(type: .roundedRect)
@@ -41,13 +42,18 @@ class NativeController: UIViewController {
    
    @objc func goClose() {
       Bootpay.removePaymentWindow()
-   
    }
     
+   @objc func onestoreClick() {
+      readyBootpay()
+   }
    
    @objc func nativeClick() {
       presentBootpayController()
    }
+   
+ 
+   
 //   @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void
   
    @objc func remoteLinkClick() {
@@ -347,11 +353,13 @@ extension NativeController {
             
 //
    //         $0.user_info = bootUser
-            $0.pg = BootpayPG.KCP // 결제할 PG사
+            $0.pg = BootpayPG.PAYAPP // 결제할 PG사
             //            $0.account_expire_at = "2018-09-25" // 가상계좌 입금기간 제한 ( yyyy-mm-dd 포멧으로 입력해주세요. 가상계좌만 적용됩니다. 오늘 날짜보다 더 뒤(미래)여야 합니다 )
 //                        $0.method = "card" // 결제수단
             $0.show_agree_window = false
+//            $0.methods = [Method.CARD, ]
             $0.method = Method.CARD
+            
             $0.ux = UX.PG_DIALOG
          }
       
@@ -411,4 +419,72 @@ extension NativeController: BootpayRequestProtocol {
         print("close")
         Bootpay.dismiss()
     }
+}
+
+
+extension NativeController: BootpayRestProtocol {
+   
+   func readyBootpay() {
+      getRestToken()
+   }
+ 
+   func getRestToken () {       
+      let restApplicationId = "5b8f6a4d396fa665fdc2b5ea"
+      let privateKey = "n9jO7MxVFor3o//c9X5tdep95ZjdaiDvVB4h1B5cMHQ="
+        
+      BootpayRest.getRestToken(sendable: self, restApplicationId: restApplicationId, privateKey: privateKey)
+    }
+   
+   func callbackRestToken(resData: [String: Any]) {
+      if let data = resData["data"], let token  = (data as! [String: Any])["token"]  {
+         
+         let unique_user_id = String(Date().timeIntervalSinceReferenceDate) // 이 값이 user_id로, user별로 고유해야한다. 겹칠경우 등록된 결제수단에 대해 다른 사용자가 결제를 하는 대참사가 벌어질 수 있다.
+         
+         let user = BootpayUser()
+         user.id = unique_user_id
+         user.area = "서울"
+         user.gender = 1
+         user.email = "test1234@gmail.com"
+         user.phone = "010-1234-4567"
+         user.birth = "1988-06-10"
+         user.username = "홍길동"
+         
+         if let json = user.toJSONString() {
+            BootpayRest.getEasyPayUserToken(sendable: self, restToken: token as! String, user: json)
+         }
+      }
+   }
+   
+   func callbackEasyCardUserToken(resData: [String: Any]) {
+      
+      if let data = resData["data"], let userToken  = (data as! [String: Any])["user_token"] {
+         startBootpay(userToken as! String)
+      }
+   }
+   
+   func startBootpay(_ userToken: String) {
+      let payload = BootpayPayload()
+      payload.params {
+         $0.price = 1000 // 결제할 금액
+         $0.name = "블링블링's 마스카라" // 결제할 상품명
+         $0.order_id = "1234_1234_124" // 결제 고유번호
+//            $0.application_id = "5e0daa104f74b40024d23183"
+         $0.application_id = "5b8f6a4d396fa665fdc2b5e9"
+         $0.user_token = userToken
+         
+//
+//         $0.user_info = bootUser
+         $0.pg = BootpayPG.ONESTORE // 결제할 PG사
+         //            $0.account_expire_at = "2018-09-25" // 가상계좌 입금기간 제한 ( yyyy-mm-dd 포멧으로 입력해주세요. 가상계좌만 적용됩니다. 오늘 날짜보다 더 뒤(미래)여야 합니다 )
+//                        $0.method = "card" // 결제수단
+         $0.show_agree_window = false
+//         $0.method = Method.EASY_CARD
+         $0.methods = [Method.EASY_CARD, Method.CARD, Method.EASY_BANK, Method.PHONE, Method.BANK, Method.VBANK]
+         $0.ux = UX.PG_DIALOG
+      }
+      
+            
+      Bootpay.request(self, sendable: self, payload: payload, user: BootpayUser(), items: [BootpayItem](), extra: BootpayExtra(), addView: true)
+      
+   }
 }

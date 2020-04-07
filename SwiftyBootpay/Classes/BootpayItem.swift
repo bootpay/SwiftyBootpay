@@ -10,7 +10,7 @@
 import ObjectMapper
 
 //MARK: Bootpay Models
-public class BootpayItem: NSObject, BootpayParams, Mappable {
+public class BootpayItem: NSObject, BootpayParams, Mappable, Decodable {
     public override init() {}
     @objc public var item_name = "" //아이템 이름
     @objc public var qty: Int = 0  //상품 판매된 수량

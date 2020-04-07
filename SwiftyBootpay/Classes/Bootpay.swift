@@ -8,6 +8,7 @@
 import Foundation
 import CryptoSwift
 import Alamofire
+import SwiftUI
 
 extension String {
     subscript (i: Int) -> Character {
@@ -91,7 +92,8 @@ class BootpayDefault {
         return true
     }
     
-    public static func request(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, payload: BootpayPayload,  user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, smsPayload: SMSPayload? = nil, remoteForm: RemoteOrderForm? = nil, remotePre: RemoteOrderPre? = nil, addView: Bool? = false) {
+    
+        public static func request(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, payload: BootpayPayload,  user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, smsPayload: SMSPayload? = nil, remoteForm: RemoteOrderForm? = nil, remotePre: RemoteOrderPre? = nil, addView: Bool? = false, _ gameObject: String = "") {
         
         if(!checkValid(payload: payload, user: user, items: items, extra: extra, smsPayload: smsPayload, remoteForm: remoteForm, remotePre: remotePre)) { return }
         
@@ -349,7 +351,7 @@ extension Bootpay {
 }
 
 
-//MARK: Bootpay LifeCycle Fpr Analytics
+//MARK: Bootpay LifeCycle For Analytics
 extension Bootpay {
     @objc(appLaunch:)
     open func appLaunch(application_id: String) {
@@ -386,9 +388,49 @@ extension Bootpay {
     }
     
     
+    //for unity
     @objc(request_objc:::::::::)
     public static func request_objc(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, payload: BootpayPayload,  user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, smsPayload: SMSPayload? = nil, remoteForm: RemoteOrderForm? = nil, remotePre: RemoteOrderPre? = nil) {
         
         request(viewController, sendable: sendable, payload: payload, user: user, items: items, extra: extra, smsPayload: smsPayload, addView: false) 
     }
+    
+    
+     @objc(request_objc_json:::::::)
+        public static func request_objc(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, payload: String,  user: String, items: String, extra: String, gameObject: String) {
+
+            guard let payload = BootpayPayload(JSONString: payload) else { return }
+            guard let user = BootpayUser(JSONString: user) else { return }
+
+
+    //        let items = BootpayUser(JSONString: user)
+            guard let extra = BootpayExtra(JSONString: extra) else { return }
+            do {
+              let items = try JSONDecoder().decode([BootpayItem].self, from: items.data(using: .utf8)!)
+                request(viewController, sendable: sendable, payload: payload, user: user, items: items, extra: extra, smsPayload: nil, addView: true, gameObject)
+
+            } catch let error as NSError {
+    //            print(error)
+                request(viewController, sendable: sendable, payload: payload, user: user, items: nil, extra: extra, smsPayload: nil, addView: true, gameObject)
+            }
+        }
+    
+//    @objc(request_objc_json:::::::)
+//    public static func request_objc(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, payload: String,  user: String, items: String, extra: String, gameObject: String) {
+//
+//        guard let payload = BootpayPayload(JSONString: payload) else { return }
+//        guard let user = BootpayUser(JSONString: user) else { return }
+//
+//
+////        let items = BootpayUser(JSONString: user)
+//        guard let extra = BootpayExtra(JSONString: extra) else { return }
+//        do {
+//          let items = try JSONDecoder().decode([BootpayItem].self, from: items.data(using: .utf8)!)
+//            request(viewController, sendable: sendable, payload: payload, user: user, items: items, extra: extra, smsPayload: nil, addView: false, gameObject)
+//
+//        } catch let error as NSError {
+////            print(error)
+//            request(viewController, sendable: sendable, payload: payload, user: user, items: nil, extra: extra, smsPayload: nil, addView: false, gameObject)
+//        }
+//    }
 }

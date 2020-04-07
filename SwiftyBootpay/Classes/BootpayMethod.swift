@@ -18,6 +18,8 @@ public struct Method {
     public static let PAYCO = "payco"; // 페이코
     public static let KAKAO = "kakao"; // 카카오
     public static let NPAY = "npay"; // 네이버페이
+    public static let EASY_CARD = "easy_card"; // 간편 정기카드결제
+    public static let EASY_BANK = "easy_bank"; // 간편 정기현금결제
 }
 
 @objc public class BootpayMethod: NSObject {
@@ -33,4 +35,6 @@ public struct Method {
     @objc public static let PAYCO = Method.PAYCO
     @objc public static let KAKAO = Method.KAKAO
     @objc public static let NPAY = Method.NPAY
+    @objc public static let EASY_CARD = Method.EASY_CARD
+    @objc public static let EASY_BANK = Method.EASY_BANK
 }

@@ -19,16 +19,21 @@ import WebKit
     @objc(onDone:) func onDone(data: [String: Any])
 }
 
+
+
 @objc class BootpayWebView: UIView {
     var wv: WKWebView!
 
     let configuration = WKWebViewConfiguration()
     
     var popupWV: WKWebView!
-    final let BASE_URL = "https://inapp.bootpay.co.kr/3.2.1/production.html"
+    final let BASE_URL = "https://inapp.bootpay.co.kr/3.2.3/production.html"
     final let bridgeName = "Bootpay_iOS"
     var firstLoad = false
+    
     weak var sendable: BootpayRequestProtocol?
+    
+    
     var bootpayScript = ""
     var parentController: BootpayController!
     func bootpayRequest(_ script: String) {
@@ -123,6 +128,9 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if let url = navigationAction.request.url {
+            
+            print(url)
+             
             if(isItunesURL(url.absoluteString)) {
                 if #available(iOS 10, *) {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -215,23 +223,7 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
         wv.uiDelegate = self
         wv.navigationDelegate = self
         self.addSubview(wv)
-        
-//        wv.frame = self.bounds
-        
-        
-//                   let configuration = WKWebViewConfiguration()
-//                   configuration.userContentController.add(self, name: bridgeName)
-        
-//                   wv.wv = WKWebView(frame: self.bounds, configuration: configuration)
-
-                   
-        
-                   
-//        wv.sendable = self.sendable
-//                   wv.startRequest(navigationAction.request)
-
-       
-//                   self.popupWV  = wv.wv
+         
         return wv
     }
 }

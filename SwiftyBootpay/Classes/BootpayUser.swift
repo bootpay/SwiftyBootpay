@@ -41,8 +41,7 @@ public class BootpayUser: NSObject, BootpayParams, Mappable {
             "email: '\(email.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'").replace(target: "'\n", withString: ""))',",
             "gender: \(Int(gender)),",
             "birth: '\(birth.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'").replace(target: "'\n", withString: ""))',",
-            "phone: '\(phone.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'").replace(target: "'\n", withString: ""))',",
-            "phone: '\(phone.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'").replace(target: "'\n", withString: ""))',",
+            "phone: '\(phone.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'").replace(target: "'\n", withString: ""))'", 
             "}"
             ].reduce("", +)
     }
