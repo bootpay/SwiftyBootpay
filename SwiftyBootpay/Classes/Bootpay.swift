@@ -102,8 +102,8 @@ class BootpayDefault {
             request_dialog(viewController, sendable: sendable, payload: payload, user: user, items: items, extra: extra, smsPayload: smsPayload, addView: addView)
         case UX.PG_SUBSCRIPT:
             request_dialog(viewController, sendable: sendable, payload: payload, user: user, items: items, extra: extra, smsPayload: smsPayload)
-        case UX.BOOTPAY_REMOTE_LINK:
-            request_link(payload, items: items, user: user, extra: extra, smsPayload: smsPayload)
+//        case UX.BOOTPAY_REMOTE_LINK:
+//            request_link(payload, items: items, user: user, extra: extra, smsPayload: smsPayload)
         case UX.BOOTPAY_REMOTE_FORM:
             request_form(payload, user: user, items: items, extra: extra, smsPayload: smsPayload, remoteForm: remoteForm)
         case UX.BOOTPAY_REMOTE_PRE:
@@ -141,28 +141,28 @@ class BootpayDefault {
         }
     }
     
-    private static func request_link(_ payload: BootpayPayload, items: [BootpayItem]?, user: BootpayUser?, extra: BootpayExtra?, smsPayload: SMSPayload?) {
-        
-        let requestString = payload.toJSONString() ?? ""
-        let itemsString = items?.toJSONString() ?? ""
-        let userString = user?.toJSONString() ?? ""
-        let extraString = extra?.toJSONString() ?? ""
-        let smsPayloadString = smsPayload?.toJSONString() ?? ""
-        
-        var params = jsonStringToDic(requestString) ?? [:]
-        params["items"] = itemsString
-        params["user_info"] = userString
-        params["params"] = extraString
-        params["sms_payload"] = smsPayloadString
-        
-//        Alamofire.Request
-        
-        AF.request("https://api.bootpay.co.kr/app/rest/remote_link", method: .post, parameters: params)
-            .validate()
-            .responseJSON { response in
-                print(response.value ?? "")
-        }
-    }
+//    private static func request_link(_ payload: BootpayPayload, items: [BootpayItem]?, user: BootpayUser?, extra: BootpayExtra?, smsPayload: SMSPayload?) {
+//        
+//        let requestString = payload.toJSONString() ?? ""
+//        let itemsString = items?.toJSONString() ?? ""
+//        let userString = user?.toJSONString() ?? ""
+//        let extraString = extra?.toJSONString() ?? ""
+//        let smsPayloadString = smsPayload?.toJSONString() ?? ""
+//        
+//        var params = jsonStringToDic(requestString) ?? [:]
+//        params["items"] = itemsString
+//        params["user_info"] = userString
+//        params["params"] = extraString
+//        params["sms_payload"] = smsPayloadString
+//        
+////        Alamofire.Request
+//        
+//        AF.request("https://api.bootpay.co.kr/app/rest/remote_link", method: .post, parameters: params)
+//            .validate()
+//            .responseJSON { response in
+//                print(response.value ?? "")
+//        }
+//    }
     
     private static func request_form(_ payload: BootpayPayload, user: BootpayUser?, items: [BootpayItem]?, extra: BootpayExtra?, smsPayload: SMSPayload?, remoteForm: RemoteOrderForm?) {
         
