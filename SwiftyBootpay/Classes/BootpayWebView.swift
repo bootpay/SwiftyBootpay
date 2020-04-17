@@ -129,7 +129,6 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if let url = navigationAction.request.url {
             
-            print(url)
              
             if(isItunesURL(url.absoluteString)) {
                 if #available(iOS 10, *) {

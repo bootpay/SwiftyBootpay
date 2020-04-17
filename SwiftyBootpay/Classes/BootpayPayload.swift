@@ -134,7 +134,6 @@ public class BootpayPayload: NSObject, BootpayParams, Mappable  {
             "application_id: '\(application_id)',",
             "name: '\(name.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'").replace(target: "\n", withString: ""))',",
             "pg:'\(pg)',",
-            "user_token:'\(user_token)',",
             "phone:'\(userPhone)',",
 //            "show_agree_window: \(show_agree_window),",
             "show_agree_window: \(show_agree_window == true ? 1 : 0),",
@@ -143,9 +142,14 @@ public class BootpayPayload: NSObject, BootpayParams, Mappable  {
             "order_id: '\(order_id)',",
             "use_order_id: '\(use_order_id)',",
             "account_expire_at: '\(account_expire_at)',",
-            
             ]
         
+        
+        if !user_token.isEmpty {
+            array.append("user_token: '\(user_token)',")
+        }
+        
+//        "user_token:'\(user_token)',",
         
         if !method.isEmpty {
             array.append("method: '\(method)',")
@@ -177,7 +181,7 @@ public class BootpayPayload: NSObject, BootpayParams, Mappable  {
                 "webkit.messageHandlers.\(bridgeName).postMessage(data);",
                 "});"]
         
-        print(result.reduce("", +))
+//        print(result.reduce("", +))
         return result.reduce("", +)
     }
 }
