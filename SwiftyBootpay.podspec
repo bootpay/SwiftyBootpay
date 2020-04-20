@@ -6,6 +6,7 @@
 # To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
 #
 
+
 Pod::Spec.new do |s|
   s.name             = 'SwiftyBootpay'
   s.version          = '3.2.41'
@@ -25,7 +26,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/bootpay/SwiftyBootpay.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '10.0'
   s.swift_version = '4.2'
 
   s.source_files = 'SwiftyBootpay/Classes/**/*'
@@ -38,7 +39,7 @@ Pod::Spec.new do |s|
   
   s.static_framework = true
   s.dependency 'CryptoSwift'  
-  s.dependency 'Alamofire',  '~> 5.0.0-rc.3'
+  s.dependency 'Alamofire',  '~> 5.1.0'
   s.dependency 'ObjectMapper'
 #  s.dependency 'AlamofireObjectMapper'
 #  s.dependency 'AlamofireImage'
