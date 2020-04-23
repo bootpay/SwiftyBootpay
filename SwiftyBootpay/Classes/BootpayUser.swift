@@ -33,10 +33,10 @@ public class BootpayUser: NSObject, BootpayParams, Mappable {
     @objc public var area = ""
     
     func toString() -> String {
-
         return [
             "{",
             "id: '\(id.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'").replace(target: "'\n", withString: ""))',",
+            "username: '\(username.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'").replace(target: "'\n", withString: ""))',",
             "user_id: '\(user_id.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'").replace(target: "'\n", withString: ""))',",
             "email: '\(email.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'").replace(target: "'\n", withString: ""))',",
             "gender: \(Int(gender)),",
