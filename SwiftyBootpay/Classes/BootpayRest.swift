@@ -62,7 +62,7 @@ import Alamofire
                    .validate()
                    .responseJSON { response in
                     
-                    print(response)
+//                    print(response)
                     
                     if let value = response.value as? [String: AnyObject] {
                         sendable.callbackEasyCardUserToken(resData: value)

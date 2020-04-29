@@ -18,6 +18,8 @@ class NativeController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.view.backgroundColor = UIColor.white
+       
+      
         setUI()
         sendAnaylticsUserLogin() // 유저 로그인 시점에 호출
         sendAnaylticsPageCall() // 페이지 유입(추적) 시점에 호출, 로그인 통신이 완료된 후에 호출해야 함
@@ -98,7 +100,7 @@ class NativeController: UIViewController {
          $0.name = "블링\"블링's 마스카라" // 결제할 상품명
          $0.order_id = "1234_1234_124" // 결제 고유번호
          $0.params = customParams // 커스텀 변수
-         $0.application_id = "5b9f51264457636ab9a07cdd"
+         $0.application_id = "5b8f6a4d396fa665fdc2b5e9"
 //         $0.user_info = bootUser
          $0.pg = "danal" // 결제할 PG사
          //            $0.account_expire_at = "2018-09-25" // 가상계좌 입금기간 제한 ( yyyy-mm-dd 포멧으로 입력해주세요. 가상계좌만 적용됩니다. 오늘 날짜보다 더 뒤(미래)여야 합니다 )
@@ -168,7 +170,7 @@ class NativeController: UIViewController {
          $0.name = "블링\"블링's 마스카라" // 결제할 상품명
          $0.order_id = "1234_1234_124" // 결제 고유번호
          $0.params = customParams // 커스텀 변수
-         $0.application_id = "5b9f51264457636ab9a07cdd"
+         $0.application_id = "5b8f6a4d396fa665fdc2b5e9"
          //         $0.user_info = bootUser
          $0.pg = "payletter" // 결제할 PG사
          //            $0.account_expire_at = "2018-09-25" // 가상계좌 입금기간 제한 ( yyyy-mm-dd 포멧으로 입력해주세요. 가상계좌만 적용됩니다. 오늘 날짜보다 더 뒤(미래)여야 합니다 )
@@ -239,7 +241,7 @@ class NativeController: UIViewController {
          $0.name = "블링\"블링's 마스카라" // 결제할 상품명
          $0.order_id = "1234_1234_124" // 결제 고유번호
          $0.params = customParams // 커스텀 변수
-         $0.application_id = "5b9f51264457636ab9a07cdd"
+         $0.application_id = "5b8f6a4d396fa665fdc2b5e9"
          //         $0.user_info = bootUser
          $0.pg = "danal" // 결제할 PG사
          //            $0.account_expire_at = "2018-09-25" // 가상계좌 입금기간 제한 ( yyyy-mm-dd 포멧으로 입력해주세요. 가상계좌만 적용됩니다. 오늘 날짜보다 더 뒤(미래)여야 합니다 )
@@ -353,7 +355,7 @@ extension NativeController {
             
 //
    //         $0.user_info = bootUser
-            $0.pg = BootpayPG.DANAL // 결제할 PG사
+            $0.pg = BootpayPG.KCP // 결제할 PG사
             //            $0.account_expire_at = "2018-09-25" // 가상계좌 입금기간 제한 ( yyyy-mm-dd 포멧으로 입력해주세요. 가상계좌만 적용됩니다. 오늘 날짜보다 더 뒤(미래)여야 합니다 )
 //                        $0.method = "card" // 결제수단
             $0.show_agree_window = false
@@ -386,7 +388,7 @@ extension NativeController: BootpayRequestProtocol {
     
     // 가상계좌 입금 계좌번호가 발급되면 호출되는 함수입니다.
     func onReady(data: [String: Any]) {
-        print("ready")
+//        print("ready")
         print(data)
     }
     
@@ -410,13 +412,13 @@ extension NativeController: BootpayRequestProtocol {
     // 결제완료시 호출
     // 아이템 지급 등 데이터 동기화 로직을 수행합니다
     func onDone(data: [String: Any]) {
-        print("onDone")
+//        print("onDone")
         print(data)
     }
     
     //결제창이 닫힐때 실행되는 부분
     func onClose() {
-        print("close")
+//        print("close")
         Bootpay.dismiss()
     }
 }

@@ -31,7 +31,8 @@ import WebKit
     final let bridgeName = "Bootpay_iOS"
     var firstLoad = false
     
-    weak var sendable: BootpayRequestProtocol?
+//    weak var sendable: BootpayRequestProtocol?
+    var sendable: BootpayRequestProtocol?
     
     
     var bootpayScript = ""
@@ -184,8 +185,6 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
         if(message.name == self.bridgeName) {
             guard let body = message.body as? [String: Any] else {
                 if message.body as? String == "close" {
-//                    Bootpay.sharedInstance.sendab
-//                    Bootpay.sharedInstance.vc.sendable.onClose()
                     sendable?.onClose()
                 }
                 return

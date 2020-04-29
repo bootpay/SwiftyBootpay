@@ -137,6 +137,7 @@ class BootpayDefault {
         if (addView == true) {
             viewController.view.addSubview(sharedInstance.vc!.view)
         } else {
+            viewController.modalPresentationStyle = .fullScreen
             viewController.present(sharedInstance.vc!, animated: true, completion: nil)
         }
     }
@@ -395,25 +396,27 @@ extension Bootpay {
         request(viewController, sendable: sendable, payload: payload, user: user, items: items, extra: extra, smsPayload: smsPayload, addView: false) 
     }
     
+   
+    
     
      @objc(request_objc_json:::::::)
-        public static func request_objc(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, payload: String,  user: String, items: String, extra: String, gameObject: String) {
+     public static func request_objc(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, payload: String,  user: String, items: String, extra: String, _ gameObject: String) {
 
-            guard let payload = BootpayPayload(JSONString: payload) else { return }
-            guard let user = BootpayUser(JSONString: user) else { return }
+        guard let payload = BootpayPayload(JSONString: payload) else { return }
+        guard let user = BootpayUser(JSONString: user) else { return }
 
 
-    //        let items = BootpayUser(JSONString: user)
-            guard let extra = BootpayExtra(JSONString: extra) else { return }
-            do {
-              let items = try JSONDecoder().decode([BootpayItem].self, from: items.data(using: .utf8)!)
-                request(viewController, sendable: sendable, payload: payload, user: user, items: items, extra: extra, smsPayload: nil, addView: true, gameObject)
+//        let items = BootpayUser(JSONString: user)
+        guard let extra = BootpayExtra(JSONString: extra) else { return }
+        do {
+          let items = try JSONDecoder().decode([BootpayItem].self, from: items.data(using: .utf8)!)
+            request(viewController, sendable: sendable, payload: payload, user: user, items: items, extra: extra, smsPayload: nil, addView: true, gameObject)
 
-            } catch let error as NSError {
-    //            print(error)
-                request(viewController, sendable: sendable, payload: payload, user: user, items: nil, extra: extra, smsPayload: nil, addView: true, gameObject)
-            }
+        } catch let error as NSError {
+//            print(error)
+            request(viewController, sendable: sendable, payload: payload, user: user, items: nil, extra: extra, smsPayload: nil, addView: true, gameObject)
         }
+     }
     
 //    @objc(request_objc_json:::::::)
 //    public static func request_objc(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, payload: String,  user: String, items: String, extra: String, gameObject: String) {

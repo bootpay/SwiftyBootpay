@@ -59,42 +59,16 @@ extension URL {
     @objc public var user = BootpayUser()
     @objc public var extra = BootpayExtra()
     @objc public var items = [BootpayItem]()  
-    
-//    @objc public var price = Double(0)
-//    @objc public var application_id = Bootpay.sharedInstance.getApplicationId()
-//    @objc public var name = ""
-//    @objc public var pg = ""
-//    @objc public var phone = ""
-//    @objc public var show_agree_window = 0
-//    @objc public var items = [BootpayItem]()
-//    @objc public var method = ""
-//    @objc public var methods = [String]()
-//    @objc public var user_info: [String: String] = [:]
-//    @objc public var params: [String: Any] = [:]
-//    @objc public var order_id = ""
-//    @objc public var use_order_id = 0
-//    @objc public var expire_month = 12 // 정기결제 실행 기간
-//    @objc public var vbank_result = 1 // 가상계좌 결과창 안보이게 하기
-//    @objc public var account_expire_at = "" // 가상계좌 입금 만료 기한
-//    @objc public var quotas = [0,2,3,4,5,6,7,8,9,10,11,12] // 할부 개월 수
+     
     var isPaying = false
-    @objc public weak var sendable: BootpayRequestProtocol?
+    @objc public var sendable: BootpayRequestProtocol?
+//    @objc public weak var sendable: BootpayRequestProtocol?
     
     internal var wv: BootpayWebView!
 }
 
 
 extension BootpayController: BootpayParams {
-//    @objc(addItem:)
-//    public func addItem(item: BootpayItem) {
-//        self.request.items.append(item)
-//    }
-    
-    
-//    @objc(setBootpayItems:)
-//    public func setItems(items: [BootpayItem]) {
-//        self.request.items = items
-//    }
     
     @objc(transactionConfirm:)
     public func transactionConfirm(data: [String: Any]) {
@@ -124,9 +98,26 @@ extension BootpayController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         
+//        let rootViewController = UIApplication.shared.keyWindow?.rootViewController
+//        rootViewController?.present(UIViewController(), animated: true, completion: nil)
+        
         self.isPaying = true
         if wv == nil { wv = BootpayWebView() }
-        wv.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+         
+        
+        if #available(iOS 11.0, *) {
+//            print(self.view.safeAreaInsets.bottom)
+
+            let window = UIApplication.shared.keyWindow
+            let topPadding = window?.safeAreaInsets.top ?? 0.0
+            let bottomPadding = window?.safeAreaInsets.bottom ?? 0.0
+            
+            wv.frame = CGRect(x: 0, y: topPadding, width: self.view.frame.width, height: self.view.frame.height - topPadding - bottomPadding)
+//            wv.frame = CGRect(x: self.view.safeAreaInsets.left, y: self.view.safeAreaInsets.top, width: self.view.safeAreaInsets.right, height: self.view.safeAreaInsets.bottom)
+        } else {
+            wv.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+            // Fallback on earlier versions
+        }
         
         let script = payload.generateScript(wv.bridgeName, items: items, user: user, extra: extra)
         

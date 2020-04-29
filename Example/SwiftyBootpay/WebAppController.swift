@@ -194,7 +194,7 @@ extension WebAppController {
     
     // 가상계좌 입금 계좌번호가 발급되면 호출되는 함수입니다.
     func onReady(data: [String: Any]) {
-        print("ready")
+//        print("ready")
         print(data)
     }
     
