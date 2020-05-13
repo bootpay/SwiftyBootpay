@@ -108,7 +108,7 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
         if firstLoad == false {
             firstLoad = true
             registerAppId()
-            setDevelopmode()
+//            setDevelopmode()
             setDevice()
             setAnalytics()
             loadBootapyRequest()
