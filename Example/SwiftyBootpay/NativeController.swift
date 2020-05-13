@@ -25,6 +25,12 @@ class NativeController: UIViewController {
         sendAnaylticsPageCall() // 페이지 유입(추적) 시점에 호출, 로그인 통신이 완료된 후에 호출해야 함
     }
    
+   override func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(animated)
+      
+      self.navigationController?.navigationBar.isHidden = true
+   }
+   
     func setUI() {
       let titles = ["일반 결제 테스트", "인앱결제(원스토어) 테스트"]
       let selectors = [#selector(nativeClick), #selector(onestoreClick)]
@@ -350,16 +356,20 @@ extension NativeController {
             $0.name = "블링블링's 마스카라" // 결제할 상품명
             $0.order_id = "1234_1234_124" // 결제 고유번호
             $0.params = customParams // 커스텀 변수
-//            $0.application_id = "5e0daa104f74b40024d23183"
-            $0.application_id = "5b8f6a4d396fa665fdc2b5e9"
+            $0.application_id = "5b9f51264457636ab9a07cdd"
+//            $0.application_id = "5b8f6a4d396fa665fdc2b5e9"
+//            $0.application_id = "5e5391a302f57e002e4b4129"
+            
+//            $0.application_id = "5e82c63602f57e0029d6383d"
+            
             
 //
    //         $0.user_info = bootUser
-            $0.pg = BootpayPG.KCP // 결제할 PG사
+            $0.pg = BootpayPG.NICEPAY // 결제할 PG사
             //            $0.account_expire_at = "2018-09-25" // 가상계좌 입금기간 제한 ( yyyy-mm-dd 포멧으로 입력해주세요. 가상계좌만 적용됩니다. 오늘 날짜보다 더 뒤(미래)여야 합니다 )
 //                        $0.method = "card" // 결제수단
             $0.show_agree_window = false
-//            $0.methods = [Method.CARD, ]
+//            $0.methods = [Method.BANK, Method.CARD]
             $0.method = Method.CARD
             
             $0.ux = UX.PG_DIALOG
@@ -368,7 +378,7 @@ extension NativeController {
          let extra = BootpayExtra()
       
          extra.quotas = [0, 2, 3] // 5만원 이상일 경우 할부 허용범위 설정 가능, (예제는 일시불, 2개월 할부, 3개월 할부 허용)
-//         extra.popup = 1
+//         extra.iosCloseButton = true;
       
          var items = [BootpayItem]()
          items.append(item1)
@@ -383,18 +393,19 @@ extension NativeController {
 extension NativeController: BootpayRequestProtocol {
     // 에러가 났을때 호출되는 부분
     func onError(data: [String: Any]) {
-        print(data)
+        print("------------ error \(data)")
     }
     
     // 가상계좌 입금 계좌번호가 발급되면 호출되는 함수입니다.
     func onReady(data: [String: Any]) {
+      print("------------ ready \(data)")
 //        print("ready")
-        print(data)
+//        print(data)
     }
     
     // 결제가 진행되기 바로 직전 호출되는 함수로, 주로 재고처리 등의 로직이 수행
     func onConfirm(data: [String: Any]) {
-        print(data)
+        print("------------ confirm \(data)")
         
         let iWantPay = true
         if iWantPay == true {  // 재고가 있을 경우.
@@ -406,19 +417,20 @@ extension NativeController: BootpayRequestProtocol {
     
     // 결제 취소시 호출
     func onCancel(data: [String: Any]) {
-        print(data)
+      print("------------ cancel \(data)")
+//        print(data)
     }
     
     // 결제완료시 호출
     // 아이템 지급 등 데이터 동기화 로직을 수행합니다
     func onDone(data: [String: Any]) {
 //        print("onDone")
-        print(data)
+        print("------------ done \(data)")
     }
     
     //결제창이 닫힐때 실행되는 부분
     func onClose() {
-//        print("close")
+        print("--------------   close")
         Bootpay.dismiss()
     }
 }

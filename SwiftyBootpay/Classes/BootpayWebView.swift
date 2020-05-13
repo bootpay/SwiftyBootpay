@@ -92,7 +92,6 @@ extension BootpayWebView {
         doJavascript("window.BootPay.setAnalyticsData({"
             + "sk: '\(Bootpay.sharedInstance.sk)', "
             + "sk_time: \(Bootpay.sharedInstance.sk_time), "
-            + "time: \(Bootpay.sharedInstance.time), "
             + "uuid: '\(Bootpay.sharedInstance.uuid)'"
             + "});")
     }
@@ -109,7 +108,7 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
         if firstLoad == false {
             firstLoad = true
             registerAppId()
-//            setDevelopmode()
+            setDevelopmode()
             setDevice()
             setAnalytics()
             loadBootapyRequest()
@@ -129,8 +128,7 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if let url = navigationAction.request.url {
-            
-             
+              
             if(isItunesURL(url.absoluteString)) {
                 if #available(iOS 10, *) {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -144,7 +142,8 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
                 } else {
                     UIApplication.shared.openURL(url)
                 }
-                decisionHandler(.cancel)
+//                decisionHandler(.cancel)
+                decisionHandler(.allow)
             } else {
                 decisionHandler(.allow)
             }

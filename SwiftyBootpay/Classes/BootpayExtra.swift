@@ -19,6 +19,7 @@ public class BootpayExtra: NSObject, BootpayParams, Mappable {
     @objc public var popup = -1
     @objc public var disp_cash_result = "Y"; // 현금영수증 보일지 말지.. 가상계좌 KCP 옵션
     @objc public var escrow = 0;
+    @objc public var iosCloseButton = false;
     @objc public var onestore = BootpayOneStore()
     
     public override init() {}
@@ -39,6 +40,7 @@ public class BootpayExtra: NSObject, BootpayParams, Mappable {
         disp_cash_result <- map["disp_cash_result"]
         escrow <- map["escrow"]
         onestore <- map["onestore"]
+        iosCloseButton <- map["iosCloseButton"]
     }
     
     public func getJson(pg: String) -> String {
@@ -51,12 +53,12 @@ public class BootpayExtra: NSObject, BootpayParams, Mappable {
                 "vbank_result:\(vbank_result),",
                 "start_at: '\(start_at)',",
                 "end_at: '\(end_at)',",
-            
                 "quota:'\(quota)',",
                 "popup: \(getPopup(pg: pg)),",
                 "locale:'\(locale)',",
                 "disp_cash_result:'\(disp_cash_result)',",
-                "escrow:'\(escrow)'",
+                "escrow:'\(escrow)',",
+                "iosCloseButton: \(iosCloseButton)",
         ]
         
         if(pg == "onestore") {

@@ -98,33 +98,45 @@ extension BootpayController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-//        let rootViewController = UIApplication.shared.keyWindow?.rootViewController
-//        rootViewController?.present(UIViewController(), animated: true, completion: nil)
-        
         self.isPaying = true
         if wv == nil { wv = BootpayWebView() }
-         
+            
+        var topPadding = CGFloat(0.0)
+        var bottomPadding = CGFloat(0.0)
+        var btnMarginTop = CGFloat(0.0)
+        if(extra.iosCloseButton) {
+            btnMarginTop = 20.0
+        }
         
         if #available(iOS 11.0, *) {
-//            print(self.view.safeAreaInsets.bottom)
-
             let window = UIApplication.shared.keyWindow
-            let topPadding = window?.safeAreaInsets.top ?? 0.0
-            let bottomPadding = window?.safeAreaInsets.bottom ?? 0.0
-            
-            wv.frame = CGRect(x: 0, y: topPadding, width: self.view.frame.width, height: self.view.frame.height - topPadding - bottomPadding)
-//            wv.frame = CGRect(x: self.view.safeAreaInsets.left, y: self.view.safeAreaInsets.top, width: self.view.safeAreaInsets.right, height: self.view.safeAreaInsets.bottom)
-        } else {
-            wv.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
-            // Fallback on earlier versions
+            topPadding = window?.safeAreaInsets.top ?? 0.0
+            bottomPadding = window?.safeAreaInsets.bottom ?? 0.0
         }
+        
+     
+        
+        wv.frame = CGRect(x: 0,
+                          y: topPadding + btnMarginTop,
+                          width: self.view.frame.width,
+                          height: self.view.frame.height - topPadding - bottomPadding - btnMarginTop
+        )
         
         let script = payload.generateScript(wv.bridgeName, items: items, user: user, extra: extra)
         
         wv.bootpayRequest(script)
         wv.sendable = self.sendable
         wv.parentController = self
-        self.view.addSubview(wv) 
+        self.view.addSubview(wv)
+        
+        if(extra.iosCloseButton) {
+            let close = UIButton()
+            close.setTitle("X", for: .normal)
+            close.addTarget(self, action: #selector(removePaymentWindow), for: .touchUpInside)
+            close.frame = CGRect(x: self.view.frame.width - 40, y: topPadding, width: 40, height: 30)
+            close.setTitleColor(.darkGray, for: .normal)
+            self.view.addSubview(close)
+        }
     }
 }
 

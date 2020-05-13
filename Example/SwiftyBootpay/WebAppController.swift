@@ -21,16 +21,16 @@ class WebAppController: UIViewController {
     }
     
     func setUI() {
-//        HTTPCookieStorage.shared.cookieAcceptPolicy = HTTPCookie.AcceptPolicy.always // 현대카드 등 쿠키설정 이슈 해결을 위해 필요
+        HTTPCookieStorage.shared.cookieAcceptPolicy = HTTPCookie.AcceptPolicy.always // 현대카드 등 쿠키설정 이슈 해결을 위해 필요
         let configuration = WKWebViewConfiguration() //wkwebview <-> javasscript function(bootpay callback)
-//        configuration.userContentController.add(self, name: bridgeName)
+        configuration.userContentController.add(self, name: bridgeName)
         webView = WKWebView(frame: self.view.bounds, configuration: configuration)
-//        webView.uiDelegate = self
-//        webView.navigationDelegate = self
+        webView.uiDelegate = self
+        webView.navigationDelegate = self
         self.view.addSubview(webView)
         
         
-        let url = URL(string: "https://g-cdn.bootpay.co.kr/test/payment/index.html")
+        let url = URL(string: "https://www.xn--v52b27q9ubg9u.com/app/user/auth/login.php")
 //        let url = URL(string: "https://test-shop.bootpay.co.kr") 
          
         
@@ -84,7 +84,13 @@ extension WebAppController:  WKNavigationDelegate, WKUIDelegate, WKScriptMessage
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        
+        
+        
         if let url = navigationAction.request.url {
+            
+            print("--------------- \(url.absoluteString)");
+            
             if(isItunesURL(url.absoluteString)) {
                 if #available(iOS 10, *) {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
