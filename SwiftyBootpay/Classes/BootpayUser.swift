@@ -20,6 +20,7 @@ public class BootpayUser: NSObject, BootpayParams, Mappable {
         birth <- map["birth"]
         phone <- map["phone"]
         area <- map["area"]
+        addr <- map["addr"]
     }
     
     public override init() {}
@@ -31,6 +32,7 @@ public class BootpayUser: NSObject, BootpayParams, Mappable {
     @objc public var birth = ""
     @objc public var phone = ""
     @objc public var area = ""
+    @objc public var addr = ""
     
     func toString() -> String {
         return [
@@ -41,7 +43,9 @@ public class BootpayUser: NSObject, BootpayParams, Mappable {
             "email: '\(email.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'").replace(target: "'\n", withString: ""))',",
             "gender: \(Int(gender)),",
             "birth: '\(birth.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'").replace(target: "'\n", withString: ""))',",
-            "phone: '\(phone.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'").replace(target: "'\n", withString: ""))'", 
+            "phone: '\(phone.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'").replace(target: "'\n", withString: ""))',",
+            "area: '\(area.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'").replace(target: "'\n", withString: ""))',",
+            "addr: '\(addr.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'").replace(target: "'\n", withString: ""))'",
             "}"
             ].reduce("", +)
     }

@@ -347,6 +347,7 @@ extension NativeController {
             $0.username = "사용자 이름"
             $0.email = "user1234@gmail.com"
             $0.area = "서울" // 사용자 주소
+            $0.addr = "서울시 동작구 상도로";
             $0.phone = "010-1234-4567"
          }
       
@@ -356,11 +357,7 @@ extension NativeController {
             $0.name = "블링블링's 마스카라" // 결제할 상품명
             $0.order_id = "1234_1234_124" // 결제 고유번호
             $0.params = customParams // 커스텀 변수
-            $0.application_id = "5b9f51264457636ab9a07cdd"
-//            $0.application_id = "5b8f6a4d396fa665fdc2b5e9"
-//            $0.application_id = "5e5391a302f57e002e4b4129"
-            
-//            $0.application_id = "5e82c63602f57e0029d6383d"
+            $0.application_id = "5b8f6a4d396fa665fdc2b5e9"  
             
             
 //
