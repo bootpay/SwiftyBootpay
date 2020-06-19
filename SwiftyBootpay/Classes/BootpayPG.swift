@@ -22,6 +22,7 @@ public struct PG {
     public static let PAYLETTER = "payletter"
     public static let BOOTPAY = "bootpay"
     public static let ONESTORE = "onestore"
+    public static let WELCOME = "welcome"
 }
 
 @objc public class BootpayPG: NSObject {
@@ -41,5 +42,6 @@ public struct PG {
     @objc public static let PAYLETTER = PG.PAYLETTER
     @objc public static let BOOTPAY = PG.BOOTPAY
     @objc public static let ONESTORE = PG.ONESTORE
+    @objc public static let WELCOME = PG.WELCOME
 }
 

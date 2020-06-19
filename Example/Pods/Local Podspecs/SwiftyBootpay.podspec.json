@@ -1,7 +1,7 @@
 {
   "name": "SwiftyBootpay",
-  "version": "3.2.41",
-  "summary": "PG Plugin For Swift",
+  "version": "3.2.47",
+  "summary": "Bootpay PG Plugin For Swift",
   "homepage": "https://github.com/bootpay/SwiftyBootpay",
   "license": {
     "type": "MIT",
@@ -12,7 +12,7 @@
   },
   "source": {
     "git": "https://github.com/bootpay/SwiftyBootpay.git",
-    "tag": "3.2.41"
+    "tag": "3.2.47"
   },
   "platforms": {
     "ios": "10.0"
