@@ -362,19 +362,23 @@ extension NativeController {
             
 //
    //         $0.user_info = bootUser
-            $0.pg = BootpayPG.WELCOME // 결제할 PG사
+            $0.pg = BootpayPG.PAYLETTER // 결제할 PG사
             //            $0.account_expire_at = "2018-09-25" // 가상계좌 입금기간 제한 ( yyyy-mm-dd 포멧으로 입력해주세요. 가상계좌만 적용됩니다. 오늘 날짜보다 더 뒤(미래)여야 합니다 )
 //                        $0.method = "card" // 결제수단
             $0.show_agree_window = false
 //            $0.methods = [Method.BANK, Method.CARD]
             $0.method = Method.CARD
             
+            
             $0.ux = UX.PG_DIALOG
          }
       
          let extra = BootpayExtra()
       
+      
+         //extra.popup = 1
          extra.quotas = [0, 2, 3] // 5만원 이상일 경우 할부 허용범위 설정 가능, (예제는 일시불, 2개월 할부, 3개월 할부 허용)
+//         extra.app_scheme = "temp";
 //         extra.iosCloseButton = true;
       
          var items = [BootpayItem]()

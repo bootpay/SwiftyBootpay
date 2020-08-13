@@ -124,6 +124,8 @@ extension BootpayController {
         
         let script = payload.generateScript(wv.bridgeName, items: items, user: user, extra: extra)
         
+        print(script);
+        
         wv.bootpayRequest(script)
         wv.sendable = self.sendable
         wv.parentController = self

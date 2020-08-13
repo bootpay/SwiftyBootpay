@@ -29,9 +29,8 @@ class WebAppController: UIViewController {
         webView.navigationDelegate = self
         self.view.addSubview(webView)
         
-        
-        let url = URL(string: "https://www.xn--v52b27q9ubg9u.com/app/user/auth/login.php")
-//        let url = URL(string: "https://test-shop.bootpay.co.kr") 
+         
+        let url = URL(string: "http://218.232.75.131/a.html")
          
         
         

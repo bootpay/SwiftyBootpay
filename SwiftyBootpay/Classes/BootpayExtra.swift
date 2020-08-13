@@ -72,6 +72,7 @@ public class BootpayExtra: NSObject, BootpayParams, Mappable {
     }
     
     func getURLSchema() -> String{
+        if(app_scheme.count > 0) { return app_scheme; }
         guard let schemas = Bundle.main.object(forInfoDictionaryKey: "CFBundleURLTypes") as? [[String:Any]],
             let schema = schemas.first,
             let urlschemas = schema["CFBundleURLSchemes"] as? [String],
