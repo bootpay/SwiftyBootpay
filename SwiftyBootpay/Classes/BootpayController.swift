@@ -126,7 +126,18 @@ extension BootpayController {
         
         print(script);
         
-        wv.bootpayRequest(script)
+        // 필요한 PG는 팝업으로 띄운다
+        var quick_popup = extra.quick_popup;
+        if(quick_popup == -1 && payload.pg == "danal" && payload.method == "card") {
+            print("quick popup22")
+            quick_popup = 1;
+        }
+        if(quick_popup == 1) {
+            wv.bootpayRequest(script, quick_popup)
+        } else {
+            wv.bootpayRequest(script)
+        }
+        
         wv.sendable = self.sendable
         wv.parentController = self
         self.view.addSubview(wv)
@@ -140,6 +151,8 @@ extension BootpayController {
             self.view.addSubview(close)
         }
     }
+    
+//    bool needQ
 }
 
 

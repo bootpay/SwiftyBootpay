@@ -16,7 +16,9 @@ public class BootpayExtra: NSObject, BootpayParams, Mappable {
     @objc public var app_scheme_host = "" //app2app 결제시 return 받을 intent scheme host
 //    @objc public var ux = "" //다양한 결제시나리오를 지원하기 위한 용도로 사용됨
     @objc public var locale = "ko" //결제창 언어지원
+    @objc public var offer_period = ""; //결제창 제공기간에 해당하는 string 값, 지원하는 PG만 적용됨
     @objc public var popup = -1
+    @objc public var quick_popup = -1
     @objc public var disp_cash_result = "Y"; // 현금영수증 보일지 말지.. 가상계좌 KCP 옵션
     @objc public var escrow = 0;
     @objc public var iosCloseButton = false;
@@ -34,9 +36,11 @@ public class BootpayExtra: NSObject, BootpayParams, Mappable {
         quotas <- map["quotas"]
         app_scheme <- map["app_scheme"]
         app_scheme_host <- map["app_scheme_host"]
+        offer_period <- map["offer_period"]
 //        ux <- map["ux"]
         locale <- map["locale"]
         popup <- map["popup"]
+        quick_popup <- map["quick_popup"]
         disp_cash_result <- map["disp_cash_result"]
         escrow <- map["escrow"]
         onestore <- map["onestore"]
@@ -54,7 +58,9 @@ public class BootpayExtra: NSObject, BootpayParams, Mappable {
                 "start_at: '\(start_at)',",
                 "end_at: '\(end_at)',",
                 "quota:'\(quota)',",
-                "popup: \(getPopup(pg: pg)),",
+                "offer_period: '\(offer_period)',",
+                "popup: \(popup),",
+                "quick_popup: \(quick_popup),",
                 "locale:'\(locale)',",
                 "disp_cash_result:'\(disp_cash_result)',",
                 "escrow:'\(escrow)',",

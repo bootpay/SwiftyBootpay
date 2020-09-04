@@ -27,9 +27,11 @@ import WebKit
     let configuration = WKWebViewConfiguration()
     
     var popupWV: WKWebView!
-    final let BASE_URL = "https://inapp.bootpay.co.kr/3.2.6/production.html"
+    final let BASE_URL = "https://inapp.bootpay.co.kr/3.3.0/production.html"
     final let bridgeName = "Bootpay_iOS"
     var firstLoad = false
+    
+    var quick_popup = -1;
     
 //    weak var sendable: BootpayRequestProtocol?
     var sendable: BootpayRequestProtocol?
@@ -37,12 +39,13 @@ import WebKit
     
     var bootpayScript = ""
     var parentController: BootpayController!
-    func bootpayRequest(_ script: String) {
+    func bootpayRequest(_ script: String, _ quick_popup: Int = -1) {
         HTTPCookieStorage.shared.cookieAcceptPolicy = HTTPCookie.AcceptPolicy.always  // 현대카드 등 쿠키설정 이슈 해결을 위해 필요
         configuration.userContentController.add(self, name: bridgeName)
         wv = WKWebView(frame: self.bounds, configuration: configuration)
         wv.uiDelegate = self
         wv.navigationDelegate = self
+        self.quick_popup = quick_popup;
         self.addSubview(wv)
         self.bootpayScript = script
         self.loadUrl(BASE_URL)
@@ -75,8 +78,12 @@ extension BootpayWebView {
         doJavascript("window.BootPay.setApplicationId('\(Bootpay.sharedInstance.application_id)');")
     }
     
-    func setDevelopmode() {
+    func setDevelopMode() {
         doJavascript("window.BootPay.setMode('development');")
+    }
+    
+    func setStageMode() {
+        doJavascript("window.BootPay.setMode('stage');")
     }
     
     internal func setDevice() {
@@ -96,6 +103,10 @@ extension BootpayWebView {
             + "});")
     }
     
+    internal func setQuickPopup() {
+        doJavascript("window.BootPay.startQuickPopup();")
+    }
+    
     internal func loadBootapyRequest() {
         doJavascript(self.bootpayScript)
     }
@@ -108,10 +119,19 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
         if firstLoad == false {
             firstLoad = true
             registerAppId()
-//            setDevelopmode()
+//            setDevelopMode()
+//            setStageMode()
             setDevice()
             setAnalytics()
-            loadBootapyRequest()
+            
+            if(quick_popup == 1) {
+                print("quick popup")
+                wv.evaluateJavaScript("window.BootPay.startQuickPopup();") { (value, error) in
+                    self.loadBootapyRequest()
+                }
+            } else {
+                self.loadBootapyRequest()
+            }
         }
     }
     
