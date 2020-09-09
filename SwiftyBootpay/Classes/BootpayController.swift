@@ -79,6 +79,7 @@ extension BootpayController: BootpayParams {
     @objc(removePaymentWindow)
     public func removePaymentWindow() {
         wv.doJavascript("window.BootPay.removePaymentWindow();")
+        dismiss()
     }
     
     @objc(dismiss)
@@ -124,11 +125,11 @@ extension BootpayController {
         
         let script = payload.generateScript(wv.bridgeName, items: items, user: user, extra: extra)
         
-        print(script);
+//        print(script);
         
         // 필요한 PG는 팝업으로 띄운다
         var quick_popup = extra.quick_popup;
-        if(quick_popup == -1 && payload.pg == "danal" && payload.method == "card") {
+        if(quick_popup == -1 && payload.pg != "payapp" && payload.method == "card") {
             print("quick popup22")
             quick_popup = 1;
         }
@@ -143,12 +144,18 @@ extension BootpayController {
         self.view.addSubview(wv)
         
         if(extra.iosCloseButton) {
-            let close = UIButton()
-            close.setTitle("X", for: .normal)
-            close.addTarget(self, action: #selector(removePaymentWindow), for: .touchUpInside)
-            close.frame = CGRect(x: self.view.frame.width - 40, y: topPadding, width: 40, height: 30)
-            close.setTitleColor(.darkGray, for: .normal)
-            self.view.addSubview(close)
+            if(extra.iosCloseButtonView == nil) {
+                let close = UIButton()
+                close.setTitle("X", for: .normal)
+                close.addTarget(self, action: #selector(removePaymentWindow), for: .touchUpInside)
+                close.frame = CGRect(x: self.view.frame.width - 40, y: topPadding, width: 40, height: 30)
+                close.setTitleColor(.darkGray, for: .normal)
+                self.view.addSubview(close)
+            } else {
+                extra.iosCloseButtonView!.addTarget(self, action: #selector(removePaymentWindow), for: .touchUpInside)
+                if(extra.iosCloseButtonView!.frame == CGRect.null) { extra.iosCloseButtonView!.frame = CGRect(x: self.view.frame.width - 40, y: topPadding, width: 40, height: 30) }
+                self.view.addSubview(extra.iosCloseButtonView!)
+            }
         }
     }
     

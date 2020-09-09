@@ -17,11 +17,12 @@ public class BootpayExtra: NSObject, BootpayParams, Mappable {
 //    @objc public var ux = "" //다양한 결제시나리오를 지원하기 위한 용도로 사용됨
     @objc public var locale = "ko" //결제창 언어지원
     @objc public var offer_period = ""; //결제창 제공기간에 해당하는 string 값, 지원하는 PG만 적용됨
-    @objc public var popup = -1
-    @objc public var quick_popup = -1
-    @objc public var disp_cash_result = "Y"; // 현금영수증 보일지 말지.. 가상계좌 KCP 옵션
-    @objc public var escrow = 0;
-    @objc public var iosCloseButton = false;
+    @objc public var popup = -1 //1이면 popup, 0이면 iframe 연동
+    @objc public var quick_popup = -1 //1: popup 호출시 버튼을 띄우지 않는다. 0: 일 경우 버튼을 호출한다
+    @objc public var disp_cash_result = "Y" // 현금영수증 보일지 말지.. 가상계좌 KCP 옵션
+    @objc public var escrow = 0
+    @objc public var iosCloseButton = false
+    @objc public var iosCloseButtonView: UIButton?
     @objc public var onestore = BootpayOneStore()
     
     public override init() {}
@@ -59,8 +60,8 @@ public class BootpayExtra: NSObject, BootpayParams, Mappable {
                 "end_at: '\(end_at)',",
                 "quota:'\(quota)',",
                 "offer_period: '\(offer_period)',",
-                "popup: \(popup),",
-                "quick_popup: \(quick_popup),",
+                "popup: \(popup == 1 ? 1 : 0),",
+                "quick_popup: \(quick_popup == 1 ? 1 : 0),",
                 "locale:'\(locale)',",
                 "disp_cash_result:'\(disp_cash_result)',",
                 "escrow:'\(escrow)',",

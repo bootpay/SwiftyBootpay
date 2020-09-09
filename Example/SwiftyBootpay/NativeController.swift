@@ -367,8 +367,8 @@ extension NativeController {
             //            $0.account_expire_at = "2018-09-25" // 가상계좌 입금기간 제한 ( yyyy-mm-dd 포멧으로 입력해주세요. 가상계좌만 적용됩니다. 오늘 날짜보다 더 뒤(미래)여야 합니다 )
 //                        $0.method = "card" // 결제수단
             $0.show_agree_window = false
-//            $0.methods = [Method.BANK, Method.CARD]
-            $0.method = Method.CARD
+            $0.methods = [Method.BANK, Method.CARD, Method.PHONE]
+//            $0.method = Method.CARD
             $0.ux = UX.PG_DIALOG
          }
       
@@ -378,7 +378,15 @@ extension NativeController {
 //         extra.quick_popup = 1;
          extra.quotas = [0, 2, 3] // 5만원 이상일 경우 할부 허용범위 설정 가능, (예제는 일시불, 2개월 할부, 3개월 할부 허용)
 //         extra.app_scheme = "bootpaysample://"; // 페이레터와 같은 특정 PG사의 경우 :// 값을 붙여야 할 수도 있습니다. 
-//         extra.iosCloseButton = true;
+
+
+      //   close 버튼을 커스텀하기
+//         let close = UIButton()
+//         close.setTitle("XX", for: .normal)
+//         close.frame = CGRect(x: self.view.frame.width - 40, y: 20, width: 40, height: 30)
+//         close.setTitleColor(.darkGray, for: .normal)
+//         extra.iosCloseButtonView = close
+//         extra.iosCloseButton = true
       
          var items = [BootpayItem]()
          items.append(item1)
@@ -399,8 +407,6 @@ extension NativeController: BootpayRequestProtocol {
     // 가상계좌 입금 계좌번호가 발급되면 호출되는 함수입니다.
     func onReady(data: [String: Any]) {
       print("------------ ready \(data)")
-//        print("ready")
-//        print(data)
     }
     
     // 결제가 진행되기 바로 직전 호출되는 함수로, 주로 재고처리 등의 로직이 수행
@@ -418,7 +424,6 @@ extension NativeController: BootpayRequestProtocol {
     // 결제 취소시 호출
     func onCancel(data: [String: Any]) {
       print("------------ cancel \(data)")
-//        print(data)
     }
     
     // 결제완료시 호출

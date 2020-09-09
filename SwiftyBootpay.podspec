@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftyBootpay'
-  s.version          = '3.3.0'
+  s.version          = '3.3.01'
   s.summary          = 'Bootpay PG Plugin For Swift'
 
 # This description is used to generate tags and improve search results.
