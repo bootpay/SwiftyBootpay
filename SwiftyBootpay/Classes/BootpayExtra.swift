@@ -25,6 +25,11 @@ public class BootpayExtra: NSObject, BootpayParams, Mappable {
     @objc public var iosCloseButtonView: UIButton?
     @objc public var onestore = BootpayOneStore()
     
+    @objc public var theme = "purple" //통합 결제창 색상 지정 (purple, red, custom 지정 가능 )
+    @objc public var custom_background = "" //theme가 custom인 경우 배경 색 지정 가능 ( ex: #f2f2f2 )
+    @objc public var custom_font_color = "" //theme가 custom인 경우 폰트색 지정 가능 ( ex: #333333 )
+    
+    
     public override init() {}
     public required init?(map: Map) {
     }
@@ -46,6 +51,10 @@ public class BootpayExtra: NSObject, BootpayParams, Mappable {
         escrow <- map["escrow"]
         onestore <- map["onestore"]
         iosCloseButton <- map["iosCloseButton"]
+        
+        theme <- map["theme"]
+        custom_background <- map["custom_background"]
+        custom_font_color <- map["custom_font_color"]
     }
     
     public func getJson(pg: String) -> String {
@@ -65,6 +74,9 @@ public class BootpayExtra: NSObject, BootpayParams, Mappable {
                 "locale:'\(locale)',",
                 "disp_cash_result:'\(disp_cash_result)',",
                 "escrow:'\(escrow)',",
+                "theme:'\(theme)',",
+                "custom_background:'\(custom_background)',",
+                "custom_font_color:'\(custom_font_color)',",
                 "iosCloseButton: \(iosCloseButton)",
         ]
         

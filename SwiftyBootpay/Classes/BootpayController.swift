@@ -130,7 +130,7 @@ extension BootpayController {
         // 필요한 PG는 팝업으로 띄운다
         var quick_popup = extra.quick_popup;
         if(quick_popup == -1 && payload.pg != "payapp" && payload.method == "card") {
-            print("quick popup22")
+//            print("quick popup22")
             quick_popup = 1;
         }
         if(quick_popup == 1) {

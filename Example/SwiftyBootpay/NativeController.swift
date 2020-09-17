@@ -344,7 +344,7 @@ extension NativeController {
         // 구매자 정보
         let bootUser = BootpayUser()
          bootUser.params {
-            $0.username = "사용자 이름"
+//            $0.username = "사용자 이름"
             $0.email = "user1234@gmail.com"
             $0.area = "서울" // 사용자 주소
             $0.addr = "서울시 동작구 상도로";
@@ -363,11 +363,11 @@ extension NativeController {
             
 //
    //         $0.user_info = bootUser
-            $0.pg = BootpayPG.NICEPAY // 결제할 PG사
+//            $0.pg = BootpayPG.NICEPAY // 결제할 PG사
             //            $0.account_expire_at = "2018-09-25" // 가상계좌 입금기간 제한 ( yyyy-mm-dd 포멧으로 입력해주세요. 가상계좌만 적용됩니다. 오늘 날짜보다 더 뒤(미래)여야 합니다 )
 //                        $0.method = "card" // 결제수단
             $0.show_agree_window = false
-            $0.methods = [Method.BANK, Method.CARD, Method.PHONE]
+            $0.methods = [Method.BANK, Method.CARD, Method.PHONE, Method.VBANK]
 //            $0.method = Method.CARD
             $0.ux = UX.PG_DIALOG
          }
@@ -377,6 +377,7 @@ extension NativeController {
 //         extra.offer_period = "1년치"
 //         extra.quick_popup = 1;
          extra.quotas = [0, 2, 3] // 5만원 이상일 경우 할부 허용범위 설정 가능, (예제는 일시불, 2개월 할부, 3개월 할부 허용)
+         extra.theme = "red"
 //         extra.app_scheme = "bootpaysample://"; // 페이레터와 같은 특정 PG사의 경우 :// 값을 붙여야 할 수도 있습니다. 
 
 
