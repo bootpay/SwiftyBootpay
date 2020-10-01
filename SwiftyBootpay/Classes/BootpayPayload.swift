@@ -131,6 +131,7 @@ public class BootpayPayload: NSObject, BootpayParams, Mappable  {
         var array = [
             "BootPay.request({",
             "price: '\(price)',",
+            "tax_free: '\(tax_free)',",
             "application_id: '\(application_id)',",
             "name: '\(name.replace(target: "\"", withString: "'").replace(target: "'", withString: "\\'").replace(target: "\n", withString: ""))',",
             "pg:'\(pg)',",
