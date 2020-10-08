@@ -86,6 +86,8 @@ public class BootpayExtra: NSObject, BootpayParams, Mappable {
         }
         extra.append("}")
         
+        print(getURLSchema())
+        
         
         return extra.reduce("", +)
     }
