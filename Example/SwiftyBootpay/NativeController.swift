@@ -12,6 +12,7 @@ import Alamofire
 
 //MARK: ViewController Init
 class NativeController: UIViewController {
+    var payType = 1 // 1일경우 인앱결제, 2일경우 지문결제
     var vc: BootpayController!
     
     override func viewDidLoad() {
@@ -32,8 +33,8 @@ class NativeController: UIViewController {
    }
    
     func setUI() {
-      let titles = ["일반 결제 테스트", "인앱결제(원스토어) 테스트"]
-      let selectors = [#selector(nativeClick), #selector(onestoreClick)]
+      let titles = ["일반 결제 테스트", "인앱결제(원스토어) 테스트", "지문결제 테스트"]
+      let selectors = [#selector(nativeClick), #selector(onestoreClick), #selector(fingerClick)]
 //      let selectors = [#selector(onestoreClick), #selector(nativeClick), #selector(remoteLinkClick), #selector(remoteOrderClick), #selector(remotePreClick)]
       let array = 0...(titles.count-1)
       let unitHeight = self.view.frame.height / CGFloat(array.count)
@@ -58,6 +59,10 @@ class NativeController: UIViewController {
    
    @objc func nativeClick() {
       presentBootpayController()
+   }
+   
+   @objc func fingerClick() {
+      print(552)
    }
    
  
@@ -446,7 +451,7 @@ extension NativeController: BootpayRestProtocol {
       getRestToken()
    }
  
-   func getRestToken () {       
+   func getRestToken () {
       let restApplicationId = "5b8f6a4d396fa665fdc2b5ea"
       let privateKey = "n9jO7MxVFor3o//c9X5tdep95ZjdaiDvVB4h1B5cMHQ="
         
@@ -476,15 +481,27 @@ extension NativeController: BootpayRestProtocol {
    func callbackEasyCardUserToken(resData: [String: Any]) {
       
       if let data = resData["data"], let userToken  = (data as! [String: Any])["user_token"] {
-         startBootpay(userToken as! String)
+         if(payType == 1) {
+            startBootpay(userToken as! String)
+         } else if(payType == 2) {
+            fingerBootpay(userToken as! String)
+         }
       }
    }
    
+   func fingerBootpay(_ userToken: String) {
+      
+   }
+   
    func startBootpay(_ userToken: String) {
+      let user = BootpayUser()
+      user.phone = "010-1234-4567"
+//      print(userToken)
       let payload = BootpayPayload()
       payload.params {
          $0.price = 1000 // 결제할 금액
          $0.name = "블링블링's 마스카라" // 결제할 상품명
+//         $0.phone
          $0.order_id = "1234_1234_124" // 결제 고유번호
 //            $0.application_id = "5e0daa104f74b40024d23183"
          $0.application_id = "5b8f6a4d396fa665fdc2b5e9"
@@ -502,7 +519,7 @@ extension NativeController: BootpayRestProtocol {
       }
       
             
-      Bootpay.request(self, sendable: self, payload: payload, user: BootpayUser(), items: [BootpayItem](), extra: BootpayExtra(), addView: true)
+      Bootpay.request(self, sendable: self, payload: payload, user: user, items: [BootpayItem](), extra: BootpayExtra(), addView: true)
       
    }
 }

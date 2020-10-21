@@ -6,7 +6,7 @@
 //  Copyright © 2018년 CocoaPods. All rights reserved.
 //
 
-import UIKit 
+import UIKit
 
 extension String
 {
@@ -24,8 +24,8 @@ class RootController: UIViewController {
     }
     
     func setUI() {
-        let titles = ["Native 연동", "Native-C 연동", "LocalHtml 연동", "WebApp 연동"]
-        let selectors = [#selector(nativeClick), #selector(nativeCClick), #selector(localHtmlClick), #selector(webappClick)]
+        let titles = ["Native 연동", "Native 지문결제", "Native-C 연동", "LocalHtml 연동", "WebApp 연동"]
+        let selectors = [#selector(nativeClick), #selector(nativeFingerClick), #selector(nativeCClick), #selector(localHtmlClick), #selector(webappClick)]
         let array = 0...3
         let unitHeight = CGFloat(140)
         for i in array {
@@ -39,6 +39,11 @@ class RootController: UIViewController {
     
     @objc func nativeClick() {
         let vc = NativeController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func nativeFingerClick() {
+        let vc = NativeFingerController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

@@ -1,11 +1,16 @@
 PODS:
-  - Alamofire (5.1.0)
-  - CryptoSwift (1.3.1)
-  - ObjectMapper (3.5.2)
-  - SwiftyBootpay (3.2.47):
-    - Alamofire (~> 5.1.0)
+  - Alamofire (5.2.2)
+  - CryptoSwift (1.3.2)
+  - ObjectMapper (4.2.0)
+  - SnapKit (5.0.1)
+  - SwiftOTP (2.0.2):
+    - CryptoSwift (>= 1.0.0)
+  - SwiftyBootpay (3.3.13):
+    - Alamofire (~> 5.2.2)
     - CryptoSwift
     - ObjectMapper
+    - SnapKit (~> 5.0.0)
+    - SwiftOTP
 
 DEPENDENCIES:
   - SwiftyBootpay (from `../`)
@@ -15,16 +20,20 @@ SPEC REPOS:
     - Alamofire
     - CryptoSwift
     - ObjectMapper
+    - SnapKit
+    - SwiftOTP
 
 EXTERNAL SOURCES:
   SwiftyBootpay:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
-  CryptoSwift: f12f037f6d0fcd6d48c96db0071b653de64e6c4d
-  ObjectMapper: b53ae947d370bf89423e86be7d4e2d2b2a8d3f40
-  SwiftyBootpay: a0edb70454d179d5f42dc705b79c7fd9638b66cb
+  Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
+  CryptoSwift: 093499be1a94b0cae36e6c26b70870668cb56060
+  ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftOTP: 572fb5601add61e93534cf6644ef236d65b4aae8
+  SwiftyBootpay: 1dea774a5618435385c103a8afcb31ae1e4334da
 
 PODFILE CHECKSUM: c286c6f0a203519149ce94c6a5310148b7a2a2ba
 

@@ -58,6 +58,7 @@ extension URL {
     @objc public var payload = BootpayPayload()
     @objc public var user = BootpayUser()
     @objc public var extra = BootpayExtra()
+    @objc public var ux = ""
     @objc public var items = [BootpayItem]()  
      
     var isPaying = false

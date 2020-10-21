@@ -15,6 +15,7 @@ public struct UX {
     public static let BOOTPAY_REMOTE_LINK = "BOOTPAY_REMOTE_LINK" // 결제링크 바로 생성
     public static let BOOTPAY_REMOTE_FORM = "BOOTPAY_REMOTE_FORM" // 결제폼 생성
     public static let BOOTPAY_REMOTE_PRE = "BOOTPAY_REMOTE_PRE" // 사전예약 생성
+    public static let BOOTPAY_FIDO = "BOOTPAY_FIDO" // 생체인증 + OTP
     
     //    BOOTPAY_CARD_SIMPLE, // 부트페이 로켓결제 일부
     //    BOOTPAY_SUBSCRIPT_ROCKET, // 부트페이 로켓결제

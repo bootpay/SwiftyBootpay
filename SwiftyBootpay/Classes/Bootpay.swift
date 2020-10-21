@@ -60,6 +60,8 @@ class BootpayDefault {
 }
 
 @objc public class Bootpay: NSObject {
+    public static let URL = "https://inapp.bootpay.co.kr/3.3.1/production.html"
+    
     public static func dicToJsonString(_ data: [String: Any]) -> String {
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
@@ -100,6 +102,8 @@ class BootpayDefault {
         switch payload.ux {
         case UX.PG_DIALOG:
             request_dialog(viewController, sendable: sendable, payload: payload, user: user, items: items, extra: extra, smsPayload: smsPayload, addView: addView)
+        case UX.BOOTPAY_FIDO:
+            request_dialog(viewController, sendable: sendable, payload: payload, user: user, items: items, extra: extra, smsPayload: smsPayload, addView: addView)
         case UX.PG_SUBSCRIPT:
             request_dialog(viewController, sendable: sendable, payload: payload, user: user, items: items, extra: extra, smsPayload: smsPayload)
 //        case UX.BOOTPAY_REMOTE_LINK:
@@ -113,7 +117,30 @@ class BootpayDefault {
         }
     }
     
-    private static func request_dialog(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, payload: BootpayPayload,  user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, smsPayload: SMSPayload? = nil, addView: Bool? = false) {
+    private static func request_fido(_ viewController: UIViewController) {
+        //Create the AlertController and add Its action like button in Actionsheet
+//          let actionSheetControllerIOS8: UIAlertController = UIAlertController(title: "Please select", message: "Option to select", preferredStyle: UIAlertController.ActionSheet)
+//
+//          let cancelActionButton = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+//              print("Cancel")
+//          }
+//          actionSheetControllerIOS8.addAction(cancelActionButton)
+//
+//          let saveActionButton = UIAlertAction(title: "Save", style: .default)
+//              { _ in
+//                 print("Save")
+//          }
+//          actionSheetControllerIOS8.addAction(saveActionButton)
+//
+//          let deleteActionButton = UIAlertAction(title: "Delete", style: .default)
+//              { _ in
+//                  print("Delete")
+//          }
+//          actionSheetControllerIOS8.addAction(deleteActionButton)
+//          viewController.present(actionSheetControllerIOS8, animated: true, completion: nil)
+    }
+    
+    private static func request_dialog(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, payload: BootpayPayload,  user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, smsPayload: SMSPayload? = nil, addView: Bool? = false, ux: String? = nil) {
         
 //        sharedInstance.vc.request = request
 //        if let user = user { sharedInstance.vc.user = user }
@@ -124,7 +151,7 @@ class BootpayDefault {
 //        if sharedInstance.vc == nil {
 //            sharedInstance.vc = BootpayController()
 //        }
-        sharedInstance.vc = BootpayController() 
+        sharedInstance.vc = BootpayController()
         
         sharedInstance.vc?.payload = payload
         if(payload.application_id.isEmpty) { sharedInstance.vc?.payload.application_id = sharedInstance.application_id }
@@ -132,6 +159,7 @@ class BootpayDefault {
         
         if let user = user { sharedInstance.vc?.user = user }
         if let extra = extra { sharedInstance.vc?.extra = extra }
+        if let ux = ux { sharedInstance.vc?.ux = ux }
         if let sendable = sendable { sharedInstance.vc?.sendable = sendable }
         if let items = items { sharedInstance.vc?.items = items }
         if (addView == true) {
@@ -143,21 +171,21 @@ class BootpayDefault {
     }
     
 //    private static func request_link(_ payload: BootpayPayload, items: [BootpayItem]?, user: BootpayUser?, extra: BootpayExtra?, smsPayload: SMSPayload?) {
-//        
+//
 //        let requestString = payload.toJSONString() ?? ""
 //        let itemsString = items?.toJSONString() ?? ""
 //        let userString = user?.toJSONString() ?? ""
 //        let extraString = extra?.toJSONString() ?? ""
 //        let smsPayloadString = smsPayload?.toJSONString() ?? ""
-//        
+//
 //        var params = jsonStringToDic(requestString) ?? [:]
 //        params["items"] = itemsString
 //        params["user_info"] = userString
 //        params["params"] = extraString
 //        params["sms_payload"] = smsPayloadString
-//        
+//
 ////        Alamofire.Request
-//        
+//
 //        AF.request("https://api.bootpay.co.kr/app/rest/remote_link", method: .post, parameters: params)
 //            .validate()
 //            .responseJSON { response in
@@ -255,7 +283,7 @@ class BootpayDefault {
     }
     
     open func getUUId() -> String {
-        if self.uuid == "" { return BootpayDefault.getString(key: "uuid") }
+        if self.uuid == "" { self.uuid = BootpayDefault.getString(key: "uuid") }
         return self.uuid
     }
     
@@ -268,13 +296,22 @@ class BootpayDefault {
         if self.sk_time == 0 { return BootpayDefault.getInt(key: "sk_time") }
         return self.sk_time
     }
+    
+    public static func getUUID() -> String {
+        var uuid = BootpayDefault.getString(key: "uuid")
+        if uuid == "" {
+            uuid = UUID().uuidString
+            BootpayDefault.setValue("uuid", value: uuid)
+        }
+        return uuid
+    }
 }
 
 //MARK: Bootpay Model Update
 extension Bootpay {
     fileprivate func loadSessionValues() {
         loadUuid()
-        loadSkTime() 
+        loadSkTime()
     }
     
     fileprivate func loadUuid() {
@@ -393,7 +430,7 @@ extension Bootpay {
     @objc(request_objc:::::::::)
     public static func request_objc(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, payload: BootpayPayload,  user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, smsPayload: SMSPayload? = nil, remoteForm: RemoteOrderForm? = nil, remotePre: RemoteOrderPre? = nil) {
         
-        request(viewController, sendable: sendable, payload: payload, user: user, items: items, extra: extra, smsPayload: smsPayload, addView: false) 
+        request(viewController, sendable: sendable, payload: payload, user: user, items: items, extra: extra, smsPayload: smsPayload, addView: false)
     }
     
    

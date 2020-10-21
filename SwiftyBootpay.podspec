@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftyBootpay'
-  s.version          = '3.3.12'
+  s.version          = '3.3.13'
   s.summary          = 'Bootpay PG Plugin For Swift'
 
 # This description is used to generate tags and improve search results.
@@ -39,8 +39,12 @@ Pod::Spec.new do |s|
   
   s.static_framework = true
   s.dependency 'CryptoSwift'  
-  s.dependency 'Alamofire',  '~> 5.1.0'
+  s.dependency 'Alamofire',  '~> 5.2.2'
   s.dependency 'ObjectMapper'
+  
+  s.dependency 'SwiftOTP'
+  s.dependency 'SnapKit', '~> 5.0.0'
+  
 #  s.dependency 'AlamofireObjectMapper'
 #  s.dependency 'AlamofireImage'
   

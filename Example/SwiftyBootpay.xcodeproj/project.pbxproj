@@ -17,6 +17,7 @@
 		811A2AC22161E538005BDC68 /* RootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811A2AC12161E538005BDC68 /* RootController.swift */; };
 		8194D4FC2162EE4900CDA843 /* LocalHtmlController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8194D4FB2162EE4800CDA843 /* LocalHtmlController.swift */; };
 		81D546E71FA729AB003F7EF7 /* .swift-version in Resources */ = {isa = PBXBuildFile; fileRef = 81D546E61FA729AB003F7EF7 /* .swift-version */; };
+		8C2389EC25348DFB00B45F9B /* NativeFingerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2389EB25348DFB00B45F9B /* NativeFingerController.swift */; };
 		C1FD617BB8DB7AF2A005C651 /* Pods_SwiftyBootpay_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B9AD7678AAF7DC621FC5F7 /* Pods_SwiftyBootpay_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		8193CD6E22A744D100A582D5 /* SwiftyBootpay_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftyBootpay_Example-Bridging-Header.h"; sourceTree = "<group>"; };
 		8194D4FB2162EE4800CDA843 /* LocalHtmlController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalHtmlController.swift; sourceTree = "<group>"; };
 		81D546E61FA729AB003F7EF7 /* .swift-version */ = {isa = PBXFileReference; lastKnownFileType = text; path = ".swift-version"; sourceTree = "<group>"; };
+		8C2389EB25348DFB00B45F9B /* NativeFingerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativeFingerController.swift; sourceTree = "<group>"; };
 		B532A88FAB5C53985F6967AF /* Pods-SwiftyBootpay_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyBootpay_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyBootpay_Tests/Pods-SwiftyBootpay_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		B7183E45378FE1B44208E11D /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		B8B9AD7678AAF7DC621FC5F7 /* Pods_SwiftyBootpay_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyBootpay_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,6 +94,7 @@
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				811A2AC12161E538005BDC68 /* RootController.swift */,
 				607FACD71AFB9204008FA782 /* NativeController.swift */,
+				8C2389EB25348DFB00B45F9B /* NativeFingerController.swift */,
 				8194D4FB2162EE4800CDA843 /* LocalHtmlController.swift */,
 				811A2AB72161945F005BDC68 /* WebAppController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
@@ -237,12 +240,16 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftOTP/SwiftOTP.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftOTP.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -277,6 +284,7 @@
 				607FACD81AFB9204008FA782 /* NativeController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				8194D4FC2162EE4900CDA843 /* LocalHtmlController.swift in Sources */,
+				8C2389EC25348DFB00B45F9B /* NativeFingerController.swift in Sources */,
 				811A2AB82161945F005BDC68 /* WebAppController.swift in Sources */,
 				811A2AC22161E538005BDC68 /* RootController.swift in Sources */,
 			);
