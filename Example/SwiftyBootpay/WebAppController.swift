@@ -87,8 +87,7 @@ extension WebAppController:  WKNavigationDelegate, WKUIDelegate, WKScriptMessage
         
         
         if let url = navigationAction.request.url {
-            
-            print("--------------- \(url.absoluteString)");
+             
             
             if(isItunesURL(url.absoluteString)) {
                 if #available(iOS 10, *) {

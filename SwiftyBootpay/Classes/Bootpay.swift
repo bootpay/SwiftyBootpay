@@ -60,6 +60,8 @@ class BootpayDefault {
 }
 
 @objc public class Bootpay: NSObject {
+    public static let URL = "https://inapp.bootpay.co.kr/3.3.1/production.html"
+    
     public static func dicToJsonString(_ data: [String: Any]) -> String {
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
@@ -92,6 +94,23 @@ class BootpayDefault {
         return true
     }
     
+    public static func requestBio(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, payload: BootpayBioPayload, userToken: String, theme: BootpayBioTheme? = nil, extra: BootpayExtra? = nil) {
+        
+        sharedInstance.bioVc = BootpayAuthController()
+        
+        sharedInstance.bioVc?.bioPayload = payload
+        if(payload.application_id.isEmpty) {
+            sharedInstance.vc?.payload.application_id = sharedInstance.application_id
+        }
+        if theme != nil { sharedInstance.bioVc?.theme = theme! }
+        sharedInstance.bioVc?.sendable = sendable 
+        sharedInstance.bioVc?.userToken = userToken
+        if extra != nil { sharedInstance.bioVc?.extra = extra! }
+        
+        viewController.present(sharedInstance.bioVc!, animated: true, completion: nil) 
+    }
+    
+    
     
         public static func request(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, payload: BootpayPayload,  user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, smsPayload: SMSPayload? = nil, remoteForm: RemoteOrderForm? = nil, remotePre: RemoteOrderPre? = nil, addView: Bool? = false, _ gameObject: String = "") {
         
@@ -100,30 +119,23 @@ class BootpayDefault {
         switch payload.ux {
         case UX.PG_DIALOG:
             request_dialog(viewController, sendable: sendable, payload: payload, user: user, items: items, extra: extra, smsPayload: smsPayload, addView: addView)
+      
         case UX.PG_SUBSCRIPT:
             request_dialog(viewController, sendable: sendable, payload: payload, user: user, items: items, extra: extra, smsPayload: smsPayload)
 //        case UX.BOOTPAY_REMOTE_LINK:
 //            request_link(payload, items: items, user: user, extra: extra, smsPayload: smsPayload)
-        case UX.BOOTPAY_REMOTE_FORM:
-            request_form(payload, user: user, items: items, extra: extra, smsPayload: smsPayload, remoteForm: remoteForm)
-        case UX.BOOTPAY_REMOTE_PRE:
-            request_pre(payload, user: user, items: items, extra: extra, smsPayload: smsPayload, remotePre: remotePre)
+//        case UX.BOOTPAY_REMOTE_FORM:
+//            request_form(payload, user: user, items: items, extra: extra, smsPayload: smsPayload, remoteForm: remoteForm)
+//        case UX.BOOTPAY_REMOTE_PRE:
+//            request_pre(payload, user: user, items: items, extra: extra, smsPayload: smsPayload, remotePre: remotePre)
         default:
             return
         }
     }
+     
     
-    private static func request_dialog(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, payload: BootpayPayload,  user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, smsPayload: SMSPayload? = nil, addView: Bool? = false) {
-        
-//        sharedInstance.vc.request = request
-//        if let user = user { sharedInstance.vc.user = user }
-//        if let extra = extra { sharedInstance.vc.extra = extra }
-//        if let sendable = sendable { sharedInstance.vc.sendable = sendable }
-//        if let items = items { sharedInstance.vc.items = items }
-//        viewController.present(sharedInstance.vc, animated: true, completion: nil)
-//        if sharedInstance.vc == nil {
-//            sharedInstance.vc = BootpayController()
-//        }
+    private static func request_dialog(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, payload: BootpayPayload,  user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, smsPayload: SMSPayload? = nil, addView: Bool? = false, ux: String? = nil) {
+ 
         sharedInstance.vc = BootpayController() 
         
         sharedInstance.vc?.payload = payload
@@ -132,6 +144,7 @@ class BootpayDefault {
         
         if let user = user { sharedInstance.vc?.user = user }
         if let extra = extra { sharedInstance.vc?.extra = extra }
+        if let ux = ux { sharedInstance.vc?.ux = ux }
         if let sendable = sendable { sharedInstance.vc?.sendable = sendable }
         if let items = items { sharedInstance.vc?.items = items }
         if (addView == true) {
@@ -141,92 +154,7 @@ class BootpayDefault {
             viewController.present(sharedInstance.vc!, animated: true, completion: nil)
         }
     }
-    
-//    private static func request_link(_ payload: BootpayPayload, items: [BootpayItem]?, user: BootpayUser?, extra: BootpayExtra?, smsPayload: SMSPayload?) {
-//        
-//        let requestString = payload.toJSONString() ?? ""
-//        let itemsString = items?.toJSONString() ?? ""
-//        let userString = user?.toJSONString() ?? ""
-//        let extraString = extra?.toJSONString() ?? ""
-//        let smsPayloadString = smsPayload?.toJSONString() ?? ""
-//        
-//        var params = jsonStringToDic(requestString) ?? [:]
-//        params["items"] = itemsString
-//        params["user_info"] = userString
-//        params["params"] = extraString
-//        params["sms_payload"] = smsPayloadString
-//        
-////        Alamofire.Request
-//        
-//        AF.request("https://api.bootpay.co.kr/app/rest/remote_link", method: .post, parameters: params)
-//            .validate()
-//            .responseJSON { response in
-//                print(response.value ?? "")
-//        }
-//    }
-    
-    private static func request_form(_ payload: BootpayPayload, user: BootpayUser?, items: [BootpayItem]?, extra: BootpayExtra?, smsPayload: SMSPayload?, remoteForm: RemoteOrderForm?) {
-        
-        let requestString = payload.toJSONString() ?? ""
-        let itemsString = items?.toJSONString() ?? ""
-        let userString = user?.toJSONString() ?? ""
-        let extraString = extra?.toJSONString() ?? ""
-        let smsPayloadString = smsPayload?.toJSONString() ?? ""
-        var remoteFormString = remoteForm?.toJSONString() ?? ""
-        if remoteFormString.count == 0 {
-            let form = RemoteOrderForm()
-            form.params {
-                $0.n = payload.name
-                $0.ip = payload.price
-                $0.pg = payload.pg
-            }
-            remoteFormString = form.toJSONString() ?? ""
-        }
-        
-        var params = jsonStringToDic(requestString) ?? [:]
-        params["items"] = itemsString
-        params["user_info"] = userString
-        params["params"] = extraString
-        params["sms_payload"] = smsPayloadString
-        params["remote_form"] = remoteFormString
-        
-        AF.request("https://api-ehowlsla.bootpay.co.kr/app/rest/remote_form", method: .post, parameters: params)
-            .validate()
-            .responseJSON { response in
-                print(response.value ?? "")
-        }
-    }
-    
-    public static func request_pre(_ payload: BootpayPayload, user: BootpayUser?, items: [BootpayItem]?, extra: BootpayExtra?, smsPayload: SMSPayload?, remotePre: RemoteOrderPre?) {
-        
-        let requestString = payload.toJSONString() ?? ""
-        let itemsString = items?.toJSONString() ?? ""
-        let userString = user?.toJSONString() ?? ""
-        let extraString = extra?.toJSONString() ?? ""
-        let smsPayloadString = smsPayload?.toJSONString() ?? ""
-        var remotePreString = remotePre?.toJSONString() ?? ""
-        if remotePreString.count == 0 {
-            let pre = RemoteOrderPre()
-            pre.params {
-                $0.n = payload.name
-                $0.e_p = "\(payload.price)"
-            }
-            remotePreString = pre.toJSONString() ?? ""
-        }
-        
-        var params = jsonStringToDic(requestString) ?? [:]
-        params["items"] = itemsString
-        params["user_info"] = userString
-        params["params"] = extraString
-        params["sms_payload"] = smsPayloadString
-        params["remote_pre"] = remotePreString
-        
-        AF.request("https://api-ehowlsla.bootpay.co.kr/app/rest/remote_pre", method: .post, parameters: params)
-            .validate()
-            .responseJSON { response in
-                print(response.value ?? "")
-        }
-    }
+     
 
     
     public override init() {
@@ -245,6 +173,7 @@ class BootpayDefault {
     var time = 0 // 미접속 시간
     @objc public var user = BootpayUser()
     @objc public var vc: BootpayController?
+    @objc public var bioVc: BootpayAuthController?
     
     var key = ""
     var iv = ""
@@ -255,7 +184,7 @@ class BootpayDefault {
     }
     
     open func getUUId() -> String {
-        if self.uuid == "" { return BootpayDefault.getString(key: "uuid") }
+        if self.uuid == "" { self.uuid = BootpayDefault.getString(key: "uuid") }
         return self.uuid
     }
     
@@ -267,6 +196,15 @@ class BootpayDefault {
     open func getSkTime() -> Int {
         if self.sk_time == 0 { return BootpayDefault.getInt(key: "sk_time") }
         return self.sk_time
+    }
+    
+    public static func getUUID() -> String {
+        var uuid = BootpayDefault.getString(key: "uuid")
+        if uuid == "" {
+            uuid = UUID().uuidString
+            BootpayDefault.setValue("uuid", value: uuid)
+        }
+        return uuid
     }
 }
 
@@ -375,17 +313,22 @@ extension Bootpay {
     @objc(transactionConfirm:)
     public static func transactionConfirm(data: [String: Any]) {
         sharedInstance.vc?.transactionConfirm(data: data)
+        sharedInstance.bioVc?.transactionConfirm(data: data)
     }
     
     @objc(removePaymentWindow)
     public static func removePaymentWindow() {
-           sharedInstance.vc?.removePaymentWindow()
+        sharedInstance.vc?.removePaymentWindow()
+        sharedInstance.bioVc?.removePaymentWindow()
     }
     
     @objc(dismiss)
     public static func dismiss() {
         sharedInstance.vc?.dismiss()
         sharedInstance.vc?.view.removeFromSuperview()
+        
+        sharedInstance.bioVc?.dismiss()
+        sharedInstance.bioVc?.view.removeFromSuperview()
     }
     
     

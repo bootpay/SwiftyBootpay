@@ -6,6 +6,4 @@ use_frameworks!
 
 target 'SwiftyBootpay_Example' do
   pod 'SwiftyBootpay', :path => '../'
-  
-   
 end

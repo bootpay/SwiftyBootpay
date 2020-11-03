@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftyBootpay'
-  s.version          = '3.3.12'
+  s.version          = '3.3.5'
   s.summary          = 'Bootpay PG Plugin For Swift'
 
 # This description is used to generate tags and improve search results.
@@ -24,6 +24,7 @@ Pod::Spec.new do |s|
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'bootpay' => 'bootpay.co.kr@gmail.com' }
   s.source           = { :git => 'https://github.com/bootpay/SwiftyBootpay.git', :tag => s.version.to_s }
+  
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '10.0'
@@ -31,17 +32,26 @@ Pod::Spec.new do |s|
 
   s.source_files = 'SwiftyBootpay/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'SwiftyBootpay' => ['SwiftyBootpay/Assets/*.png']
-  # }
+  s.resource_bundles = {
+    'SwiftyBootpay' => ['SwiftyBootpay/*.xcassets']
+  }
+#  s.resources = "SwiftyBootpay/*.xcassets"
+    
+#  s.resource_bundles = {'SwiftyBootpay/Assets/*'}
+  
+#   s.resource_bundles = {
+#     'SwiftyBootpay' => ['Images/**/*']
+#   }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   
   s.static_framework = true
   s.dependency 'CryptoSwift'  
-  s.dependency 'Alamofire',  '~> 5.1.0'
+  s.dependency 'Alamofire',  '~> 5.2.2'
   s.dependency 'ObjectMapper'
-#  s.dependency 'AlamofireObjectMapper'
-#  s.dependency 'AlamofireImage'
+  s.dependency 'SwiftOTP'
+  s.dependency 'SnapKit', '~> 5.0.0'
+  s.dependency 'JGProgressHUD'
+   
   
 end

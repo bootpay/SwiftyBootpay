@@ -6,7 +6,8 @@
 //  Copyright © 2018년 CocoaPods. All rights reserved.
 //
 
-import UIKit 
+import UIKit
+import SwiftyBootpay
 
 extension String
 {
@@ -24,17 +25,20 @@ class RootController: UIViewController {
     }
     
     func setUI() {
-        let titles = ["Native 연동", "Native-C 연동", "LocalHtml 연동", "WebApp 연동"]
-        let selectors = [#selector(nativeClick), #selector(nativeCClick), #selector(localHtmlClick), #selector(webappClick)]
+        let titles = ["Native 연동", "Native 지문결제", "Native-C 연동", "LocalHtml 연동", "WebApp 연동"]
+        let selectors = [#selector(nativeClick), #selector(nativeFingerClick), #selector(nativeCClick), #selector(localHtmlClick), #selector(webappClick)]
         let array = 0...3
         let unitHeight = CGFloat(140)
         for i in array {
             let btn = UIButton(type: .roundedRect)
+//            btn.setImage(UIImage(named: "temp"), for: .normal)
             btn.frame = CGRect(x: 0, y: 60 + unitHeight * CGFloat(i), width: self.view.frame.width, height: unitHeight)
             btn.setTitle(titles[i], for: .normal)
             btn.addTarget(self, action: selectors[i], for: .touchUpInside)
             self.view.addSubview(btn)
         }
+        
+         
     }
     
     @objc func nativeClick() {
@@ -42,8 +46,14 @@ class RootController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    @objc func nativeFingerClick() {
+        let vc = NativeBioController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     @objc func nativeCClick() {
-//        let vc = NativeCController()
+//        let vc = CardSelectView()
+        
 //        self.navigationController?.pushViewController(vc, animated: true)
     }
     

@@ -8,7 +8,6 @@
 
 import UIKit
 import WebKit
-//import
 
 @objc public protocol BootpayRequestProtocol {
     @objc(onError:) func onError(data: [String: Any])
@@ -27,25 +26,26 @@ import WebKit
     let configuration = WKWebViewConfiguration()
     
     var popupWV: WKWebView!
-    final let BASE_URL = "https://inapp.bootpay.co.kr/3.3.1/production.html"
+    final let BASE_URL = Bootpay.URL
     final let bridgeName = "Bootpay_iOS"
     var firstLoad = false
     
     var quick_popup = -1;
+    var isFido = false
     
 //    weak var sendable: BootpayRequestProtocol?
     var sendable: BootpayRequestProtocol?
     
     
     var bootpayScript = ""
-    var parentController: BootpayController!
-    func bootpayRequest(_ script: String, _ quick_popup: Int = -1) {
+    var parentController: UIViewController!
+    func bootpayRequest(_ script: String, quick_popup: Int = -1) {
         HTTPCookieStorage.shared.cookieAcceptPolicy = HTTPCookie.AcceptPolicy.always  // 현대카드 등 쿠키설정 이슈 해결을 위해 필요
         configuration.userContentController.add(self, name: bridgeName)
         wv = WKWebView(frame: self.bounds, configuration: configuration)
         wv.uiDelegate = self
         wv.navigationDelegate = self
-        self.quick_popup = quick_popup;
+        self.quick_popup = quick_popup
         self.addSubview(wv)
         self.bootpayScript = script
         self.loadUrl(BASE_URL)
@@ -74,8 +74,7 @@ extension BootpayWebView {
     
     
     
-    func registerAppId() {
-        doJavascript("window.BootPay.setApplicationId('\(Bootpay.sharedInstance.application_id)');")
+    func registerAppId() {        doJavascript("window.BootPay.setApplicationId('\(Bootpay.sharedInstance.application_id)');")
     }
     
     func setDevelopMode() {
@@ -119,8 +118,7 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
         if firstLoad == false {
             firstLoad = true
             registerAppId()
-//            setDevelopMode()
-//            setStageMode()
+//            setDevelopMode() 
             setDevice()
             setAnalytics()
             
@@ -179,7 +177,7 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
         }
         let cancelAction = UIAlertAction(title: "결제창 닫기", style: .default) { _ in
             completionHandler()
-            self.parentController.dismiss()
+            self.parentController.dismiss(animated: true, completion: nil)
         }
         alertController.addAction(confirmAction)
         alertController.addAction(cancelAction)

@@ -66,13 +66,7 @@ import Foundation
         let uri = "https://analytics.bootpay.co.kr/call"
         var params: [String: Any]
         
-        do {
-//            let jsonEncoder = JSONEncoder()
-//            let jsonData = try jsonEncoder.encode(items)
-//            let json = String(data: jsonData, encoding: String.Encoding.utf8)
-            
-            
-            
+        do {             
             if let json = items.toJSONString() {
                 params = [
                     "ver": Bootpay.sharedInstance.ver,

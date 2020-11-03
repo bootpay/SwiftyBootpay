@@ -58,6 +58,7 @@ extension URL {
     @objc public var payload = BootpayPayload()
     @objc public var user = BootpayUser()
     @objc public var extra = BootpayExtra()
+    @objc public var ux = ""
     @objc public var items = [BootpayItem]()  
      
     var isPaying = false
@@ -125,16 +126,15 @@ extension BootpayController {
         
         let script = payload.generateScript(wv.bridgeName, items: items, user: user, extra: extra)
         
-//        print(script);
         
         // 필요한 PG는 팝업으로 띄운다
         var quick_popup = extra.quick_popup;
         if(quick_popup == -1 && payload.pg != "payapp" && payload.method == "card") {
-//            print("quick popup22")
             quick_popup = 1;
         }
+
         if(quick_popup == 1) {
-            wv.bootpayRequest(script, quick_popup)
+            wv.bootpayRequest(script, quick_popup: quick_popup)
         } else {
             wv.bootpayRequest(script)
         }
@@ -158,8 +158,6 @@ extension BootpayController {
             }
         }
     }
-    
-//    bool needQ
 }
 
 

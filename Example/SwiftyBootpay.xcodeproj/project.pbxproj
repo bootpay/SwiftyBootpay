@@ -17,6 +17,7 @@
 		811A2AC22161E538005BDC68 /* RootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811A2AC12161E538005BDC68 /* RootController.swift */; };
 		8194D4FC2162EE4900CDA843 /* LocalHtmlController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8194D4FB2162EE4800CDA843 /* LocalHtmlController.swift */; };
 		81D546E71FA729AB003F7EF7 /* .swift-version in Resources */ = {isa = PBXBuildFile; fileRef = 81D546E61FA729AB003F7EF7 /* .swift-version */; };
+		8C7011A62533DB77004F9437 /* NativeBioController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7011A52533DB77004F9437 /* NativeBioController.swift */; };
 		C1FD617BB8DB7AF2A005C651 /* Pods_SwiftyBootpay_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B9AD7678AAF7DC621FC5F7 /* Pods_SwiftyBootpay_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,8 @@
 		8193CD6E22A744D100A582D5 /* SwiftyBootpay_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftyBootpay_Example-Bridging-Header.h"; sourceTree = "<group>"; };
 		8194D4FB2162EE4800CDA843 /* LocalHtmlController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalHtmlController.swift; sourceTree = "<group>"; };
 		81D546E61FA729AB003F7EF7 /* .swift-version */ = {isa = PBXFileReference; lastKnownFileType = text; path = ".swift-version"; sourceTree = "<group>"; };
+		8C2389D825348A8E00B45F9B /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
+		8C7011A52533DB77004F9437 /* NativeBioController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeBioController.swift; sourceTree = "<group>"; };
 		B532A88FAB5C53985F6967AF /* Pods-SwiftyBootpay_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyBootpay_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyBootpay_Tests/Pods-SwiftyBootpay_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		B7183E45378FE1B44208E11D /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		B8B9AD7678AAF7DC621FC5F7 /* Pods_SwiftyBootpay_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyBootpay_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,6 +64,7 @@
 		1679294C0ADEB27DE039FCB2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8C2389D825348A8E00B45F9B /* LocalAuthentication.framework */,
 				B8B9AD7678AAF7DC621FC5F7 /* Pods_SwiftyBootpay_Example.framework */,
 			);
 			name = Frameworks;
@@ -92,6 +96,7 @@
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				811A2AC12161E538005BDC68 /* RootController.swift */,
 				607FACD71AFB9204008FA782 /* NativeController.swift */,
+				8C7011A52533DB77004F9437 /* NativeBioController.swift */,
 				8194D4FB2162EE4800CDA843 /* LocalHtmlController.swift */,
 				811A2AB72161945F005BDC68 /* WebAppController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
@@ -164,6 +169,7 @@
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
 				9777D5076F2C4DFE352EDBB8 /* [CP] Embed Pods Frameworks */,
+				B08F21FE199E8277D112E6CF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -236,17 +242,41 @@
 				"${PODS_ROOT}/Target Support Files/Pods-SwiftyBootpay_Example/Pods-SwiftyBootpay_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftOTP/SwiftOTP.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JGProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftOTP.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SwiftyBootpay_Example/Pods-SwiftyBootpay_Example-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B08F21FE199E8277D112E6CF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SwiftyBootpay_Example/Pods-SwiftyBootpay_Example-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyBootpay/SwiftyBootpay.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SwiftyBootpay.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SwiftyBootpay_Example/Pods-SwiftyBootpay_Example-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E60F96BAF51D4FA1A9578DBF /* [CP] Check Pods Manifest.lock */ = {
@@ -277,6 +307,7 @@
 				607FACD81AFB9204008FA782 /* NativeController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				8194D4FC2162EE4900CDA843 /* LocalHtmlController.swift in Sources */,
+				8C7011A62533DB77004F9437 /* NativeBioController.swift in Sources */,
 				811A2AB82161945F005BDC68 /* WebAppController.swift in Sources */,
 				811A2AC22161E538005BDC68 /* RootController.swift in Sources */,
 			);
