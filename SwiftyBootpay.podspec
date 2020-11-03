@@ -31,17 +31,12 @@ Pod::Spec.new do |s|
   s.swift_version = '4.2'
 
   s.source_files = 'SwiftyBootpay/Classes/**/*'
+
   
-  s.resource_bundles = {
-    'SwiftyBootpay' => ['SwiftyBootpay/*.xcassets']
+  s.resource_bundles = { 'SwiftyBootpay/*.xcassets'
+#    'SwiftyBootpay' => ['SwiftyBootpay/*.xcassets']
   }
-#  s.resources = "SwiftyBootpay/*.xcassets"
-    
-#  s.resource_bundles = {'SwiftyBootpay/Assets/*'}
-  
-#   s.resource_bundles = {
-#     'SwiftyBootpay' => ['Images/**/*']
-#   }
+
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   
