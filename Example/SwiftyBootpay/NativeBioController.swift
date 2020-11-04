@@ -13,7 +13,8 @@ import Alamofire
 
 class NativeBioController: UIViewController {
     var payType = 1 //1:finter, 2:easy card
-    let unique_user_id = "user_2134_123457812345678901234"
+    let unique_user_id = Bootpay.getUUID() // 실제값을 적용하실 때에는, 관리하시는 user_id를 입력해주세요. 고객별로 유니크해야하며, 다른 고객과 절대로 중복되어서는 안됩니다
+//    "user_2134_123457812345678901234"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,7 +105,7 @@ extension NativeBioController: BootpayRestProtocol {
 //        bioPayload.application_id = "5b9f51264457636ab9a07cdd"
         bioPayload.application_id = "5b8f6a4d396fa665fdc2b5e9"
         bioPayload.order_id = String(Date().timeIntervalSinceReferenceDate)
-        bioPayload.price = 89000
+        bioPayload.price = 1000
         bioPayload.name = "Touch ID 인증 결제 테스트"
 //        bioPayload.quotas = [0,1,2,3,4,5]
         

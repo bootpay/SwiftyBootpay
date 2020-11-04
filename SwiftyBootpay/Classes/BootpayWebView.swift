@@ -72,8 +72,6 @@ extension BootpayWebView {
         wv.load(request)
     }
     
-    
-    
     func registerAppId() {        doJavascript("window.BootPay.setApplicationId('\(Bootpay.sharedInstance.application_id)');")
     }
     
@@ -107,6 +105,7 @@ extension BootpayWebView {
     }
     
     internal func loadBootapyRequest() {
+        print(self.bootpayScript)
         doJavascript(self.bootpayScript)
     }
 }

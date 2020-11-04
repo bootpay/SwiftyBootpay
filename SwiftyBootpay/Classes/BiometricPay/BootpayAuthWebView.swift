@@ -25,6 +25,9 @@ import WebKit
     public static let REQUEST_TYPE_PASSWORD_CHANGE = 4 //카드 삭제
     public static let REQUEST_TYPE_ENABLE_DEVICE = 5 //해당 기기 활성화
     
+    public static let REQUEST_TYPE_ENABLE_OTHER = 6 //통합결제
+    public static let REQUEST_TYPE_PASSWORD_PAY = 7 //카드 간편결제 (비밀번호) - 생체인증 정보가 기기에 없을때
+    
     
     
     
@@ -67,7 +70,6 @@ extension BootpayAuthWebView {
     
     internal func doJavascript(_ script: String) {
         if(script == "" ) { return }
-        print(script)
         wv.evaluateJavaScript(script, completionHandler: nil)
     }
     
@@ -115,7 +117,7 @@ extension BootpayAuthWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessag
             registerAppId()
 //            setDevelopMode()
             setDevice()
-            setAnalytics()
+            setAnalytics() 
         }
     }
     
@@ -156,6 +158,7 @@ extension BootpayAuthWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessag
 
 //verifyPassword
 extension BootpayAuthWebView {
+    
     func verifyPasswordScript() -> String {
         if userToken == "" {
             print("userToken이 없습니다")

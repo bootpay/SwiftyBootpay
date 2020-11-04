@@ -10,6 +10,7 @@ import Alamofire
 import SwiftOTP
 import SnapKit
 import JGProgressHUD
+import LocalAuthentication
 
 @objc public class BootpayAuthController: UIViewController {
     @objc public var userToken = ""
@@ -42,6 +43,8 @@ import JGProgressHUD
     var actionViewHeight = CGFloat(0)
     var cardInfoList = [CardInfo]()
     var isEnableDeviceSoon = false
+     
+    var currentDeviceBioType = false
     
     
     @objc public var bioPayload: BootpayBioPayload?
@@ -50,12 +53,20 @@ import JGProgressHUD
     let hud = JGProgressHUD()
     
     override public func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad() 
         
         initUI()
         slideUpCardUI()
-        getWalletCardRequest()
-         
+        
+//        print(BioMetricAuthenticator.canAuthenticate())
+        
+        currentDeviceBioType = BioMetricAuthenticator.canAuthenticate()
+        
+        if(currentDeviceBioType) {
+            getWalletCardRequest()
+        } else {
+            goWebViewPay(isPasswordPay: true) 
+        }
     }
     
     
@@ -96,10 +107,17 @@ import JGProgressHUD
     
     func initWebViewUI() {
 //        startBiometricPayUI([])
+        
+        var bottomPadding = CGFloat(0.0)
+        if #available(iOS 11.0, *) {
+            let window = UIApplication.shared.keyWindow
+            bottomPadding = window?.safeAreaInsets.bottom ?? 0.0
+        }
+
         bioWebView.frame = CGRect(x: self.view.frame.width,
                           y: 0,
                           width: self.view.frame.width,
-                          height: self.view.frame.height - 50
+                          height: self.view.frame.height - bottomPadding - 50
         )
         bioWebView.userToken = userToken
         bioWebView.sendable = self
@@ -538,7 +556,7 @@ import JGProgressHUD
             goBiometricAddNewCard()
         } else if index == cardInfoList.count + 1 {
             //etc
-            goBiometricOther()
+            goWebViewPay(isPasswordPay: false)
         }
     }
     
@@ -549,11 +567,7 @@ import JGProgressHUD
         self.bioWebView.registerCard()
     }
     
-    func goBiometricOther() {
-//        bioPayload
-        //push view controller 하고 돌아온다
-//        sendable?.onOther()
-        
+    func goWebViewPay(isPasswordPay: Bool) {
         if let wv = bootpayWebview {
             wv.removeFromSuperview()
         }
@@ -567,14 +581,13 @@ import JGProgressHUD
        }
 
 
-
        bootpayWebview?.frame = CGRect(x: self.view.frame.width,
                          y: 0,
                          width: self.view.frame.width,
-                         height: self.view.frame.height - bottomPadding
+                         height: self.view.frame.height - bottomPadding - 50
        )
-
-        let script = bioPayload?.generateScript(bootpayWebview?.bridgeName ?? "", items: items, user: user, extra: extra)
+        bioPayload?.user_token = userToken;
+        let script = bioPayload?.generateScript(bootpayWebview?.bridgeName ?? "", items: items, user: user, extra: extra, isPasswordPay: true)
 
 
 //       // 필요한 PG는 팝업으로 띄운다
@@ -593,9 +606,8 @@ import JGProgressHUD
        bootpayWebview?.sendable = self.sendable
        bootpayWebview?.parentController = self
        self.view.addSubview(bootpayWebview!)
-    
-        slideLeftCardUI()
-//        bootpayWebview?.bootpayRequest(script ?? "")
+        
+       slideLeftCardUI()
     }
    
     func presentBootpayController() {
@@ -957,20 +969,12 @@ extension BootpayAuthController {
 
 
 extension BootpayAuthController {
+     
     
     @objc func goBiometricAuth() {
            
         BioMetricAuthenticator.shared.allowableReuseDuration = nil
-        
-//        var reason = ""
-//        if bioAuthType == 2 { //카드 생성
-//            reason = kTouchIdAuthenticationReasonForNewCard
-//        } else if bioAuthType == 3 { //카드 삭제
-//            reason = kTouchIdAuthenticationReasonForDeleteCard
-//        }
-
-       // start authentication
-       BioMetricAuthenticator.authenticateWithBioMetrics(reason: "") { [weak self] (result) in
+        BioMetricAuthenticator.authenticateWithBioMetrics(reason: "") { [weak self] (result) in
 
            
         switch result {
@@ -1042,6 +1046,15 @@ extension BootpayAuthController {
     @objc(transactionConfirm:)
     public func transactionConfirm(data: [String: Any]) {
         //rest api
+        if(currentDeviceBioType) {
+            goTransactionConfirmRestApi(data: data)
+        } else {
+            let json = Bootpay.dicToJsonString(data).replace(target: "'", withString: "\\'")
+            self.bootpayWebview?.doJavascript("window.BootPay.transactionConfirm(\(json));")
+        }
+    }
+    
+    func goTransactionConfirmRestApi(data: [String: Any]) {
         if let data = data["data"] as? [String: Any], let receipt_id = data["receipt_id"] as? String {
             
             var params = [String: Any]()

@@ -124,7 +124,7 @@ extension BootpayController {
                           height: self.view.frame.height - topPadding - bottomPadding - btnMarginTop
         )
         
-        let script = payload.generateScript(wv.bridgeName, items: items, user: user, extra: extra)
+        let script = payload.generateScript(wv.bridgeName, items: items, user: user, extra: extra, isPasswordPay: false)
         
         
         // 필요한 PG는 팝업으로 띄운다

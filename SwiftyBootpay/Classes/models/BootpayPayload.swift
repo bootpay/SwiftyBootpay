@@ -120,7 +120,7 @@ public class BootpayPayload: NSObject, BootpayParams, Mappable  {
         return urlschema
     }
     
-    func generateScript(_ bridgeName: String, items: [BootpayItem]?, user: BootpayUser?, extra: BootpayExtra?) -> String {
+    func generateScript(_ bridgeName: String, items: [BootpayItem]?, user: BootpayUser?, extra: BootpayExtra?, isPasswordPay: Bool) -> String {
         //        print(name)
         //        print(name.replace(target: "'", withString: "\'"))
         
@@ -151,14 +151,18 @@ public class BootpayPayload: NSObject, BootpayParams, Mappable  {
         }
         
 //        "user_token:'\(user_token)',",
+        if(isPasswordPay == true) {
+            array.append("method: 'easy_card',")
+        } else {
+            if !method.isEmpty {
+                array.append("method: '\(method)',")
+            }
+            
+            if !methods.isEmpty {
+                array.append("methods: \(listToJson(methods)),")
+            }
+        }
         
-        if !method.isEmpty {
-            array.append("method: '\(method)',")
-        }
-      
-        if !methods.isEmpty {
-            array.append("methods: \(listToJson(methods)),")
-        }
          
         let userJson = user?.toString() ?? ""
         array.append("user_info: \(userJson),")
