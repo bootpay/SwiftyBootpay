@@ -94,7 +94,7 @@ class BootpayDefault {
         return true
     }
     
-    public static func requestBio(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, payload: BootpayBioPayload, userToken: String, theme: BootpayBioTheme? = nil, extra: BootpayExtra? = nil) {
+    public static func requestBio(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, payload: BootpayBioPayload, user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, theme: BootpayBioTheme? = nil) {
         
         sharedInstance.bioVc = BootpayAuthController()
         
@@ -102,10 +102,13 @@ class BootpayDefault {
         if(payload.application_id.isEmpty) {
             sharedInstance.vc?.payload.application_id = sharedInstance.application_id
         }
+        sharedInstance.bioVc?.userToken = payload.user_token
+        sharedInstance.bioVc?.sendable = sendable
+        
         if theme != nil { sharedInstance.bioVc?.theme = theme! }
-        sharedInstance.bioVc?.sendable = sendable 
-        sharedInstance.bioVc?.userToken = userToken
+        if user != nil { sharedInstance.bioVc?.user = user! }
         if extra != nil { sharedInstance.bioVc?.extra = extra! }
+        if items != nil { sharedInstance.bioVc?.items = items! }
         
         viewController.present(sharedInstance.bioVc!, animated: true, completion: nil) 
     }

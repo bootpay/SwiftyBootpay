@@ -108,16 +108,12 @@ import LocalAuthentication
     func initWebViewUI() {
 //        startBiometricPayUI([])
         
-        var bottomPadding = CGFloat(0.0)
-        if #available(iOS 11.0, *) {
-            let window = UIApplication.shared.keyWindow
-            bottomPadding = window?.safeAreaInsets.bottom ?? 0.0
-        }
+      
 
         bioWebView.frame = CGRect(x: self.view.frame.width,
                           y: 0,
                           width: self.view.frame.width,
-                          height: self.view.frame.height - bottomPadding - 50
+                          height: self.view.frame.height - 50
         )
         bioWebView.userToken = userToken
         bioWebView.sendable = self
@@ -138,8 +134,6 @@ import LocalAuthentication
     }
     
     func authRegisterBiometricOTP(_ biometricSecretKey: String, serverTime: Int) {
-        print("biometricSecretKey: \(biometricSecretKey)")
-        print("serverTime: \(serverTime)")
         
         let value = getOTPValue(biometricSecretKey, serverTime: serverTime)
         registerBiometricOTP(value)
@@ -152,8 +146,6 @@ import LocalAuthentication
             "Accept": "application/json"
         ]
         
-//        print("------- 지갑 요청")
-//        print(headers)
          
         
         AF.request("https://api.bootpay.co.kr/app/easy/card/wallet", method: .get, headers: headers)

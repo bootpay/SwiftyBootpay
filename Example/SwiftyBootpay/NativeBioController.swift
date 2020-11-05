@@ -122,15 +122,45 @@ extension NativeBioController: BootpayRestProtocol {
         p1.price = 89000
         
         p2.name = "쿠폰적용"
-        p2.price = -25000
+        p2.price = -2500
         
         p3.name = "배송비"
         p3.price = 2500
         
         bioPayload.prices = [p1, p2, p3]
+        bioPayload.user_token = userToken
+        
+        let item1 = BootpayItem().params {
+            $0.item_name = "미\"키's 마우스" // 주문정보에 담길 상품명
+            $0.qty = 1 // 해당 상품의 주문 수량
+            $0.unique = "ITEM_CODE_MOUSE" // 해당 상품의 고유 키
+            $0.price = 9000 // 상품의 가격
+        }
+        let item2 = BootpayItem().params {
+            $0.item_name = "키보드" // 주문정보에 담길 상품명
+            $0.qty = 1 // 해당 상품의 주문 수량
+            $0.unique = "ITEM_CODE_KEYBOARD" // 해당 상품의 고유 키
+            $0.price = 80000 // 상품의 가격
+            $0.cat1 = "패션"
+            $0.cat2 = "여\"성'상의"
+            $0.cat3 = "블라우스"
+        }
+        var items = [BootpayItem]()
+        items.append(item1)
+        items.append(item2)
+        
+         // 구매자 정보
+        let bootUser = BootpayUser()
+         bootUser.params {
+//            $0.username = "사용자 이름"
+            $0.email = "user1234@gmail.com"
+            $0.area = "서울" // 사용자 주소
+            $0.addr = "서울시 동작구 상도로";
+            $0.phone = "010-1234-4567"
+         }
         
         
-        Bootpay.requestBio(self, sendable: self, payload: bioPayload, userToken: userToken)
+        Bootpay.requestBio(self, sendable: self, payload: bioPayload, user: bootUser, items: items, extra: extra)
     }
 }
 
