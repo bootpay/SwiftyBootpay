@@ -12,7 +12,7 @@ import SnapKit
 import JGProgressHUD
 import LocalAuthentication
 
-@objc public class BootpayAuthController: UIViewController {
+@objc open class BootpayAuthController: UIViewController {
     @objc public var userToken = ""
     @objc public var sendable: BootpayRequestProtocol?
     @objc public var user = BootpayUser()
