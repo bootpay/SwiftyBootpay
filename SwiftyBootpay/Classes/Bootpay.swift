@@ -94,7 +94,7 @@ class BootpayDefault {
         return true
     }
     
-    public static func requestBio(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, payload: BootpayBioPayload, user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, theme: BootpayBioTheme? = nil) {
+    public static func requestBio(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, payload: BootpayBioPayload, user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, theme: BootpayBioTheme? = nil, addView: Bool = false) {
         
         sharedInstance.bioVc = BootpayAuthController()
         
@@ -110,7 +110,33 @@ class BootpayDefault {
         if extra != nil { sharedInstance.bioVc?.extra = extra! }
         if items != nil { sharedInstance.bioVc?.items = items! }
         
-        viewController.present(sharedInstance.bioVc!, animated: true, completion: nil) 
+        if(addView == true) {
+            sharedInstance.bioVc!.view.backgroundColor = .clear
+            sharedInstance.bioVc!.view.isOpaque = false
+            viewController.view.addSubview(sharedInstance.bioVc!.view)
+        } else {
+          viewController.present(sharedInstance.bioVc!, animated: true, completion: nil)
+        }
+    }
+    
+    public static func requestBio3rd(_ viewController: UIViewController, authController: BootpayAuthController, sendable: BootpayRequestProtocol?, payload: BootpayBioPayload, user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, theme: BootpayBioTheme? = nil) {
+        
+        sharedInstance.bioVc = authController
+        
+        sharedInstance.bioVc?.bioPayload = payload
+        if(payload.application_id.isEmpty) {
+            sharedInstance.vc?.payload.application_id = sharedInstance.application_id
+        }
+        sharedInstance.bioVc?.userToken = payload.user_token
+        sharedInstance.bioVc?.sendable = sendable
+        
+        
+        if theme != nil { sharedInstance.bioVc?.theme = theme! }
+        if user != nil { sharedInstance.bioVc?.user = user! }
+        if extra != nil { sharedInstance.bioVc?.extra = extra! }
+        if items != nil { sharedInstance.bioVc?.items = items! }
+        
+        viewController.present(sharedInstance.bioVc!, animated: true, completion: nil)
     }
     
     
