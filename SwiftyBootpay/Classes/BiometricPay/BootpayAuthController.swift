@@ -52,6 +52,9 @@ import LocalAuthentication
     var cardSelectView: CardSelectView!
     let hud = JGProgressHUD()
     
+    var isShowCloseMsg = true
+    var isWebViewPay = false
+    
     override public func viewDidLoad() {
         super.viewDidLoad() 
         
@@ -68,7 +71,18 @@ import LocalAuthentication
             goWebViewPay(isPasswordPay: true) 
         }
     }
-    
+     
+    open override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if isShowCloseMsg == true {
+            var data = [String : Any]()
+            data["message"] = "사용자가 창을 닫았습니다."
+            data["action"] = "BootpayCancel"
+            data["code"] = -102            
+            sendable?.onCancel(data: data)
+            sendable?.onClose()
+        }
+    }
     
     func initUI() {
         hideBtn.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
@@ -523,6 +537,7 @@ import LocalAuthentication
     
     func goClickCard(_ index: Int) {
         if index < cardInfoList.count {
+            isWebViewPay = false
             //결제수단 선택
             self.selectedCardIndex = index
             if isEnableBioPayThisDevice() {
@@ -560,6 +575,8 @@ import LocalAuthentication
     }
     
     func goWebViewPay(isPasswordPay: Bool) {
+        isWebViewPay = true
+        isShowCloseMsg = false
         if let wv = bootpayWebview {
             wv.removeFromSuperview()
         }
@@ -578,8 +595,10 @@ import LocalAuthentication
                          width: self.view.frame.width,
                          height: self.view.frame.height - bottomPadding - 50
        )
-        bioPayload?.user_token = userToken;
-        let script = bioPayload?.generateScript(bootpayWebview?.bridgeName ?? "", items: items, user: user, extra: extra, isPasswordPay: true)
+        if(isPasswordPay == true) { bioPayload?.user_token = userToken; }
+        else { bioPayload?.user_token = "" }
+        
+        let script = bioPayload?.generateScript(bootpayWebview?.bridgeName ?? "", items: items, user: user, extra: extra, isPasswordPay: isPasswordPay)
 
 
 //       // 필요한 PG는 팝업으로 띄운다
@@ -687,6 +706,7 @@ import LocalAuthentication
     
     
     @objc func hideActionView() {
+        isShowCloseMsg = true 
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -733,6 +753,8 @@ import LocalAuthentication
         
         hud.textLabel.text = "결제 요청중"
         hud.show(in: self.view)
+        
+        isShowCloseMsg = false
         
         AF.request("https://api.bootpay.co.kr/app/easy/card/request", method: .post, parameters: params, headers: headers)
                  .validate() 
@@ -1038,7 +1060,9 @@ extension BootpayAuthController {
     @objc(transactionConfirm:)
     public func transactionConfirm(data: [String: Any]) {
         //rest api
-        if(currentDeviceBioType) {
+        isShowCloseMsg = false
+        if(isWebViewPay == false) {
+            
             goTransactionConfirmRestApi(data: data)
         } else {
             let json = Bootpay.dicToJsonString(data).replace(target: "'", withString: "\\'")
@@ -1072,7 +1096,7 @@ extension BootpayAuthController {
                         case .failure(_):
                             if let data = response.data {
                                 if let jsonString = String(data: data, encoding: String.Encoding.utf8), let json = jsonString.convertToDictionary() {
-                                    self.sendable?.onDone(data: json)
+                                    self.sendable?.onError(data: json)
                                     if let code = json["code"] as? Int, let msg = json["message"] as? String {
                                         self.showAlert(title: "에러코드: \(code)", message: msg)
                                     }
