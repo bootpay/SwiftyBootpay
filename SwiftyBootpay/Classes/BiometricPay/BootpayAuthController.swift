@@ -61,8 +61,6 @@ import LocalAuthentication
         initUI()
         slideUpCardUI()
         
-//        print(BioMetricAuthenticator.canAuthenticate())
-        
         currentDeviceBioType = BioMetricAuthenticator.canAuthenticate()
         
         if(currentDeviceBioType) {
@@ -199,7 +197,6 @@ import LocalAuthentication
         self.cardInfoList.removeAll()
         
         if let cardList = cardList {
-
             for card in cardList {
                 if let obj = card as? [String: AnyObject] {
                     let cardInfo = CardInfo()
@@ -210,6 +207,12 @@ import LocalAuthentication
         }
         
         appendCardUI()
+        if let cardList = cardList {
+            self.bottomTitle?.text = self.bt1
+        } else {
+            self.bottomTitle?.text = self.bt2
+        }
+        
         if isEnableDeviceSoon == true {
             goBiometricAuth()
         }
@@ -498,7 +501,7 @@ import LocalAuthentication
 
 
         let bottomTitle = UILabel()
-        bottomTitle.text = self.bt1
+        bottomTitle.text = self.bt2
         bottomTitle.font =  bottomTitle.font.withSize(14)
         bottomTitle.textColor = theme.fontColor.withAlphaComponent(0.7)
         actionView.addSubview(bottomTitle)
@@ -543,18 +546,7 @@ import LocalAuthentication
             if isEnableBioPayThisDevice() {
                 goBiometricAuth()
             } else {
-                let okAction = AlertAction(title: OKTitle)
-                let alertController = getAlertViewController(type: .alert, with: title, message: "이 기기에서 결제할 수 있도록 설정합니다\n(최초 1회)", actions: [okAction], showCancel: true) { (btnTitle) in
-                    if btnTitle == OKTitle {
-                        
-//                        self.bioAuthType = 5
-                        self.bioWebView.request_type = BootpayAuthWebView.REQUEST_TYPE_ENABLE_DEVICE
-                        self.slideLeftCardUI()
-                        self.bioWebView.verifyPassword()
-                    }
-                  }
-                
-                present(alertController, animated: true, completion: nil)
+                goEnableThisDevice()
             }
             
             
@@ -896,8 +888,42 @@ extension BootpayAuthController {
              }
     }
     
-    func registerBiometricOTP(_ otp: String) {
+    func goDeleteCardAll(wallet_id: String) {
+        let headers: HTTPHeaders = [
+            "BOOTPAY-DEVICE-UUID": Bootpay.getUUID(),
+            "BOOTPAY-USER-TOKEN": userToken,
+            "Accept": "application/json"
+        ]
         
+        hud.textLabel.text = "초기화 진행중"
+        hud.show(in: self.view)
+        
+        AF.request("https://api.bootpay.co.kr/app/easy/card/wallet/\(wallet_id)", method: .delete, headers: headers)
+                 .validate()
+                 .responseJSON { response in
+                    self.hud.dismiss(afterDelay: 0.5)
+                     
+                    switch response.result {
+                    case .success(let value):
+                        guard let res = value as? [String: AnyObject] else { return }
+                        
+                        if(res["code"] as! Int != 0) { return }
+                        self.getWalletCardRequest()
+                        
+                    case .failure(_):
+                        if let data = response.data {
+                            if let jsonString = String(data: data, encoding: String.Encoding.utf8), let json = jsonString.convertToDictionary() {
+                                if let code = json["code"] as? Int, let msg = json["message"] as? String {
+                                    self.showAlert(title: "에러코드: \(code)", message: msg)
+                                }
+                            }
+                        }
+                    }
+        }
+        
+    }
+    
+    func registerBiometricOTP(_ otp: String) {        
         var params = [String: Any]()
         params["otp"] = otp
         
@@ -956,6 +982,17 @@ extension BootpayAuthController {
         present(alertController, animated: true, completion: nil)
     }
     
+    func showDeleteAlert(title: String, message: String, OKTitle: String = "초기화", wallet_id: String) {
+        let okAction = AlertAction(title: OKTitle)
+        let alertController = getAlertViewController(type: .alert, with: title, message: message, actions: [okAction], showCancel: true) { (button) in
+            if(button == OKTitle) {
+                self.goDeleteCardAll(wallet_id: wallet_id)
+            }
+//            self.dismiss()
+        }
+        present(alertController, animated: true, completion: nil)
+    }
+    
     func showLoginSucessAlert() {
         showAlert(title: "Success", message: "Login successful")
     }
@@ -979,6 +1016,19 @@ extension BootpayAuthController {
         })
         present(alertController, animated: true, completion: nil)
     }
+    
+    func goEnableThisDevice() {
+        let okAction = AlertAction(title: OKTitle)
+        let alertController = getAlertViewController(type: .alert, with: title, message: "이 기기에서 결제할 수 있도록 설정합니다\n(최초 1회)", actions: [okAction], showCancel: true) { (btnTitle) in
+            if btnTitle == OKTitle {
+                self.bioWebView.request_type = BootpayAuthWebView.REQUEST_TYPE_ENABLE_DEVICE
+                self.slideLeftCardUI()
+                self.bioWebView.verifyPassword()
+            }
+          }
+        present(alertController, animated: true, completion: nil)
+    }
+    
 }
 
 
@@ -1088,6 +1138,7 @@ extension BootpayAuthController {
             AF.request("https://api.bootpay.co.kr/app/easy/confirm", method: .post, parameters: params, headers: headers)
                      .validate()
                      .responseJSON { response in
+                        self.hud.dismiss(afterDelay: 0.5)
                         
                         switch response.result {
                         case .success(let value):
@@ -1098,7 +1149,10 @@ extension BootpayAuthController {
                                 if let jsonString = String(data: data, encoding: String.Encoding.utf8), let json = jsonString.convertToDictionary() {
                                     self.sendable?.onError(data: json)
                                     if let code = json["code"] as? Int, let msg = json["message"] as? String {
-                                        self.showAlert(title: "에러코드: \(code)", message: msg)
+                                        
+                                        let wallet_id = self.cardInfoList[self.selectedCardIndex].wallet_id
+                                       
+                                        self.showDeleteAlert(title: "에러코드: \(code)\n\(msg)", message: "등록된 결제수단 정보를 초기화 합니다.", wallet_id: wallet_id)
                                     }
                                 }
                             }
