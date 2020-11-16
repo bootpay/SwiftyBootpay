@@ -105,7 +105,6 @@ extension BootpayWebView {
     }
     
     internal func loadBootapyRequest() {
-        print(self.bootpayScript)
         doJavascript(self.bootpayScript)
     }
 }
@@ -122,7 +121,6 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
             setAnalytics()
             
             if(quick_popup == 1) {
-                print("quick popup")
                 wv.evaluateJavaScript("window.BootPay.startQuickPopup();") { (value, error) in
                     self.loadBootapyRequest()
                 }

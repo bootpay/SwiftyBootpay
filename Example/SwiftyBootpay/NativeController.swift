@@ -14,11 +14,14 @@ import Alamofire
 class NativeController: UIViewController {
     var payType = 1 // 1일경우 인앱결제, 2일경우 지문결제
     var vc: BootpayController!
+   
+    let application_id = "5b8f6a4d396fa665fdc2b5e9"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.view.backgroundColor = UIColor.white
+       
        
       
         setUI()
@@ -104,14 +107,13 @@ class NativeController: UIViewController {
       }
       
       let payload = BootpayPayload()
-      //         $0.application_id = "5a52cc39396fa6449880c0f0"
       // 주문정보 - 실제 결제창에 반영되는 정보
       payload.params {
          $0.price = 1000 // 결제할 금액
          $0.name = "블링\"블링's 마스카라" // 결제할 상품명
          $0.order_id = "1234_1234_124" // 결제 고유번호
          $0.params = customParams // 커스텀 변수
-         $0.application_id = "5b8f6a4d396fa665fdc2b5e9"
+         $0.application_id = application_id
 //         $0.user_info = bootUser
          $0.pg = "danal" // 결제할 PG사
          //            $0.account_expire_at = "2018-09-25" // 가상계좌 입금기간 제한 ( yyyy-mm-dd 포멧으로 입력해주세요. 가상계좌만 적용됩니다. 오늘 날짜보다 더 뒤(미래)여야 합니다 )
@@ -181,7 +183,7 @@ class NativeController: UIViewController {
          $0.name = "블링\"블링's 마스카라" // 결제할 상품명
          $0.order_id = "1234_1234_124" // 결제 고유번호
          $0.params = customParams // 커스텀 변수
-         $0.application_id = "5b8f6a4d396fa665fdc2b5e9"
+         $0.application_id = application_id
          //         $0.user_info = bootUser
          $0.pg = "payletter" // 결제할 PG사
          //            $0.account_expire_at = "2018-09-25" // 가상계좌 입금기간 제한 ( yyyy-mm-dd 포멧으로 입력해주세요. 가상계좌만 적용됩니다. 오늘 날짜보다 더 뒤(미래)여야 합니다 )
@@ -252,7 +254,7 @@ class NativeController: UIViewController {
          $0.name = "블링\"블링's 마스카라" // 결제할 상품명
          $0.order_id = "1234_1234_124" // 결제 고유번호
          $0.params = customParams // 커스텀 변수
-         $0.application_id = "5b8f6a4d396fa665fdc2b5e9"
+         $0.application_id = application_id
          //         $0.user_info = bootUser
          $0.pg = "danal" // 결제할 PG사
          //            $0.account_expire_at = "2018-09-25" // 가상계좌 입금기간 제한 ( yyyy-mm-dd 포멧으로 입력해주세요. 가상계좌만 적용됩니다. 오늘 날짜보다 더 뒤(미래)여야 합니다 )
@@ -362,24 +364,26 @@ extension NativeController {
             $0.name = "테스트's 마스카라" // 결제할 상품명
             $0.order_id = "1234_1234_124" // 결제 고유번호
             $0.params = customParams // 커스텀 변수
-            $0.application_id = "5b8f6a4d396fa665fdc2b5e9"
+            $0.application_id = application_id
             
             
-            $0.pg = BootpayPG.DANAL // 결제할 PG사
+            
+            $0.pg = BootpayPG.KCP // 결제할 PG사
 
             $0.account_expire_at = "2020-10-28" // 가상계좌 입금기간 제한 ( yyyy-mm-dd 포멧으로 입력해주세요. 가상계좌만 적용됩니다. 오늘 날짜보다 더 뒤(미래)여야 합니다 )
 //                        $0.method = "card" // 결제수단
             $0.show_agree_window = false
 //            $0.methods = [Method.BANK, Method.CARD, Method.PHONE, Method.VBANK]
-//            $0.method = Method.CARD
+            $0.method = Method.NPAY
             $0.ux = UX.PG_DIALOG
          }
       
          let extra = BootpayExtra()
-         extra.popup = 1
+//         extra.popup = 0 //다날 정기결제의 경우 0
+//         extra.quick_popup = 0 //다날 정기결제의 경우 0
       
 //         extra.offer_period = "1년치"
-         extra.quick_popup = 1;
+         
          extra.quotas = [0, 1, 2, 3] // 5만원 이상일 경우 할부 허용범위 설정 가능, (예제는 일시불, 2개월 할부, 3개월 할부 허용)
 //         extra.app_scheme = "test://"; // 페이레터와 같은 특정 PG사의 경우 :// 값을 붙여야 할 수도 있습니다.
 
@@ -434,7 +438,7 @@ extension NativeController: BootpayRequestProtocol {
     // 아이템 지급 등 데이터 동기화 로직을 수행합니다
     func onDone(data: [String: Any]) {
 //        print("onDone")
-        print("------------ done \(data)")
+        print("------------ done \(data)") 
     }
     
     //결제창이 닫힐때 실행되는 부분
@@ -503,8 +507,7 @@ extension NativeController: BootpayRestProtocol {
          $0.name = "블링블링's 마스카라" // 결제할 상품명
 //         $0.phone
          $0.order_id = "1234_1234_124" // 결제 고유번호
-//            $0.application_id = "5e0daa104f74b40024d23183"
-         $0.application_id = "5b8f6a4d396fa665fdc2b5e9"
+         $0.application_id = application_id
          $0.user_token = userToken
          
 //
