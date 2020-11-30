@@ -24,8 +24,9 @@ import WebKit
     var wv: WKWebView!
 
     let configuration = WKWebViewConfiguration()
+    var preUrl = ""
     
-    var popupWV: WKWebView!
+    var popupWV: WKWebView?
     final let BASE_URL = Bootpay.URL
     final let bridgeName = "Bootpay_iOS"
     var firstLoad = false
@@ -67,12 +68,34 @@ extension BootpayWebView {
         }
     }
     
+    func didBecomeActive() {
+        //네아로 로그인일 경우 요청
+//        naversearchthirdlogin://access.naver.com?version=3&session=NkfmtANmdsIcnOBwGv4jm2TwpT98XfR1&callbackurl=
+        if(preUrl.starts(with: "naversearchthirdlogin://")) {
+            //방법1. 네아로 로그인을 부트페이가 중간에서 개입할 수 없기때문에, 중간에서 강제로 호출
+            if let value = getQueryStringParameter(url: preUrl, param: "session") {
+                if let url = URL(string: "https://nid.naver.com/login/scheme.redirect?session=\(value)") {
+                    self.popupWV?.load(URLRequest(url: url))
+                }
+            }
+            
+            //방법2. 네아로 로그인을 부트페이가 중간에서 개입할 수 없기때문에, 대안으로 브라우저에 노출된 이벤트를 실행시킨다
+//            self.popupWV?.evaluateJavaScript("document.getElementById('appschemeLogin_again').click()", completionHandler: nil)
+        }
+    }
+    
+    func getQueryStringParameter(url: String, param: String) -> String? {
+      guard let url = URLComponents(string: url) else { return nil }
+      return url.queryItems?.first(where: { $0.name == param })?.value
+    }
+    
     func startRequest(_ request: URLRequest) {
         
         wv.load(request)
     }
     
-    func registerAppId() {        doJavascript("window.BootPay.setApplicationId('\(Bootpay.sharedInstance.application_id)');")
+    func registerAppId() {
+        doJavascript("window.BootPay.setApplicationId('\(Bootpay.sharedInstance.application_id)');")
     }
     
     func setDevelopMode() {
@@ -144,6 +167,9 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if let url = navigationAction.request.url {
               
+            preUrl = url.absoluteString
+            print(preUrl)
+            
             if(isItunesURL(url.absoluteString)) {
                 if #available(iOS 10, *) {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -152,6 +178,7 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
                 }
                 decisionHandler(.cancel)
             } else if url.scheme != "http" && url.scheme != "https" {
+                
                 if #available(iOS 10, *) {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 } else {
@@ -234,6 +261,7 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
         wv.load(navigationAction.request)
         wv.uiDelegate = self
         wv.navigationDelegate = self
+        popupWV = wv
         self.addSubview(wv)
          
         return wv

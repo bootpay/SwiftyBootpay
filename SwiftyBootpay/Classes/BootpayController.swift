@@ -71,6 +71,11 @@ extension URL {
 
 extension BootpayController: BootpayParams {
     
+    @objc(didBecomeActive)
+    public func didBecomeActive() {
+        wv.didBecomeActive()
+    }
+    
     @objc(transactionConfirm:)
     public func transactionConfirm(data: [String: Any]) {
         let json = Bootpay.dicToJsonString(data).replace(target: "'", withString: "\\'") 

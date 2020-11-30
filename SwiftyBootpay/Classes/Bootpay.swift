@@ -332,6 +332,7 @@ extension Bootpay {
     open func sessionActive(active: Bool) {
         if active == true {
             loadSessionValues()
+            vc?.didBecomeActive()
         } else {
             let currentTime = currentTimeInMiliseconds()
             self.last_time = currentTime
