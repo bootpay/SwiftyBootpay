@@ -30,8 +30,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '10.0'
   s.swift_version = '4.2'
 
-  s.source_files = 'SwiftyBootpay/Classes/**/*'
-  s.branch => 'main'
+  s.source_files = 'SwiftyBootpay/Classes/**/*' 
 
   
   s.resource_bundles = {
