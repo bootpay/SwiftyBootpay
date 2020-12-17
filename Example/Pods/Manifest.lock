@@ -6,7 +6,7 @@ PODS:
   - SnapKit (5.0.1)
   - SwiftOTP (2.0.3):
     - CryptoSwift (>= 1.0.0)
-  - SwiftyBootpay (3.3.6):
+  - SwiftyBootpay (3.3.81):
     - Alamofire (~> 5.2.2)
     - CryptoSwift
     - JGProgressHUD
@@ -37,7 +37,7 @@ SPEC CHECKSUMS:
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftOTP: ce98ded1ab42e4e66c39228fcad6b0c07b98e494
-  SwiftyBootpay: a2b24f99d066103349f02e5ece74ff105a098742
+  SwiftyBootpay: cdb1abaced9e0d0c5415824cc539fe60a3a6d0c2
 
 PODFILE CHECKSUM: d088f3acb154f9617cdcf95aae0cbf40903d80d2
 

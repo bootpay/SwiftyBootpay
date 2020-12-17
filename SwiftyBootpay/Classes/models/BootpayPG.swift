@@ -23,6 +23,7 @@ public struct PG {
     public static let BOOTPAY = "bootpay"
     public static let ONESTORE = "onestore"
     public static let WELCOME = "welcome"
+    public static let TOSS = "toss"
 }
 
 @objc public class BootpayPG: NSObject {
@@ -43,6 +44,7 @@ public struct PG {
     @objc public static let BOOTPAY = PG.BOOTPAY
     @objc public static let ONESTORE = PG.ONESTORE
     @objc public static let WELCOME = PG.WELCOME
+    @objc public static let TOSS = PG.TOSS
 }
 
 class PGName {
@@ -57,6 +59,8 @@ class PGName {
         case PG.NICEPAY:
             return "NICEPAY"
         case PG.LGUP:
+            return "토스페이먼츠"
+        case PG.TOSS:
             return "토스페이먼츠"
         case PG.PAYAPP:
             return "페이앱"

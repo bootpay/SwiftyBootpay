@@ -128,6 +128,8 @@ extension BootpayWebView {
     }
     
     internal func loadBootapyRequest() {
+        print(self.bootpayScript)
+        
         doJavascript(self.bootpayScript)
     }
 }
@@ -167,8 +169,7 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if let url = navigationAction.request.url {
               
-            preUrl = url.absoluteString
-            print(preUrl)
+            preUrl = url.absoluteString 
             
             if(isItunesURL(url.absoluteString)) {
                 if #available(iOS 10, *) {

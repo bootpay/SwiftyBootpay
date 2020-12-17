@@ -191,6 +191,8 @@ public class BootpayPayload: NSObject, BootpayParams, Mappable  {
                 "}).done(function (data) {",
                 "webkit.messageHandlers.\(bridgeName).postMessage(data);",
                 "});"]
+        
+        
          
         return result.reduce("", +)
     }

@@ -132,6 +132,7 @@ extension BootpayController {
         let script = payload.generateScript(wv.bridgeName, items: items, user: user, extra: extra, isPasswordPay: false)
         
         
+        
         // 필요한 PG는 팝업으로 띄운다
         var quick_popup = extra.quick_popup;
         if(quick_popup == -1 && payload.pg != "payapp" && payload.method == "card") {
