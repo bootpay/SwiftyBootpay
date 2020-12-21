@@ -141,16 +141,16 @@ class BootpayDefault {
     
     
     
-        public static func request(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, payload: BootpayPayload,  user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, smsPayload: SMSPayload? = nil, remoteForm: RemoteOrderForm? = nil, remotePre: RemoteOrderPre? = nil, addView: Bool? = false, _ gameObject: String = "") {
+    public static func request(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, payload: BootpayPayload,  user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, smsPayload: SMSPayload? = nil, remoteForm: RemoteOrderForm? = nil, remotePre: RemoteOrderPre? = nil, addView: Bool? = false, _ gameObject: String = "", isModalButNoFullScreen: Bool? = false) {
         
         if(!checkValid(payload: payload, user: user, items: items, extra: extra, smsPayload: smsPayload, remoteForm: remoteForm, remotePre: remotePre)) { return }
         
         switch payload.ux {
         case UX.PG_DIALOG:
-            request_dialog(viewController, sendable: sendable, payload: payload, user: user, items: items, extra: extra, smsPayload: smsPayload, addView: addView)
+            request_dialog(viewController, sendable: sendable, payload: payload, user: user, items: items, extra: extra, smsPayload: smsPayload, addView: addView, isModalButNoFullScreen: isModalButNoFullScreen)
       
         case UX.PG_SUBSCRIPT:
-            request_dialog(viewController, sendable: sendable, payload: payload, user: user, items: items, extra: extra, smsPayload: smsPayload)
+            request_dialog(viewController, sendable: sendable, payload: payload, user: user, items: items, extra: extra, smsPayload: smsPayload, isModalButNoFullScreen: isModalButNoFullScreen)
 //        case UX.BOOTPAY_REMOTE_LINK:
 //            request_link(payload, items: items, user: user, extra: extra, smsPayload: smsPayload)
 //        case UX.BOOTPAY_REMOTE_FORM:
@@ -163,12 +163,14 @@ class BootpayDefault {
     }
      
     
-    private static func request_dialog(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, payload: BootpayPayload,  user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, smsPayload: SMSPayload? = nil, addView: Bool? = false, ux: String? = nil) {
+    private static func request_dialog(_ viewController: UIViewController, sendable: BootpayRequestProtocol?, payload: BootpayPayload,  user: BootpayUser? = nil, items: [BootpayItem]? = nil, extra: BootpayExtra? = nil, smsPayload: SMSPayload? = nil, addView: Bool? = false, ux: String? = nil, isModalButNoFullScreen: Bool? = false) {
  
         sharedInstance.vc = BootpayController() 
         
         sharedInstance.vc?.payload = payload
         if(payload.application_id.isEmpty) { sharedInstance.vc?.payload.application_id = sharedInstance.application_id }
+        
+        if let isModalButNoFullScreen = isModalButNoFullScreen { sharedInstance.vc?.isModalButNoFullScreen = isModalButNoFullScreen }
          
         
         if let user = user { sharedInstance.vc?.user = user }
