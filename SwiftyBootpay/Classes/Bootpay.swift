@@ -377,9 +377,7 @@ extension Bootpay {
 
         guard let payload = BootpayPayload(JSONString: payload) else { return }
         guard let user = BootpayUser(JSONString: user) else { return }
-
-
-//        let items = BootpayUser(JSONString: user)
+ 
         guard let extra = BootpayExtra(JSONString: extra) else { return }
         do {
           let items = try JSONDecoder().decode([BootpayItem].self, from: items.data(using: .utf8)!)

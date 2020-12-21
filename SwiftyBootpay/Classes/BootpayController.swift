@@ -59,7 +59,8 @@ extension URL {
     @objc public var user = BootpayUser()
     @objc public var extra = BootpayExtra()
     @objc public var ux = ""
-    @objc public var items = [BootpayItem]()  
+    @objc public var items = [BootpayItem]()
+    @objc public var isModalButNoFullScreen = false //팝업이긴 하지만 풀 스크린이 아닐 경우
      
     var isPaying = false
     @objc public var sendable: BootpayRequestProtocol?
@@ -120,6 +121,7 @@ extension BootpayController {
             topPadding = window?.safeAreaInsets.top ?? 0.0
             bottomPadding = window?.safeAreaInsets.bottom ?? 0.0
         }
+        if(isModalButNoFullScreen == true) { topPadding = CGFloat(0) }
         
      
         
