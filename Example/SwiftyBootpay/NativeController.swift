@@ -380,8 +380,8 @@ extension NativeController {
          }
       
          let extra = BootpayExtra()
-         extra.popup = 1 //다날 정기결제의 경우 0
-         extra.quick_popup = 1 //다날 정기결제의 경우 0
+         extra.popup = 0 //다날 정기결제의 경우 0
+         extra.quick_popup = 0 //다날 정기결제의 경우 0
       
 //         extra.offer_period = "1년치"
          
@@ -401,7 +401,7 @@ extension NativeController {
          items.append(item1)
          items.append(item2)
       
-      Bootpay.request(self, sendable: self, payload: payload, user: bootUser, items: items, extra: extra, addView: true)
+      Bootpay.request(self, sendable: self, payload: payload, user: bootUser, items: items, extra: extra, addView: false)
     }
 }
 

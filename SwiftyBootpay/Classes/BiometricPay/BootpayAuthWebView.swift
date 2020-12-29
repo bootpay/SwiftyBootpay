@@ -48,6 +48,7 @@ import WebKit
         let configuration = WKWebViewConfiguration()
         configuration.userContentController.add(self, name: bridgeName)
         wv = WKWebView(frame: frame, configuration: configuration)
+//        wv.
         wv.uiDelegate = self
         wv.navigationDelegate = self
         self.addSubview(wv)
@@ -83,8 +84,8 @@ extension BootpayAuthWebView {
     
     func registerAppId() {
 //        let app_id = "5b8f6a4d396fa665fdc2b5e9"
-        let app_id = "5b9f51264457636ab9a07cdd"
-        doJavascript("window.BootPay.setApplicationId('\(app_id)');")
+//        let app_id = "5b9f51264457636ab9a07cdd"
+        doJavascript("window.BootPay.setApplicationId('\(Bootpay.sharedInstance.application_id)');")
     }
     
     func setDevelopMode() {
