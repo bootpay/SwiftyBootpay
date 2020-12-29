@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftyBootpay'
-  s.version          = '3.3.831'
+  s.version          = '3.3.832'
   s.summary          = 'Bootpay PG Plugin For Swift'
 
 # This description is used to generate tags and improve search results.
@@ -36,10 +36,7 @@ Pod::Spec.new do |s|
   s.resource_bundles = {
     'SwiftyBootpay' => ['SwiftyBootpay/*.xcassets']
   }
-
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  
+ 
   s.static_framework = true
   s.dependency 'CryptoSwift'  
   s.dependency 'Alamofire',  '~> 5.2.2'

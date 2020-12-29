@@ -46,10 +46,20 @@ import WebKit
         wv = WKWebView(frame: self.bounds, configuration: configuration)
         wv.uiDelegate = self
         wv.navigationDelegate = self
+        wv.scrollView.delegate = self
         self.quick_popup = quick_popup
         self.addSubview(wv)
         self.bootpayScript = script
         self.loadUrl(BASE_URL)
+    }
+    
+    deinit {
+        if(wv != nil) {
+            wv.uiDelegate = nil
+            wv.navigationDelegate = self
+            wv.scrollView.delegate = nil
+        }
+        
     }
 }
 
@@ -270,3 +280,8 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
 }
 
 
+extension BootpayWebView: UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return nil
+    }
+}
