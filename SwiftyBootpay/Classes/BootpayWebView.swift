@@ -269,8 +269,8 @@ extension BootpayWebView: WKNavigationDelegate, WKUIDelegate, WKScriptMessageHan
     }
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-//         let wv = WKWebView()
-         let wv = WKWebView(frame: self.bounds, configuration: configuration)
+
+        let wv = WKWebView(frame: self.bounds, configuration: configuration)
         wv.load(navigationAction.request)
         wv.uiDelegate = self
         wv.navigationDelegate = self 
