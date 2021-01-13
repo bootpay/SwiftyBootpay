@@ -369,7 +369,7 @@ extension NativeController {
             
             
             
-            $0.pg = BootpayPG.KICC // 결제할 PG사
+            $0.pg = BootpayPG.INICIS // 결제할 PG사
 
             $0.account_expire_at = "2020-12-07" // 가상계좌 입금기간 제한 ( yyyy-mm-dd 포멧으로 입력해주세요. 가상계좌만 적용됩니다. 오늘 날짜보다 더 뒤(미래)여야 합니다 )
 //                        $0.method = "card" // 결제수단
@@ -380,8 +380,8 @@ extension NativeController {
          }
       
          let extra = BootpayExtra()
-         extra.popup = 0 //다날 정기결제의 경우 0
-         extra.quick_popup = 0 //다날 정기결제의 경우 0
+         extra.popup = 1 //다날 정기결제의 경우 0
+         extra.quick_popup = 1 //다날 정기결제의 경우 0
       
 //         extra.offer_period = "1년치"
          

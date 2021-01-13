@@ -9,6 +9,7 @@ public struct PG {
     public static let KCP = "kcp"
     public static let DANAL = "danal"
     public static let INICIS = "inicis"
+    public static let UDPAY = "udpay"
     public static let NICEPAY = "nicepay"
     public static let LGUP = "lgup"
     public static let PAYAPP = "payapp"
@@ -30,6 +31,7 @@ public struct PG {
     @objc public static let KCP = PG.KCP
     @objc public static let DANAL = PG.DANAL
     @objc public static let INICIS = PG.INICIS
+    @objc public static let UDPAY = PG.UDPAY
     @objc public static let NICEPAY = PG.NICEPAY
     @objc public static let LGUP = PG.LGUP
     @objc public static let PAYAPP = PG.PAYAPP
@@ -56,6 +58,8 @@ class PGName {
             return "Danal"
         case PG.INICIS:
             return "KG 이니시스"
+        case PG.UDPAY:
+            return "유디페이"
         case PG.NICEPAY:
             return "NICEPAY"
         case PG.LGUP:
