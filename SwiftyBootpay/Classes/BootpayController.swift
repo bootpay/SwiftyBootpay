@@ -123,12 +123,10 @@ extension BootpayController {
         }
         if(isModalButNoFullScreen == true) { topPadding = CGFloat(0) }
         
-     
-        
         wv.frame = CGRect(x: 0,
-                          y: topPadding + btnMarginTop,
+                          y: topPadding + btnMarginTop + extra.topMargin,
                           width: self.view.frame.width,
-                          height: self.view.frame.height - topPadding - bottomPadding - btnMarginTop
+                          height: self.view.frame.height - topPadding - bottomPadding - btnMarginTop - extra.topMargin
         )
         
         let script = payload.generateScript(wv.bridgeName, items: items, user: user, extra: extra, isPasswordPay: false)

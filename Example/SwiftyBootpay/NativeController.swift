@@ -369,13 +369,13 @@ extension NativeController {
             
             
             
-            $0.pg = BootpayPG.INICIS // 결제할 PG사
+            $0.pg = BootpayPG.NICEPAY // 결제할 PG사
 
             $0.account_expire_at = "2020-12-07" // 가상계좌 입금기간 제한 ( yyyy-mm-dd 포멧으로 입력해주세요. 가상계좌만 적용됩니다. 오늘 날짜보다 더 뒤(미래)여야 합니다 )
 //                        $0.method = "card" // 결제수단
             $0.show_agree_window = false
 //            $0.methods = [Method.BANK, Method.CARD, Method.PHONE, Method.VBANK]
-//            $0.method = Method.CARD
+            $0.method = Method.CARD
             $0.ux = UX.PG_DIALOG
          }
       
@@ -390,18 +390,19 @@ extension NativeController {
 
 
       //   close 버튼을 커스텀하기
-//         let close = UIButton()
-//         close.setTitle("XX", for: .normal)
-//         close.frame = CGRect(x: self.view.frame.width - 40, y: 20, width: 40, height: 30)
-//         close.setTitleColor(.darkGray, for: .normal)
-//         extra.iosCloseButtonView = close
-//         extra.iosCloseButton = true
+         let close = UIButton()
+         close.setTitle("XX", for: .normal)
+         close.frame = CGRect(x: self.view.frame.width - 40, y: 20, width: 40, height: 30)
+         close.setTitleColor(.darkGray, for: .normal)
+         extra.iosCloseButtonView = close
+         extra.iosCloseButton = true
       
          var items = [BootpayItem]()
          items.append(item1)
          items.append(item2)
       
-      Bootpay.request(self, sendable: self, payload: payload, user: bootUser, items: items, extra: extra, addView: false)
+         extra.topMargin = 0.0
+         Bootpay.request(self, sendable: self, payload: payload, user: bootUser, items: items, extra: extra, addView: false)
     }
 }
 

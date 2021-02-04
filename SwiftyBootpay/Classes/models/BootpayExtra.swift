@@ -29,6 +29,7 @@ public class BootpayExtra: NSObject, BootpayParams, Mappable {
     @objc public var custom_background = "" //theme가 custom인 경우 배경 색 지정 가능 ( ex: #f2f2f2 )
     @objc public var custom_font_color = "" //theme가 custom인 경우 폰트색 지정 가능 ( ex: #333333 )
     
+    @objc public var topMargin:CGFloat = 0.0
     
     public override init() {}
     public required init?(map: Map) {
@@ -55,6 +56,7 @@ public class BootpayExtra: NSObject, BootpayParams, Mappable {
         theme <- map["theme"]
         custom_background <- map["custom_background"]
         custom_font_color <- map["custom_font_color"]
+        topMargin <- map["topMargin"]
     }
     
     public func getJson(pg: String) -> String {
@@ -77,7 +79,9 @@ public class BootpayExtra: NSObject, BootpayParams, Mappable {
                 "theme:'\(theme)',",
                 "custom_background:'\(custom_background)',",
                 "custom_font_color:'\(custom_font_color)',",
+                "topMargin:'\(topMargin)',",
                 "iosCloseButton: \(iosCloseButton)",
+            
         ]
         
         if(pg == "onestore") {
