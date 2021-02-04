@@ -390,12 +390,12 @@ extension NativeController {
 
 
       //   close 버튼을 커스텀하기
-         let close = UIButton()
-         close.setTitle("XX", for: .normal)
-         close.frame = CGRect(x: self.view.frame.width - 40, y: 20, width: 40, height: 30)
-         close.setTitleColor(.darkGray, for: .normal)
-         extra.iosCloseButtonView = close
-         extra.iosCloseButton = true
+//         let close = UIButton()
+//         close.setTitle("XX", for: .normal)
+//         close.frame = CGRect(x: self.view.frame.width - 40, y: 20, width: 40, height: 30)
+//         close.setTitleColor(.darkGray, for: .normal)
+//         extra.iosCloseButtonView = close
+//         extra.iosCloseButton = true
       
          var items = [BootpayItem]()
          items.append(item1)
