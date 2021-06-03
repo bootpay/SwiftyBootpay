@@ -21,8 +21,8 @@ public class BootpayExtra: NSObject, BootpayParams, Mappable {
     @objc public var quick_popup = 1 //1: popup 호출시 버튼을 띄우지 않는다. 0: 일 경우 버튼을 호출한다
     @objc public var disp_cash_result = "Y" // 현금영수증 보일지 말지.. 가상계좌 KCP 옵션
     @objc public var escrow = 0
-    @objc public var iosCloseButton = false
-    @objc public var iosCloseButtonView: UIButton?
+    @objc public var ios_close_button = false
+    @objc public var ios_close_button_view: UIButton?
     @objc public var onestore = BootpayOneStore()
     
     @objc public var theme = "purple" //통합 결제창 색상 지정 (purple, red, custom 지정 가능 )
@@ -51,7 +51,7 @@ public class BootpayExtra: NSObject, BootpayParams, Mappable {
         disp_cash_result <- map["disp_cash_result"]
         escrow <- map["escrow"]
         onestore <- map["onestore"]
-        iosCloseButton <- map["iosCloseButton"]
+        ios_close_button <- map["ios_close_button"]
         
         theme <- map["theme"]
         custom_background <- map["custom_background"]
@@ -80,7 +80,7 @@ public class BootpayExtra: NSObject, BootpayParams, Mappable {
                 "custom_background:'\(custom_background)',",
                 "custom_font_color:'\(custom_font_color)',",
                 "topMargin:'\(topMargin)',",
-                "iosCloseButton: \(iosCloseButton)",
+                "ios_close_button: \(ios_close_button)",
             
         ]
         

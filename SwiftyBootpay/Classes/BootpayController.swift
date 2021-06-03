@@ -112,7 +112,7 @@ extension BootpayController {
         var topPadding = CGFloat(0.0)
         var bottomPadding = CGFloat(0.0)
         var btnMarginTop = CGFloat(0.0)
-        if(extra.iosCloseButton) {
+        if(extra.ios_close_button) {
             btnMarginTop = 20.0
         }
         
@@ -149,8 +149,8 @@ extension BootpayController {
         wv.parentController = self
         self.view.addSubview(wv)
         
-        if(extra.iosCloseButton) {
-            if(extra.iosCloseButtonView == nil) {
+        if(extra.ios_close_button) {
+            if(extra.ios_close_button_view == nil) {
                 let close = UIButton()
                 close.setTitle("X", for: .normal)
                 close.addTarget(self, action: #selector(removePaymentWindow), for: .touchUpInside)
@@ -158,9 +158,9 @@ extension BootpayController {
                 close.setTitleColor(.darkGray, for: .normal)
                 self.view.addSubview(close)
             } else {
-                extra.iosCloseButtonView!.addTarget(self, action: #selector(removePaymentWindow), for: .touchUpInside)
-                if(extra.iosCloseButtonView!.frame == CGRect.null) { extra.iosCloseButtonView!.frame = CGRect(x: self.view.frame.width - 40, y: topPadding, width: 40, height: 30) }
-                self.view.addSubview(extra.iosCloseButtonView!)
+                extra.ios_close_button_view!.addTarget(self, action: #selector(removePaymentWindow), for: .touchUpInside)
+                if(extra.ios_close_button_view!.frame == CGRect.null) { extra.ios_close_button_view!.frame = CGRect(x: self.view.frame.width - 40, y: topPadding, width: 40, height: 30) }
+                self.view.addSubview(extra.ios_close_button_view!)
             }
         }
     }
