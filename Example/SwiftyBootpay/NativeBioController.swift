@@ -13,7 +13,8 @@ import Alamofire
 
 class NativeBioController: UIViewController {
     var payType = 1 //1:finter, 2:easy card
-    let unique_user_id = Bootpay.getUUID() // 실제값을 적용하실 때에는, 관리하시는 user_id를 입력해주세요. 고객별로 유니크해야하며, 다른 고객과 절대로 중복되어서는 안됩니다
+    let unique_user_id = "1234"
+//        Bootpay.getUUID() // 실제값을 적용하실 때에는, 관리하시는 user_id를 입력해주세요. 고객별로 유니크해야하며, 다른 고객과 절대로 중복되어서는 안됩니다
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -192,7 +193,7 @@ extension NativeBioController: BootpayRequestProtocol {
     // 결제완료시 호출
     // 아이템 지급 등 데이터 동기화 로직을 수행합니다
     func onDone(data: [String: Any]) {
-        print("onDone")
+        print("---- onDone \(data)")
         Bootpay.dismiss()
     }
     

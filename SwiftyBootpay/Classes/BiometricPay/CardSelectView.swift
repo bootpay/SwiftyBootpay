@@ -139,7 +139,7 @@ extension CardSelectView: UICollectionViewDataSource {
 
 extension CardSelectView: UICollectionViewDelegate {
     
-    private func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         scalingCarousel.didScroll()
     }
      

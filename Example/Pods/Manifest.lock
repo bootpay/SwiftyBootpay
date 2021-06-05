@@ -1,12 +1,12 @@
 PODS:
   - Alamofire (5.2.2)
-  - CryptoSwift (1.3.2)
+  - CryptoSwift (1.3.7)
   - JGProgressHUD (2.2)
   - ObjectMapper (4.2.0)
   - SnapKit (5.0.1)
-  - SwiftOTP (2.0.2):
+  - SwiftOTP (2.0.3):
     - CryptoSwift (>= 1.0.0)
-  - SwiftyBootpay (3.3.13):
+  - SwiftyBootpay (3.4.107):
     - Alamofire (~> 5.2.2)
     - CryptoSwift
     - JGProgressHUD
@@ -32,13 +32,13 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
-  CryptoSwift: 093499be1a94b0cae36e6c26b70870668cb56060
+  CryptoSwift: b6faad405e69964740422daf121918b5b1870f2b
   JGProgressHUD: d83d7a981b85d11205e19ff8ad5bb9c40571c847
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
-  SwiftOTP: 572fb5601add61e93534cf6644ef236d65b4aae8
-  SwiftyBootpay: d05b6d99a6dbaeb9cf807c0bd975e8eba803e114
+  SwiftOTP: ce98ded1ab42e4e66c39228fcad6b0c07b98e494
+  SwiftyBootpay: 1cf14c6230c17548a6cdc004f9feaa4c44158c50
 
 PODFILE CHECKSUM: d088f3acb154f9617cdcf95aae0cbf40903d80d2
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.10.1

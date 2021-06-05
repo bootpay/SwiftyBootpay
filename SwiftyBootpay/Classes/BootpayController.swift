@@ -59,7 +59,8 @@ extension URL {
     @objc public var user = BootpayUser()
     @objc public var extra = BootpayExtra()
     @objc public var ux = ""
-    @objc public var items = [BootpayItem]()  
+    @objc public var items = [BootpayItem]()
+    @objc public var isModalButNoFullScreen = false //팝업이긴 하지만 풀 스크린이 아닐 경우
      
     var isPaying = false
     @objc public var sendable: BootpayRequestProtocol?
@@ -70,6 +71,11 @@ extension URL {
 
 
 extension BootpayController: BootpayParams {
+    
+    @objc(didBecomeActive)
+    public func didBecomeActive() {
+        wv.didBecomeActive()
+    }
     
     @objc(transactionConfirm:)
     public func transactionConfirm(data: [String: Any]) {
@@ -106,7 +112,7 @@ extension BootpayController {
         var topPadding = CGFloat(0.0)
         var bottomPadding = CGFloat(0.0)
         var btnMarginTop = CGFloat(0.0)
-        if(extra.iosCloseButton) {
+        if(extra.ios_close_button) {
             btnMarginTop = 20.0
         }
         
@@ -115,16 +121,16 @@ extension BootpayController {
             topPadding = window?.safeAreaInsets.top ?? 0.0
             bottomPadding = window?.safeAreaInsets.bottom ?? 0.0
         }
-        
-     
+        if(isModalButNoFullScreen == true) { topPadding = CGFloat(0) }
         
         wv.frame = CGRect(x: 0,
-                          y: topPadding + btnMarginTop,
+                          y: topPadding + btnMarginTop + extra.topMargin,
                           width: self.view.frame.width,
-                          height: self.view.frame.height - topPadding - bottomPadding - btnMarginTop
+                          height: self.view.frame.height - topPadding - bottomPadding - btnMarginTop - extra.topMargin
         )
         
         let script = payload.generateScript(wv.bridgeName, items: items, user: user, extra: extra, isPasswordPay: false)
+        
         
         
         // 필요한 PG는 팝업으로 띄운다
@@ -143,8 +149,8 @@ extension BootpayController {
         wv.parentController = self
         self.view.addSubview(wv)
         
-        if(extra.iosCloseButton) {
-            if(extra.iosCloseButtonView == nil) {
+        if(extra.ios_close_button) {
+            if(extra.ios_close_button_view == nil) {
                 let close = UIButton()
                 close.setTitle("X", for: .normal)
                 close.addTarget(self, action: #selector(removePaymentWindow), for: .touchUpInside)
@@ -152,9 +158,9 @@ extension BootpayController {
                 close.setTitleColor(.darkGray, for: .normal)
                 self.view.addSubview(close)
             } else {
-                extra.iosCloseButtonView!.addTarget(self, action: #selector(removePaymentWindow), for: .touchUpInside)
-                if(extra.iosCloseButtonView!.frame == CGRect.null) { extra.iosCloseButtonView!.frame = CGRect(x: self.view.frame.width - 40, y: topPadding, width: 40, height: 30) }
-                self.view.addSubview(extra.iosCloseButtonView!)
+                extra.ios_close_button_view!.addTarget(self, action: #selector(removePaymentWindow), for: .touchUpInside)
+                if(extra.ios_close_button_view!.frame == CGRect.null) { extra.ios_close_button_view!.frame = CGRect(x: self.view.frame.width - 40, y: topPadding, width: 40, height: 30) }
+                self.view.addSubview(extra.ios_close_button_view!)
             }
         }
     }
